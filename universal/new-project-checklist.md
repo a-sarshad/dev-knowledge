@@ -1,8 +1,6 @@
 # New Project Checklist
+> universal — React + Vite + TypeScript + RTL/فارسی
 > updated: 2026-05-17
-
-چک‌لیست پروژه‌های React + Vite + TypeScript با RTL/فارسی.
-برای setup کتابخانه UI، فایل مربوطه در `design-systems/` رو چک کن.
 
 ---
 
@@ -16,21 +14,24 @@ pnpm install
 
 ---
 
-## ۲. Packages (generic)
+## ۲. Packages — از کاربر بپرس
 
-```bash
-# Router
-pnpm add react-router-dom
+قبل از نصب، با کاربر confirm کن که پروژه به چه چیزی نیاز داره:
 
-# Data fetching
-pnpm add @tanstack/react-query axios
+**Routing** (اگه چند صفحه داره)
+- `react-router-dom` — رایج‌ترین گزینه
 
-# Icons
-pnpm add lucide-react
-```
+**Data fetching** (اگه API call داره)
+- `@tanstack/react-query` + `axios` — برای REST
+- `@tanstack/react-query` + `graphql-request` — برای GraphQL
+- `fetch` native — اگه ساده‌ست
 
-برای UI library جداگانه نصب کن:
-- Chakra UI v3 → `design-systems/chakra-ui-v3/setup-checklist.md`
+**Icons** (اگه آیکون لازمه)
+- `lucide-react` — سبک و tree-shakeable
+- یا هر icon library که پروژه تعریف کرده
+
+**UI Library**
+→ فایل مخصوص DS انتخابی در `design-systems/` رو ببین
 
 ---
 
@@ -52,17 +53,27 @@ pnpm add lucide-react
 
 ---
 
-## ۵. File Structure (generic)
+## ۵. File Structure — از کاربر بپرس
+
+قبل از ساختن فایل‌ها، از کاربر بپرس layout کلی سایت چیه:
+
+> «پروژه‌ات چه قسمت‌هایی داره؟
+> مثلاً: navbar بالا دارش؟ sidebar کناری داره؟ footer داره؟
+> یا یه ساختار متفاوت داره؟»
+
+بر اساس جواب، ساختار رو modular بساز:
 
 ```
 src/
-  components/layout/
-    Layout.tsx
-    Navbar.tsx
-    Sidebar.tsx
-    Header.tsx
+  components/
+    layout/         ← فقط اگه layout پیچیده داره
+      Layout.tsx    ← همیشه
+      Navbar.tsx    ← اگه navbar داره
+      Sidebar.tsx   ← اگه sidebar داره
+      Footer.tsx    ← اگه footer داره
+      Header.tsx    ← اگه page-level header داره
   pages/
-  services/
+  services/         ← اگه API call داره
   types/
 ```
 

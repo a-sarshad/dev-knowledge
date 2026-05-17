@@ -87,3 +87,20 @@ RTL: ← (ChevronLeft = next)
 - از `<html dir="rtl">` ارث می‌برن از طریق CSS cascade ✅
 - ولی DOM order داخلشون رو باید خودت کنترل کنی
 - همیشه `dir="rtl"` رو explicit روی Positioner/Portal container اضافه کن
+
+---
+
+## ⚠️ دام رایج — text-align در RTL
+
+جدول logical props بالا نشون میده `text-align: right` → `text-align: end`.
+این از نظر تئوری درسته، ولی در پروژه‌های RTL-only می‌تونه گیج‌کننده باشه:
+
+```css
+/* در RTL: */
+text-align: start  →  راست‌چین  ✅ (start = inline start = راست در RTL)
+text-align: end    →  چپ‌چین   ⚠️ (end = inline end = چپ در RTL)
+```
+
+**قانون عملی برای پروژه فارسی/عربی:**
+- برای راست‌چین: از `text-align: right` یا `text-align: start` استفاده کن
+- از `text-align: end` در RTL-only projects پرهیز کن — چپ‌چین می‌شه

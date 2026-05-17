@@ -16,6 +16,19 @@
 <Text lineHeight="1.14">   {/* 32px at 3xl */}
 ```
 
+### textAlign="end" در RTL — چپ‌چین میشه
+```tsx
+// ❌ در RTL، end = inline-end = LEFT
+<Text textAlign="end">متن فارسی</Text>  // چپ‌چین!
+
+// ✅ برای راست‌چین در RTL:
+<Text textAlign="right">متن فارسی</Text>
+// یا
+<Text textAlign="start">متن فارسی</Text>  // start = راست در RTL
+```
+> **چرا؟** در RTL، inline-start = راست، inline-end = چپ.
+> پس `end` عکس چیزیه که انتظار داری.
+
 ### bg="bg.default" — BROKEN
 ```tsx
 // ❌ CSS var به transparent resolve می‌شه

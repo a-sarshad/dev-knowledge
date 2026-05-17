@@ -71,17 +71,19 @@ Chakra v3 از logical props پشتیبانی می‌کنه:
 ## Layout Body
 
 ```tsx
-// Body: sidebar بعد از main در RTL (sidebar سمت راست)
-<Flex maxW="1920px" mx="auto">
-  <Box flex={1}>  {/* Main — سمت چپ‌تر */}
+// RTL: اولین child = rightmost
+// Sidebar سمت راست → باید FIRST در DOM باشه
+<Flex maxW="1920px" mx="auto" alignItems="flex-start">
+  <Sidebar w="256px" flexShrink={0} />  {/* FIRST → rightmost در RTL ✅ */}
+  <Box flex={1} minW={0}>              {/* SECOND → left در RTL ✅ */}
     <PageHeader />
     <Content />
   </Box>
-  <Sidebar w="256px" />  {/* سمت راست — آخر در DOM */}
 </Flex>
 
-// ⚠️ counterintuitive: align="flex-start" = RIGHT در RTL
-//                       align="flex-end"   = LEFT  در RTL
+// ⚠️ counterintuitive — column flex:
+// align="flex-start" = RIGHT side در RTL
+// align="flex-end"   = LEFT  side در RTL
 ```
 
 ---
