@@ -1,5 +1,8 @@
 # New Project Checklist
-> updated: 2026-05-16
+> updated: 2026-05-17
+
+چک‌لیست پروژه‌های React + Vite + TypeScript با RTL/فارسی.
+برای setup کتابخانه UI، فایل مربوطه در `design-systems/` رو چک کن.
 
 ---
 
@@ -13,22 +16,25 @@ pnpm install
 
 ---
 
-## ۲. Packages
+## ۲. Packages (generic)
 
 ```bash
-# Chakra UI v3
-pnpm add @chakra-ui/react @emotion/react @emotion/styled
+# Router
+pnpm add react-router-dom
 
-# Router + Data fetching
-pnpm add react-router-dom @tanstack/react-query axios
+# Data fetching
+pnpm add @tanstack/react-query axios
 
 # Icons
 pnpm add lucide-react
 ```
 
+برای UI library جداگانه نصب کن:
+- Chakra UI v3 → `design-systems/chakra-ui-v3/setup-checklist.md`
+
 ---
 
-## ۳. Font — Vazirmatn (RTL)
+## ۳. Font — Vazirmatn (RTL/Persian)
 
 در `index.html`:
 ```html
@@ -46,7 +52,7 @@ pnpm add lucide-react
 
 ---
 
-## ۵. File Structure
+## ۵. File Structure (generic)
 
 ```
 src/
@@ -54,74 +60,15 @@ src/
     Layout.tsx
     Navbar.tsx
     Sidebar.tsx
-    SidebarItem.tsx
     Header.tsx
-    UserMenu.tsx
-  contexts/
-    ColorModeContext.tsx
   pages/
-  theme/
-    index.ts
-    tokens.ts
-  types/
   services/
+  types/
 ```
 
 ---
 
-## ۶. Theme Setup
-
-```ts
-// src/theme/index.ts
-import { createSystem, defaultConfig, defineConfig } from '@chakra-ui/react'
-import { projectTokens } from './tokens'
-
-const layoutConfig = defineConfig({
-  globalCss: {
-    'html, body': {
-      direction: 'rtl',
-      fontFamily: 'body',
-      bg: 'bg.subtle',
-    },
-  },
-})
-
-export const system = createSystem(defaultConfig, projectTokens, layoutConfig)
-```
-
----
-
-## ۷. main.tsx
-
-```tsx
-import { ChakraProvider, LocaleProvider } from '@chakra-ui/react'
-import { system } from './theme'
-import { ColorModeProvider } from './contexts/ColorModeContext'
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <ChakraProvider value={system}>
-      <LocaleProvider locale="fa-IR">
-        <ColorModeProvider>
-          <QueryClientProvider client={queryClient}>
-            <App />
-          </QueryClientProvider>
-        </ColorModeProvider>
-      </LocaleProvider>
-    </ChakraProvider>
-  </StrictMode>,
-)
-```
-
----
-
-## ۸. CLAUDE.md
-
-از `dev-knowledge/design-systems/chakra-ui-v3/CLAUDE-template.md` کپی کن و customize کن.
-
----
-
-## ۹. Git
+## ۶. Git
 
 ```bash
 git init
