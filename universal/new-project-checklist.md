@@ -88,3 +88,33 @@ git commit -m "chore: initial setup"
 gh repo create project-name --private
 git push -u origin main
 ```
+
+---
+
+## ۷. CLAUDE.md
+
+یه `CLAUDE.md` در root پروژه بساز با این بخش‌ها:
+
+```markdown
+# [نام پروژه] — Claude Reference
+
+## Stack
+- React + Vite + TypeScript
+- [UI Library]
+- [RTL/LTR یا Bilingual؟]
+
+## Critical Rules
+[قوانین مهم پروژه — از CLAUDE-template مربوط به DS کپی کن]
+
+## File Structure
+[ساختار فایل‌های پروژه]
+```
+
+برای DS خاص، از template مربوطه در `design-systems/<ds>/` استفاده کن.
+
+---
+
+## ۸. HANDOFF.md
+
+یه `HANDOFF.md` در root پروژه بساز — template در `universal/session-management.md` هست.
+این فایل رو بعد از هر milestone آپدیت کن و همراه کد commit کن.
