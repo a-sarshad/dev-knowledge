@@ -77,6 +77,5 @@ const NextIcon = ({ dir }) =>
 
 ## پیاده‌سازی در هر DS
 
-- Chakra UI v3 → `dev-knowledge/design-systems/chakra-ui-v3/multilang.md`
-- Tailwind → `dev-knowledge/design-systems/tailwind/multilang.md`
-- Bootstrap → `dev-knowledge/design-systems/bootstrap/multilang.md`
+- Chakra UI v3 → `dev-knowledge/design-systems/chakra-ui-v3/chakra-ui-v3.md` (بخش Direction Setup)
+- Bootstrap 5 → `dev-knowledge/projects/airport/project-context.md` (بخش Direction Setup)

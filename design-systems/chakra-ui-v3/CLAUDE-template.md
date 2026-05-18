@@ -1,10 +1,11 @@
 # [PROJECT NAME] — Claude Reference
-# کپی این فایل برای پروژه جدید، موارد مشخص‌شده رو customize کن
-# updated: 2026-05-16
+# کپی این فایل برای پروژه جدید، موارد [CUSTOMIZE] رو عوض کن
+# updated: 2026-05-18
 
 ---
 
 ## Stack
+<!-- [CUSTOMIZE] -->
 - React 19 + Vite + TypeScript
 - Chakra UI v3
 - RTL / Persian (Vazirmatn font)
@@ -32,7 +33,7 @@ Key issues:
 - Avatar.Root + asChild → wrap in `<Box as="button">` first
 
 ### Layout
-<!-- [CUSTOMIZE] مشخصات layout پروژه -->
+<!-- [CUSTOMIZE] مشخصات layout این پروژه -->
 - Navbar: full-width sticky header
 - Body: `maxW="1920px" mx="auto"`
 - Sidebar: `w="256px"` expanded
@@ -40,46 +41,23 @@ Key issues:
 ---
 
 ## Brand Tokens
-<!-- [CUSTOMIZE] رنگ اصلی پروژه -->
+<!-- [CUSTOMIZE] رنگ اصلی این پروژه — از project-context.md بیار -->
 | Token | Light | Dark |
 |-------|-------|------|
 | `brand.solid` | teal.600 | teal.400 |
 | `brand.fg` | teal.700 | teal.300 |
 | `brand.muted` | teal.100 | teal.900 |
 
-→ برای کامل: `src/theme/tokens.ts`
-
----
-
-## Spacing Scale
-```
-0.5→2px | 1→4px | 2→8px | 3→12px | 4→16px | 5→20px
-6→24px  | 8→32px | 10→40px | 12→48px | 16→64px
-```
-
-## Border Radius
-```
-sm(2px) | md(4px) | lg(6px) | xl(8px) | 2xl(12px) | full(9999px)
-```
-
-## Typography
-```
-xs(12) | sm(14) | md(16) | lg(18) | xl(20) | 2xl(24) | 3xl(30)
-normal(400) | medium(500) | semibold(600) | bold(700)
-```
+→ کامل: `src/theme/tokens.ts`
+→ جدول همه variant‌ها: `dev-knowledge/design-systems/chakra-ui-v3/tokens.md`
 
 ---
 
 ## File Structure
+<!-- [CUSTOMIZE] ساختار این پروژه رو اینجا بنویس -->
 ```
 src/
   components/layout/
-    Layout.tsx
-    Navbar.tsx
-    Sidebar.tsx
-    SidebarItem.tsx
-    Header.tsx
-    UserMenu.tsx
   contexts/
     ColorModeContext.tsx
   pages/
@@ -93,7 +71,8 @@ src/
 ---
 
 ## Knowledge References
+- Chakra full reference: `dev-knowledge/design-systems/chakra-ui-v3/chakra-ui-v3.md`
+- All tokens: `dev-knowledge/design-systems/chakra-ui-v3/tokens.md`
+- Known bugs: `dev-knowledge/design-systems/chakra-ui-v3/known-bugs.md`
 - RTL concepts: `dev-knowledge/universal/rtl-concepts.md`
-- Chakra bugs: `dev-knowledge/design-systems/chakra-ui-v3/known-bugs.md`
-- Tokens: `dev-knowledge/design-systems/chakra-ui-v3/tokens.md`
 - Figma→Code: `dev-knowledge/universal/figma-to-code.md`

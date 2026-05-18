@@ -8,19 +8,28 @@
 
 ```
 dev-knowledge/
-├── universal/                      ← مفاهیم برای همه stack ها
-│   ├── rtl-concepts.md             ← RTL، logical CSS، DOM order
-│   ├── multilang-concepts.md       ← locale، direction، font
-│   ├── figma-to-code.md            ← workflow پیاده‌سازی از فیگما
-│   └── new-project-checklist.md    ← شروع پروژه جدید
+├── universal/                        ← مفاهیم مستقل از stack
+│   ├── rtl-concepts.md               ← RTL، logical CSS، Bootstrap RTL fixes
+│   ├── multilang-concepts.md         ← locale، direction، font — concepts
+│   ├── git-troubleshoot.md           ← خطاهای رایج git + راه‌حل
+│   ├── figma-to-code.md              ← workflow پیاده‌سازی از فیگما
+│   ├── new-project-checklist.md      ← شروع پروژه جدید (generic)
+│   ├── project-init-wizard.md        ← wizard تعاملی برای scaffold کردن پروژه
+│   └── session-management.md         ← مدیریت context و HANDOFF.md
 │
-└── design-systems/
-    └── chakra-ui-v3/
-        ├── known-bugs.md           ← باگ‌های تأییدشده + راه‌حل
-        ├── rtl.md                  ← پیاده‌سازی RTL در Chakra
-        ├── tokens.md               ← همه token ها
-        ├── multilang.md            ← پیاده‌سازی دوزبانه
-        └── CLAUDE-template.md      ← template برای CLAUDE.md پروژه جدید
+├── design-systems/
+│   └── chakra-ui-v3/
+│       ├── chakra-ui-v3.md           ← مرجع اصلی: RTL، tokens، multilang، patterns
+│       ├── tokens.md                 ← جداول کامل همه token‌ها (lookup)
+│       ├── known-bugs.md             ← باگ‌های تأییدشده + راه‌حل با مثال کد
+│       ├── setup-checklist.md        ← نصب و setup قدم‌به‌قدم
+│       └── CLAUDE-template.md        ← template برای CLAUDE.md پروژه‌های Chakra
+│
+└── projects/
+    ├── airport/
+    │   └── project-context.md        ← brand tokens، layout، RTL setup
+    └── vitrina/
+        └── project-context.md        ← brand tokens، breakpoints، feature flags
 ```
 
 ---
@@ -28,18 +37,20 @@ dev-knowledge/
 ## نحوه استفاده
 
 **پروژه جدید:**
-1. `new-project-checklist.md` رو دنبال کن
-2. `CLAUDE-template.md` رو کپی کن به پروژه جدید به عنوان `CLAUDE.md`
+1. `universal/new-project-checklist.md` رو دنبال کن
+2. اگه Chakra UI → `design-systems/chakra-ui-v3/CLAUDE-template.md` رو کپی کن
 3. فقط بخش‌های `[CUSTOMIZE]` رو عوض کن
 
 **حین کار:**
-- وقتی bug جدید پیدا می‌شه → `known-bugs.md` آپدیت می‌شه
-- وقتی pattern جدید کشف می‌شه → فایل مربوطه آپدیت می‌شه
+- bug جدید → `known-bugs.md` آپدیت می‌شه
+- خطای git → `universal/git-troubleshoot.md` رو چک کن
+- pattern جدید → فایل مربوطه آپدیت می‌شه
 
 ---
 
-## پروژه‌هایی که از این استفاده می‌کنن
+## پروژه‌ها
 
-| پروژه | DS | مسیر |
-|-------|-----|-------|
-| Vitrina | Chakra UI v3 | `GitHub/Claude Code/Vitrina` |
+| پروژه | Design System | زبان |
+|-------|--------------|------|
+| Vitrina | Chakra UI v3 | فارسی (RTL) |
+| Airport | Bootstrap 5 | فارسی + انگلیسی (RTL/LTR) |
