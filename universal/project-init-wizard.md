@@ -269,6 +269,6 @@ feat: scaffold [project-name] project
 - Setup Chakra: `design-systems/chakra-ui-v3/setup-checklist.md`
 - Tokens کامل: `design-systems/chakra-ui-v3/tokens.md`
 - Known bugs: `design-systems/chakra-ui-v3/known-bugs.md`
-- RTL concepts: `universal/rtl-concepts.md`
-- Multilang: `design-systems/chakra-ui-v3/multilang.md`
+- Language & RTL: `universal/language.md`
+- Multilang + Direction Setup: `design-systems/chakra-ui-v3/chakra-ui-v3.md`
 - Figma→Code: `universal/figma-to-code.md`
