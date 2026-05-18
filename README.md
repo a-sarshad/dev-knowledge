@@ -12,9 +12,8 @@ dev-knowledge/
 │   ├── rtl-concepts.md               ← RTL، logical CSS، DOM order — concepts
 │   ├── multilang-concepts.md         ← locale، direction، font — concepts
 │   ├── git-troubleshoot.md           ← خطاهای رایج git + راه‌حل
-│   ├── figma-to-code.md              ← workflow پیاده‌سازی از فیگما
-│   ├── new-project-checklist.md      ← شروع پروژه جدید (generic)
-│   ├── project-init-wizard.md        ← wizard تعاملی برای scaffold کردن پروژه
+│   ├── figma-to-code.md              ← پیاده‌سازی دیزاین از Figma (نه project init)
+│   ├── project-init-wizard.md        ← شروع پروژه جدید — wizard تعاملی (skill)
 │   └── session-management.md         ← مدیریت context و HANDOFF.md
 │
 ├── design-systems/

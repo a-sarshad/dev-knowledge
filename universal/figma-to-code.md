@@ -1,5 +1,6 @@
-# Figma → Code Workflow
+# Figma → Code — پیاده‌سازی دیزاین
 > universal — مستقل از design system
+> کاربرد: وقتی دیزاین آماده‌ست و می‌خوای کدش کنی — نه برای شروع پروژه جدید
 > updated: 2026-05-17
 
 ---
