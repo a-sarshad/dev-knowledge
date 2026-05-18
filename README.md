@@ -9,8 +9,7 @@
 ```
 dev-knowledge/
 ├── universal/                        ← مفاهیم مستقل از stack
-│   ├── rtl-concepts.md               ← RTL، logical CSS، DOM order — concepts
-│   ├── multilang-concepts.md         ← locale، direction، font — concepts
+│   ├── language.md                   ← RTL/LTR، locale، font، logical CSS، DOM order
 │   ├── git-troubleshoot.md           ← خطاهای رایج git + راه‌حل
 │   ├── figma-to-code.md              ← پیاده‌سازی دیزاین از Figma (نه project init)
 │   ├── project-init-wizard.md        ← شروع پروژه جدید — wizard تعاملی (skill)
