@@ -9,7 +9,7 @@
 ```
 dev-knowledge/
 ├── universal/                        ← مفاهیم مستقل از stack
-│   ├── rtl-concepts.md               ← RTL، logical CSS، Bootstrap RTL fixes
+│   ├── rtl-concepts.md               ← RTL، logical CSS، DOM order — concepts
 │   ├── multilang-concepts.md         ← locale، direction، font — concepts
 │   ├── git-troubleshoot.md           ← خطاهای رایج git + راه‌حل
 │   ├── figma-to-code.md              ← workflow پیاده‌سازی از فیگما
@@ -18,12 +18,14 @@ dev-knowledge/
 │   └── session-management.md         ← مدیریت context و HANDOFF.md
 │
 ├── design-systems/
-│   └── chakra-ui-v3/
-│       ├── chakra-ui-v3.md           ← مرجع اصلی: RTL، tokens، multilang، patterns
-│       ├── tokens.md                 ← جداول کامل همه token‌ها (lookup)
-│       ├── known-bugs.md             ← باگ‌های تأییدشده + راه‌حل با مثال کد
-│       ├── setup-checklist.md        ← نصب و setup قدم‌به‌قدم
-│       └── CLAUDE-template.md        ← template برای CLAUDE.md پروژه‌های Chakra
+│   ├── chakra-ui-v3/
+│   │   ├── chakra-ui-v3.md           ← مرجع اصلی: RTL، tokens، multilang، patterns
+│   │   ├── tokens.md                 ← جداول کامل همه token‌ها (lookup)
+│   │   ├── known-bugs.md             ← باگ‌های تأییدشده + راه‌حل با مثال کد
+│   │   ├── setup-checklist.md        ← نصب و setup قدم‌به‌قدم
+│   │   └── CLAUDE-template.md        ← template برای CLAUDE.md پروژه‌های Chakra
+│   └── bootstrap5/
+│       └── rtl.md                    ← RTL setup، logical classes، known fixes
 │
 └── projects/
     ├── airport/
