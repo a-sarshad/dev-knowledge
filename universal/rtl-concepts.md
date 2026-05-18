@@ -90,6 +90,31 @@ RTL: ← (ChevronLeft = next)
 
 ---
 
+## ⚠️ دام رایج — Bootstrap modal close button در RTL
+
+Bootstrap 5 روی `.modal-header .btn-close` این رو hardcode می‌کنه:
+```css
+margin-left: auto;   /* دکمه × رو همیشه راست نگه می‌داره */
+margin-right: calc(-.5 * var(--bs-modal-header-padding-x));
+```
+
+در RTL flex، `margin-left: auto` باز هم دکمه رو سمت **راست** نگه می‌داره — چون فضای خالی سمت چپه.
+نتیجه: دکمه × کنار title می‌مونه، نه گوشه چپ modal.
+
+**فیکس:**
+```css
+:root[dir="rtl"] .modal-header .btn-close {
+  margin-left: calc(-.5 * var(--bs-modal-header-padding-x));
+  margin-right: auto;
+}
+```
+
+این رو در `BOOTSTRAP OVERRIDES` یا بخش RTL overrides پروژه اضافه کن.
+
+> **ریشه مشکل:** Bootstrap LTR-only CSS — نسخه RTL رسمی Bootstrap (`bootstrap.rtl.min.css`) این رو درست می‌کنه ولی اگه از نسخه معمولی استفاده می‌کنی باید override دستی بزنی.
+
+---
+
 ## ⚠️ دام رایج — text-align در RTL
 
 جدول logical props بالا نشون میده `text-align: right` → `text-align: end`.
