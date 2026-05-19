@@ -37,7 +37,7 @@ dev-knowledge/
 ## نحوه استفاده
 
 **پروژه جدید:**
-1. `universal/new-project-checklist.md` رو دنبال کن
+1. `universal/project-init-wizard.md` رو دنبال کن (wizard تعاملیه — سوال‌به‌سوال)
 2. اگه Chakra UI → `design-systems/chakra-ui-v3/CLAUDE-template.md` رو کپی کن
 3. فقط بخش‌های `[CUSTOMIZE]` رو عوض کن
 

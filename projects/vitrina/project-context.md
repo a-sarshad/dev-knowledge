@@ -77,8 +77,19 @@ brand: {
 |----------|---------|--------|
 | Theme/Light | true | حالت روشن |
 | Theme/Dark | false | حالت تاریک |
+| Theme/isChecked | false | وضعیت تاگل تم |
 | Products/Show Discount | false | نمایش تخفیف |
+| Products/Show Selected-Prd CTA | true | نمایش CTA محصول انتخابی |
+| Products/Currency/Show Currency-Alert | false | نمایش هشدار ارز |
 | Badge | true | نمایش badge |
+| btnScreen/Show Maximize | false | دکمه maximize |
+| btnScreen/Show Minimize | true | دکمه minimize |
+
+## String Variables
+
+| Variable | مقدار | کاربرد |
+|----------|-------|--------|
+| Products/Currency/Currency | تومان | واحد پول نمایش محصولات |
 
 ---
 
