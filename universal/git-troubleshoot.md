@@ -31,6 +31,16 @@ git commit -m "..."
 
 > **نکته:** اگه GitHub Desktop همین خطا داد، از Terminal پاک کن — Desktop نمی‌تونه خودش lock رو حذف کنه.
 
+**اگه `rm` هم کار نکرد (permission denied):** از temp index workaround استفاده کن:
+```bash
+cd "/path/to/repo"
+export GIT_INDEX_FILE=/tmp/git-temp-index
+cp .git/index /tmp/git-temp-index
+git add -A
+git commit -m "..."
+unset GIT_INDEX_FILE
+```
+
 ---
 
 ## 🔀 Commit از GitHub Desktop کار نمی‌کنه
