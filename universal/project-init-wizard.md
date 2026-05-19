@@ -264,7 +264,11 @@ src/providers/
 
 CLAUDE.md          ← از design-systems/chakra-ui-v3/CLAUDE-template.md کپی و customize
 HANDOFF.md         ← از universal/session-management.md الگو بگیر
-README.md          ← از universal/readme-template.md با اطلاعات پروژه پر کن
+README.md          ← از universal/readme-template.md — هر {Qx} را با جواب wizard جایگزین کن:
+                      {Q1}=نام، {Q3}=توضیح، {Q4}=framework، {Q5}=language،
+                      {Q6}=package manager، {Q7}=DS، {Q17}=زبان، {Q21}=state،
+                      بخش‌های شرطی: services (Q19=بله)، types (Q20=بله)،
+                      i18n (Q17=دوزبانه)، stores (Q21=Zustand)
 ```
 
 **شرطی:**
