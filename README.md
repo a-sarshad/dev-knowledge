@@ -34,9 +34,11 @@ dev-knowledge/
 │
 └── projects/
     ├── airport/
-    │   └── project-context.md            ← brand tokens، layout، RTL setup
+    │   ├── project-context.md            ← brand tokens، layout، RTL setup
+    │   └── known-bugs.md                 ← باگ‌های project-specific
     └── vitrina/
-        └── project-context.md            ← brand tokens، breakpoints، feature flags
+        ├── project-context.md            ← brand tokens، breakpoints، feature flags
+        └── known-bugs.md                 ← باگ‌های project-specific
 ```
 
 ---

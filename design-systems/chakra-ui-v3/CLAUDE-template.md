@@ -32,6 +32,11 @@ Key issues:
 - Dark mode: toggle `.dark` class on `document.documentElement`
 - Avatar.Root + asChild → wrap in `<Box as="button">` first
 
+### Project-Specific Bugs
+<!-- باگ‌هایی که در این پروژه کشف شدن — نه DS-level -->
+<!-- فرمت: symptom → fix (یه خط) — اگه باگی نیست این section رو خالی بذار -->
+<!-- session-update این بخش رو بعد از کشف باگ جدید آپدیت می‌کنه -->
+
 ### Layout
 <!-- [CUSTOMIZE] مشخصات layout این پروژه -->
 - Navbar: full-width sticky header
