@@ -9,6 +9,11 @@
 
 ```
 dev-knowledge/
+├── skills/             ← فایل‌های .skill (automation)
+│   ├── commit-dev-knowledge.skill
+│   ├── project-init-wizard.skill
+│   ├── session-start.skill
+│   └── session-update.skill
 ├── universal/          ← دانش cross-project (همه جا صدق می‌کنه)
 ├── projects/           ← context خاص هر پروژه
 │   ├── airport/
@@ -54,10 +59,15 @@ Claude: [loads vitrina-project-context skill] → [reads projects/vitrina/projec
 
 | Skill | کاربرد |
 |-------|---------|
-| `commit-dev-knowledge` | Commit خودکار بعد از هر تغییر در DN |
+| `commit-dev-knowledge` | آماده‌سازی commit message بعد از هر تغییر در DN |
+| `session-start` | briefing وضعیت پروژه در شروع session |
+| `session-update` | ذخیره وضعیت و آپدیت HANDOFF.md در هر مرحله |
+| `project-init-wizard` | ساخت پروژه جدید با scaffold کامل |
 | `vitrina-project-context` | Load context پروژه Vitrina |
 | `airport-project-context` | Load context پروژه Airport |
 | `ds-chakra-ui` | Load دانش Chakra UI v3 |
+
+فایل‌های skill در `skills/` هستن — برای نصب/آپدیت از همانجا استفاده کن.
 
 ---
 
