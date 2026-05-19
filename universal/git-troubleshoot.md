@@ -31,14 +31,25 @@ git commit -m "..."
 
 > **نکته:** اگه GitHub Desktop همین خطا داد، از Terminal پاک کن — Desktop نمی‌تونه خودش lock رو حذف کنه.
 
-**اگه `rm` هم کار نکرد (permission denied):** از temp index workaround استفاده کن:
+**اگه `rm` هم کار نکرد (permission denied):** از temp index + git plumbing استفاده کن:
 ```bash
 cd "/path/to/repo"
+
+# مرحله ۱ — stage با temp index (دور زدن index.lock)
 export GIT_INDEX_FILE=/tmp/git-temp-index
 cp .git/index /tmp/git-temp-index
 git add -A
-git commit -m "..."
+
+# مرحله ۲ — commit با plumbing (دور زدن HEAD.lock)
+TREE=$(git write-tree)
+PARENT=$(cat .git/refs/heads/master)
+COMMIT=$(GIT_AUTHOR_NAME="Ali" GIT_AUTHOR_EMAIL="asarshad@gmail.com" \
+         GIT_COMMITTER_NAME="Ali" GIT_COMMITTER_EMAIL="asarshad@gmail.com" \
+         git commit-tree "$TREE" -p "$PARENT" -m "your message here")
+echo "$COMMIT" > .git/refs/heads/master
+
 unset GIT_INDEX_FILE
+git log --oneline -3   # تأیید
 ```
 
 ---
