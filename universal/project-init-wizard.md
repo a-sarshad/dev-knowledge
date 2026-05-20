@@ -254,6 +254,19 @@ pnpm add i18next react-i18next
 این فایل‌ها را بساز (با محتوای واقعی بر اساس جواب‌های wizard):
 
 **همیشه اجباری:**
+
+> **⚠️ مهم — CLAUDE.md Architectural Decisions:**
+> جواب‌های فاز ۷ رو مستقیماً در جدول `Architectural Decisions` داخل `CLAUDE.md` بنویس.
+> این تصمیم‌ها constraint دائمی هستن — Claude در session‌های بعدی جایگزین پیشنهاد نمی‌ده.
+>
+> ```
+> | State Management | {Q21}         | انتخاب wizard |
+> | Data Fetching    | {Q22}         | انتخاب wizard |
+> | Auth             | TBD           | — |
+> ```
+>
+> هر تصمیم معماری که بعداً در session گرفته می‌شه هم اینجا اضافه می‌شه (توسط session-update skill).
+
 ```
 src/theme/
   tokens.ts        ← brand colors، fonts، spacing

@@ -58,6 +58,22 @@ Key issues:
 
 ---
 
+## Architectural Decisions
+<!-- این تصمیم‌ها قطعی هستن — پیشنهاد جایگزین نده مگه کاربر صریحاً بخواد -->
+<!-- session-update این section رو آپدیت می‌کنه هر بار تصمیم معماری جدیدی گرفته بشه -->
+
+| حوزه | تصمیم | دلیل |
+|------|-------|------|
+| State Management | <!-- [CUSTOMIZE] مثال: Zustand --> | <!-- [CUSTOMIZE] --> |
+| Data Fetching | <!-- [CUSTOMIZE] مثال: TanStack Query --> | — |
+| Routing | <!-- [CUSTOMIZE] مثال: React Router v6 --> | — |
+| Auth | <!-- [CUSTOMIZE] مثال: JWT در localStorage --> | — |
+
+<!-- اگه تصمیم جدیدی در session گرفته شد، Claude این جدول رو آپدیت می‌کنه -->
+<!-- فرمت ردیف جدید: | حوزه | تصمیم | دلیل کوتاه | -->
+
+---
+
 ## File Structure
 <!-- [CUSTOMIZE] ساختار این پروژه رو اینجا بنویس -->
 ```
