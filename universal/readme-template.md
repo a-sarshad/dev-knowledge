@@ -19,6 +19,7 @@
 | Package Manager | Q6 |
 | State Management | Q21 |
 | Data Fetching | Q22 |
+| API Base URL | VITE_API_BASE_URL در .env.example |
 | زبان / جهت | Q17 |
 | ساختار src/i18n | فقط اگه Q17 = دوزبانه |
 | ساختار src/services | فقط اگه Q19 = بله |
@@ -76,10 +77,96 @@ src/
 [فقط اگه Q19 = بله — بخش Backend:]
 ## برای توسعه‌دهنده Backend
 
-- API base URL: `TBD`
-- Auth: `TBD`
-- Types: `src/types/api.ts`
-- Environment: `.env.example` را ببینید
+### محیط
+
+\`\`\`bash
+cp .env.example .env.local
+# مقادیر واقعی رو پر کن
+\`\`\`
+
+متغیرهای محیطی مورد نیاز (`.env.example`):
+
+\`\`\`env
+VITE_API_BASE_URL=http://localhost:8000   # آدرس backend
+VITE_API_TIMEOUT=10000                   # timeout به ms
+\`\`\`
+
+---
+
+### افزودن endpoint جدید
+
+**۱. تایپ رو تعریف کن** — `src/types/api.ts`:
+
+\`\`\`ts
+// Request payload
+export interface CreateOrderPayload {
+  productId: string
+  quantity: number
+}
+
+// Response shape
+export interface CreateOrderResponse {
+  id: string
+  status: 'pending' | 'confirmed'
+  createdAt: string
+}
+\`\`\`
+
+**۲. تابع سرویس بنویس** — `src/services/orderService.ts`:
+
+\`\`\`ts
+import { api } from './api'  // axios instance مرکزی
+import type { CreateOrderPayload, CreateOrderResponse } from '@/types/api'
+
+export const createOrder = (payload: CreateOrderPayload) =>
+  api.post<CreateOrderResponse>('/orders', payload)
+
+export const getOrders = () =>
+  api.get<CreateOrderResponse[]>('/orders')
+\`\`\`
+
+**۳. در کامپوننت استفاده کن:**
+
+\`\`\`ts
+// با {Q22: React Query}
+const { mutate } = useMutation({ mutationFn: createOrder })
+
+// با {Q22: SWR}
+const { data } = useSWR('/orders', getOrders)
+\`\`\`
+
+---
+
+### ساختار services/
+
+\`\`\`
+src/services/
+├── api.ts              ← axios instance (baseURL، interceptors، auth header)
+├── authService.ts      ← login، logout، refresh token
+└── {domain}Service.ts  ← هر domain جدید = یه فایل جدید
+\`\`\`
+
+### ساختار types/
+
+\`\`\`
+src/types/
+├── api.ts              ← همه request/response interface‌ها
+└── index.ts            ← re-export
+\`\`\`
+
+**قرارداد نامگذاری تایپ‌ها:**
+- Request body: `Create{Entity}Payload` / `Update{Entity}Payload`
+- Response: `{Entity}Response` / `{Entity}ListResponse`
+- Shared model: `{Entity}` (بدون پسوند)
+
+---
+
+### Error handling
+
+`src/services/api.ts` interceptor خطاها رو هندل می‌کنه:
+- `401` → redirect به login
+- `422` → validation errors رو برمی‌گردونه
+- بقیه → toast عمومی نمایش می‌ده
 
 ## مستندات بیشتر
 

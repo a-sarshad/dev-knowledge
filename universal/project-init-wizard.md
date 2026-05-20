@@ -274,9 +274,74 @@ README.md          ← از universal/readme-template.md — هر {Qx} را با
 **شرطی:**
 ```
 src/i18n/LocaleContext.tsx    ← اگه Q17 = دوزبانه
-src/services/api.ts           ← اگه Q19 = بله
-src/types/api.ts              ← اگه Q20 = بله
+src/services/api.ts           ← اگه Q19 = بله  [محتوا → زیر]
+src/types/api.ts              ← اگه Q20 = بله  [محتوا → زیر]
 src/contexts/ColorModeContext.tsx ← اگه Q12 = Dark Mode
+.env.example                  ← اگه Q19 = بله  [محتوا → زیر]
+```
+
+**محتوای `src/services/api.ts` (اگه Q19 = بله):**
+```ts
+import axios from 'axios'
+
+export const api = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL,
+  timeout: Number(import.meta.env.VITE_API_TIMEOUT) || 10000,
+  headers: { 'Content-Type': 'application/json' },
+})
+
+// Request interceptor — auth header
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token')
+  if (token) config.headers.Authorization = `Bearer ${token}`
+  return config
+})
+
+// Response interceptor — error handling
+api.interceptors.response.use(
+  (res) => res.data,
+  (error) => {
+    if (error.response?.status === 401) {
+      // TODO: redirect to login
+    }
+    return Promise.reject(error.response?.data ?? error)
+  }
+)
+```
+> اگه Q22 = TanStack Query، نیازی به axios نیست — می‌تونی `fetch` ساده استفاده کنی.
+> اگه Q22 = SWR، همین pattern کار می‌کنه.
+
+**محتوای `src/types/api.ts` (اگه Q20 = بله):**
+```ts
+// ── Shared ─────────────────────────────────────
+export interface PaginatedResponse<T> {
+  data: T[]
+  total: number
+  page: number
+  perPage: number
+}
+
+export interface ApiError {
+  message: string
+  code?: string
+  field?: string  // برای validation errors
+}
+
+// ── Auth ────────────────────────────────────────
+export interface LoginPayload { email: string; password: string }
+export interface LoginResponse { token: string; user: UserResponse }
+export interface UserResponse  { id: string; name: string; email: string }
+
+// ── {Domain} — اینجا entity های پروژه اضافه کن ─
+// export interface CreateXxxPayload { ... }
+// export interface XxxResponse { ... }
+```
+
+**محتوای `.env.example` (اگه Q19 = بله):**
+```env
+# Backend
+VITE_API_BASE_URL=http://localhost:8000
+VITE_API_TIMEOUT=10000
 ```
 
 ### گام ۴ — dev-knowledge
