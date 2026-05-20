@@ -1,6 +1,10 @@
 # [PROJECT NAME] — Claude Reference
 # کپی این فایل برای پروژه جدید، موارد [CUSTOMIZE] رو عوض کن
-# updated: 2026-05-18
+# updated: 2026-05-20
+
+<!-- QUICK CONTEXT — Claude reads this first, no tool call needed -->
+> **[PROJECT NAME]** | DS: Chakra UI v3 | Stack: React+Vite+TS | Lang: FA/RTL | PM: pnpm
+> Constraints: [CUSTOMIZE — e.g. Zustand · TanStack Query · JWT localStorage]
 
 ---
 
