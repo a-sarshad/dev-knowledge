@@ -12,6 +12,7 @@ dev-knowledge/
 ├── skills/             ← فایل‌های .skill (automation)
 │   ├── code-review-tokenization.skill
 │   ├── commit-dev-knowledge.skill
+│   ├── pre-delivery-check.skill
 │   ├── project-init-wizard.skill
 │   ├── session-start.skill
 │   └── session-update.skill
@@ -68,6 +69,7 @@ Claude: [loads vitrina-project-context skill] → [reads projects/vitrina/projec
 | `airport-project-context` | Load context پروژه Airport |
 | `ds-chakra-ui` | Load دانش Chakra UI v3 |
 | `code-review-tokenization` | بررسی کد از نظر استفاده صحیح از design tokens |
+| `pre-delivery-check` | بررسی خودکار checklist قبل از تحویل/merge/deploy |
 
 فایل‌های skill در `skills/` هستن — برای نصب/آپدیت از همانجا استفاده کن.
 

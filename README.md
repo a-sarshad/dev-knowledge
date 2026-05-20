@@ -11,6 +11,7 @@ dev-knowledge/
 ├── skills/                               ← فایل‌های automation (نصب در Cowork)
 │   ├── code-review-tokenization.skill    ← بررسی کد از نظر استفاده صحیح از design tokens
 │   ├── commit-dev-knowledge.skill        ← commit message آماده بعد از هر تغییر DN
+│   ├── pre-delivery-check.skill          ← checklist خودکار قبل از تحویل/merge/deploy
 │   ├── project-init-wizard.skill         ← ساخت پروژه جدید با scaffold کامل
 │   ├── session-start.skill               ← briefing وضعیت پروژه در شروع session
 │   └── session-update.skill              ← ذخیره وضعیت و آپدیت HANDOFF.md
