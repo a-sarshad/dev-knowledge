@@ -9,6 +9,7 @@
 ```
 dev-knowledge/
 ├── skills/                               ← فایل‌های automation (نصب در Cowork)
+│   ├── code-review-tokenization.skill    ← بررسی کد از نظر استفاده صحیح از design tokens
 │   ├── commit-dev-knowledge.skill        ← commit message آماده بعد از هر تغییر DN
 │   ├── project-init-wizard.skill         ← ساخت پروژه جدید با scaffold کامل
 │   ├── session-start.skill               ← briefing وضعیت پروژه در شروع session
