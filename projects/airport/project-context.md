@@ -176,7 +176,15 @@ useEffect(() => {
 
 ## Layout
 
-> TBD — بعد از دریافت Figma یا briefing تکمیل کن
+| فایل | مسیر | کاربرد |
+|------|------|--------|
+| `DashboardLayout` | `src/layouts/DashboardLayout.tsx` | layout اصلی — navbar + sidebar |
+
+- **۹۰٪+ صفحات** از این layout استفاده می‌کنن
+- صفحات **بدون layout**: login، signup
+- sidebar items بر اساس **permission/role** فیلتر می‌شن
+- در موبایل: sidebar مخفی می‌شه، با drawer/hamburger جایگزین می‌شه
+- قبل از ساخت هر صفحه جدید این فایل رو بخون
 
 ---
 

@@ -93,6 +93,20 @@ brand: {
 
 ---
 
+## Layout
+
+| فایل | مسیر | کاربرد |
+|------|------|--------|
+| `DashboardLayout` | `src/layouts/DashboardLayout.tsx` | layout اصلی — navbar + sidebar |
+
+- **۹۰٪+ صفحات** از این layout استفاده می‌کنن
+- صفحات **بدون layout**: login، signup
+- sidebar items بر اساس **permission/role** فیلتر می‌شن (vendor vs user)
+- در موبایل (480px): sidebar مخفی می‌شه، با drawer/hamburger جایگزین می‌شه
+- قبل از ساخت هر صفحه جدید این فایل رو بخون
+
+---
+
 ## نکات مهم پروژه
 
 1. سه breakpoint: 480 (mobile)، 1440 (desktop)، 1920 (wide)
