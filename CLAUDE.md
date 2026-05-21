@@ -10,12 +10,12 @@
 ```
 dev-knowledge/
 ├── skills/             ← فایل‌های .skill (automation)
-│   ├── code-review-tokenization.skill
-│   ├── commit-dev-knowledge.skill
-│   ├── pre-delivery-check.skill
-│   ├── project-init-wizard.skill
-│   ├── session-start.skill
-│   └── session-update.skill
+│   ├── dev-delivery-check.skill
+│   ├── dev-init-wizard.skill
+│   ├── dev-token-review.skill
+│   ├── wf-commit-dn.skill
+│   ├── wf-session-start.skill
+│   └── wf-session-update.skill
 ├── universal/          ← دانش cross-project (همه جا صدق می‌کنه)
 ├── projects/           ← context خاص هر پروژه
 │   ├── airport/
@@ -47,7 +47,7 @@ dev-knowledge/
 
 1. **خوندن context** — قبل از هر کار مرتبط با پروژه، skill آن پروژه رو load کن
 2. **ویرایش فایل‌ها** — با ابزارهای Read/Write/Edit
-3. **Commit خودکار** — بعد از هر تغییر، skill `commit-dev-knowledge` اجرا می‌شه
+3. **Commit خودکار** — بعد از هر تغییر، skill `wf-commit-dn` اجرا می‌شه
 
 ### مثال:
 ```
@@ -59,17 +59,26 @@ Claude: [loads vitrina-project-context skill] → [reads projects/vitrina/projec
 
 ## Skills مرتبط
 
+### wf — Workflow (مدیریت session و repo)
 | Skill | کاربرد |
 |-------|---------|
-| `commit-dev-knowledge` | آماده‌سازی commit message بعد از هر تغییر در DN |
-| `session-start` | briefing وضعیت پروژه در شروع session |
-| `session-update` | ذخیره وضعیت و آپدیت HANDOFF.md در هر مرحله |
-| `project-init-wizard` | ساخت پروژه جدید با scaffold کامل |
+| `wf-commit-dn` | آماده‌سازی commit message بعد از هر تغییر در DN |
+| `wf-session-start` | briefing وضعیت پروژه در شروع session |
+| `wf-session-update` | ذخیره وضعیت و آپدیت HANDOFF.md در هر مرحله |
+
+### dev — Development (کدنویسی و پروژه)
+| Skill | کاربرد |
+|-------|---------|
+| `dev-init-wizard` | ساخت پروژه جدید با scaffold کامل |
+| `dev-token-review` | بررسی کد از نظر استفاده صحیح از design tokens |
+| `dev-delivery-check` | بررسی خودکار checklist قبل از تحویل/merge/deploy |
+
+### project context
+| Skill | کاربرد |
+|-------|---------|
 | `vitrina-project-context` | Load context پروژه Vitrina |
 | `airport-project-context` | Load context پروژه Airport |
 | `ds-chakra-ui` | Load دانش Chakra UI v3 |
-| `code-review-tokenization` | بررسی کد از نظر استفاده صحیح از design tokens |
-| `pre-delivery-check` | بررسی خودکار checklist قبل از تحویل/merge/deploy |
 
 فایل‌های skill در `skills/` هستن — برای نصب/آپدیت از همانجا استفاده کن.
 
@@ -81,5 +90,5 @@ Claude: [loads vitrina-project-context skill] → [reads projects/vitrina/projec
   ```bash
   DN_PATH=$(ls -d /sessions/*/mnt/dev-knowledge 2>/dev/null | head -1)
   ```
-- بعد از هر تغییر فایل در این repo، بدون اینکه کاربر بخواد، `commit-dev-knowledge` اجرا کن
+- بعد از هر تغییر فایل در این repo، بدون اینکه کاربر بخواد، `wf-commit-dn` اجرا کن
 - برای خطاهای git: `universal/git-troubleshoot.md` رو ببین

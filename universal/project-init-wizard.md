@@ -265,7 +265,7 @@ pnpm add i18next react-i18next
 > | Auth             | TBD           | — |
 > ```
 >
-> هر تصمیم معماری که بعداً در session گرفته می‌شه هم اینجا اضافه می‌شه (توسط session-update skill).
+> هر تصمیم معماری که بعداً در session گرفته می‌شه هم اینجا اضافه می‌شه (توسط wf-session-update skill).
 
 ```
 src/theme/

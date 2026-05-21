@@ -9,12 +9,12 @@
 ```
 dev-knowledge/
 ├── skills/                               ← فایل‌های automation (نصب در Cowork)
-│   ├── code-review-tokenization.skill    ← بررسی کد از نظر استفاده صحیح از design tokens
-│   ├── commit-dev-knowledge.skill        ← commit message آماده بعد از هر تغییر DN
-│   ├── pre-delivery-check.skill          ← checklist خودکار قبل از تحویل/merge/deploy
-│   ├── project-init-wizard.skill         ← ساخت پروژه جدید با scaffold کامل
-│   ├── session-start.skill               ← briefing وضعیت پروژه در شروع session
-│   └── session-update.skill              ← ذخیره وضعیت و آپدیت HANDOFF.md
+│   ├── wf-session-start.skill            ← briefing وضعیت پروژه در شروع session
+│   ├── wf-session-update.skill           ← ذخیره وضعیت و آپدیت HANDOFF.md
+│   ├── wf-commit-dn.skill                ← commit message آماده بعد از هر تغییر DN
+│   ├── dev-init-wizard.skill             ← ساخت پروژه جدید با scaffold کامل
+│   ├── dev-token-review.skill            ← بررسی کد از نظر استفاده صحیح از design tokens
+│   └── dev-delivery-check.skill          ← checklist خودکار قبل از تحویل/merge/deploy
 │
 ├── universal/                            ← مفاهیم مستقل از stack
 │   ├── language.md                       ← RTL/LTR، locale، font، logical CSS
@@ -48,18 +48,19 @@ dev-knowledge/
 ## نحوه استفاده
 
 **پروژه جدید:**
-1. skill `project-init-wizard` رو در Cowork اجرا کن
+1. skill `dev-init-wizard` رو در Cowork اجرا کن
 2. wizard سوال‌به‌سوال پیش می‌ره و پروژه رو scaffold می‌کنه
 
 **شروع session:**
-1. skill `session-start` رو اجرا کن → briefing وضعیت فعلی
+1. skill `wf-session-start` رو اجرا کن → briefing وضعیت فعلی
 2. کار کن
-3. هر موقع خواستی وضعیت ذخیره کنه: skill `session-update`
+3. هر موقع خواستی وضعیت ذخیره کنه: skill `wf-session-update`
 
 **حین کار:**
 - bug جدید → `known-bugs.md` آپدیت می‌شه
 - خطای git → `universal/git-troubleshoot.md` رو چک کن
-- تغییر در DN → skill `commit-dev-knowledge` commit message آماده می‌کنه
+- تغییر در DN → skill `wf-commit-dn` commit message آماده می‌کنه
+- قبل از تحویل → skill `dev-delivery-check` همه چیز رو بررسی می‌کنه
 
 ---
 
