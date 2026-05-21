@@ -32,7 +32,10 @@ dev-knowledge/
 │   │   ├── setup-checklist.md            ← نصب و setup قدم‌به‌قدم
 │   │   └── CLAUDE-template.md            ← template برای CLAUDE.md پروژه‌های Chakra
 │   └── bootstrap5/
-│       └── rtl.md                        ← RTL setup، logical classes، known fixes
+│       ├── rtl.md                        ← RTL setup، logical classes، known fixes
+│       ├── _tokens.scss                  ← brand vars (per-project — فقط این عوض می‌شه)
+│       ├── _overrides.scss               ← mapping tokens → Bootstrap SCSS vars
+│       └── bootstrap.scss               ← entry point (copy به src/styles/ پروژه جدید)
 │
 └── projects/
     ├── airport/
