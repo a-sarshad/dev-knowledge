@@ -33,6 +33,7 @@ dev-knowledge/
 │   │   └── CLAUDE-template.md            ← template برای CLAUDE.md پروژه‌های Chakra
 │   └── bootstrap5/
 │       ├── rtl.md                        ← RTL setup، logical classes، known fixes
+│       ├── scaffold.md                   ← راهنمای setup پروژه جدید + هشدارهای رایج
 │       ├── _tokens.scss                  ← brand vars (per-project — فقط این عوض می‌شه)
 │       ├── _overrides.scss               ← mapping tokens → Bootstrap SCSS vars
 │       └── bootstrap.scss               ← entry point (copy به src/styles/ پروژه جدید)
