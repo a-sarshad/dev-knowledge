@@ -10,9 +10,11 @@
 ```
 dev-knowledge/
 ├── skills/             ← فایل‌های .skill (automation)
+│   ├── README.md                ← راهنمای کامل همه skill‌ها (trigger/کاربرد/خروجی)
 │   ├── dev-delivery-check.skill
 │   ├── dev-init-wizard.skill
 │   ├── dev-token-review.skill
+│   ├── figma-page-implement.skill
 │   ├── wf-commit-dn.skill
 │   ├── wf-session-start.skill
 │   └── wf-session-update.skill
@@ -72,6 +74,7 @@ Claude: [loads vitrina-project-context skill] → [reads projects/vitrina/projec
 | `dev-init-wizard` | ساخت پروژه جدید با scaffold کامل |
 | `dev-token-review` | بررسی کد از نظر استفاده صحیح از design tokens |
 | `dev-delivery-check` | بررسی خودکار checklist قبل از تحویل/merge/deploy |
+| `figma-page-implement` | pipeline کامل Figma → React با چک‌های token/build/visual/RTL |
 
 ### project context
 | Skill | کاربرد |

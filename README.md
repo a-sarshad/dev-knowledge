@@ -14,7 +14,8 @@ dev-knowledge/
 │   ├── wf-commit-dn.skill                ← commit message آماده بعد از هر تغییر DN
 │   ├── dev-init-wizard.skill             ← ساخت پروژه جدید با scaffold کامل
 │   ├── dev-token-review.skill            ← بررسی کد از نظر استفاده صحیح از design tokens
-│   └── dev-delivery-check.skill          ← checklist خودکار قبل از تحویل/merge/deploy
+│   ├── dev-delivery-check.skill          ← checklist خودکار قبل از تحویل/merge/deploy
+│   └── figma-page-implement.skill        ← pipeline کامل Figma → React: token/build/visual/RTL
 │
 ├── universal/                            ← مفاهیم مستقل از stack
 │   ├── language.md                       ← RTL/LTR، locale، font، logical CSS
