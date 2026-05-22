@@ -49,7 +49,7 @@ dev-knowledge/
 
 1. **خوندن context** — قبل از هر کار مرتبط با پروژه، skill آن پروژه رو load کن
 2. **ویرایش فایل‌ها** — با ابزارهای Read/Write/Edit
-3. **Commit خودکار** — بعد از هر تغییر، skill `wf-commit-dn` اجرا می‌شه
+3. **Commit خودکار** — بعد از هر تغییر، skill `wf-commit-project` اجرا می‌شه
 
 ### مثال:
 ```
@@ -93,5 +93,5 @@ Claude: [loads vitrina-project-context skill] → [reads projects/vitrina/projec
   ```bash
   DN_PATH=$(ls -d /sessions/*/mnt/dev-knowledge 2>/dev/null | head -1)
   ```
-- بعد از هر تغییر فایل در این repo، بدون اینکه کاربر بخواد، `wf-commit-dn` اجرا کن
+- بعد از هر تغییر فایل در این repo، بدون اینکه کاربر بخواد، `wf-commit-project` اجرا کن
 - برای خطاهای git: `universal/git-troubleshoot.md` رو ببین

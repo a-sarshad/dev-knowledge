@@ -64,7 +64,7 @@ dev-knowledge/
 **حین کار:**
 - bug جدید → `known-bugs.md` آپدیت می‌شه
 - خطای git → `universal/git-troubleshoot.md` رو چک کن
-- تغییر در DN → skill `wf-commit-dn` commit message آماده می‌کنه
+- تغییر در هر repo → skill `wf-commit-project` commit message آماده می‌کنه
 - قبل از تحویل → skill `dev-delivery-check` همه چیز رو بررسی می‌کنه
 
 ---
