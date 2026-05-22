@@ -20,8 +20,46 @@
 - رنگ‌ها از کدوم token یا variable؟
 - typography از کدوم text style؟
 
-**فاز ۳ — کد بنویس**
-- Figma local components → components پروژه با DS انتخابی
+**فاز ۳ — Component Resolution (اجباری)**
+
+قبل از نوشتن هر کد، برای هر کامپوننت این ترتیب رو دنبال کن:
+
+```
+1. Local first  → src/components/ پروژه رو بگرد
+2. DS second    → داکس DS یا MCP server چک کن
+3. Build last   → فقط اگه هیچ‌کدام موجود نبود بساز — از primitives، نه custom HTML
+```
+
+**Local components:**
+```bash
+# قبل از ساختن هر چیزی:
+find src/components -name "*.tsx" | xargs grep -l "<ComponentName"
+# یا:
+ls src/components/ui/ src/components/<feature>/
+```
+اگه موجود بود → import کن و استفاده کن.
+اگه variant جدیدی نیاز داری → extend کن، نساز.
+
+**DS components:**
+```
+# روش ۱ — Figma MCP:
+search_design_system("<component-name>")
+
+# روش ۲ — داکس DS (URL از CLAUDE.md پروژه):
+web_fetch("<ds-docs-url>/<component-name>")
+```
+اگه موجود بود → prop‌ها رو بخون، از همون کامپوننت استفاده کن.
+**هیچ‌وقت** یه کامپوننت DS رو با HTML خالص rebuild نکن.
+
+**Build new (فقط اگه هیچ‌کدوم موجود نبود):**
+- با primitives DS بساز (Box، Flex، Text، ...)
+- هیچ رنگ یا spacing hardcode نکن
+- در `src/components/ui/` یا محل مناسب پروژه قرار بده
+
+---
+
+**فاز ۴ — کد بنویس**
+- Figma local components → پس از Component Resolution بالا
 - Figma tokens → DS tokens پروژه (مقادیر hardcode نکن)
 - Figma auto layout → Flex/Grid
 
