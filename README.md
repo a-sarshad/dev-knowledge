@@ -10,8 +10,8 @@
 dev-knowledge/
 ├── skills/                               ← فایل‌های automation (نصب در Cowork)
 │   ├── wf-session-start.skill            ← briefing وضعیت پروژه در شروع session
-│   ├── wf-session-update.skill           ← ذخیره وضعیت و آپدیت HANDOFF.md
-│   ├── wf-commit-dn.skill                ← commit message آماده بعد از هر تغییر DN
+│   ├── wf-session-update.skill           ← ذخیره وضعیت + آپدیت HANDOFF/CLAUDE/README (جنرال)
+│   ├── wf-commit-project.skill           ← commit message آماده برای هر git repo (جنرال)
 │   ├── dev-init-wizard.skill             ← ساخت پروژه جدید با scaffold کامل
 │   ├── dev-token-review.skill            ← بررسی کد از نظر استفاده صحیح از design tokens
 │   ├── dev-delivery-check.skill          ← checklist خودکار قبل از تحویل/merge/deploy

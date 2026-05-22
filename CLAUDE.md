@@ -15,7 +15,7 @@ dev-knowledge/
 │   ├── dev-init-wizard.skill
 │   ├── dev-token-review.skill
 │   ├── figma-page-implement.skill
-│   ├── wf-commit-dn.skill
+│   ├── wf-commit-project.skill
 │   ├── wf-session-start.skill
 │   └── wf-session-update.skill
 ├── universal/          ← دانش cross-project (همه جا صدق می‌کنه)
@@ -64,9 +64,9 @@ Claude: [loads vitrina-project-context skill] → [reads projects/vitrina/projec
 ### wf — Workflow (مدیریت session و repo)
 | Skill | کاربرد |
 |-------|---------|
-| `wf-commit-dn` | آماده‌سازی commit message بعد از هر تغییر در DN |
+| `wf-commit-project` | آماده‌سازی commit message برای هر git repo (جنرال) |
 | `wf-session-start` | briefing وضعیت پروژه در شروع session |
-| `wf-session-update` | ذخیره وضعیت و آپدیت HANDOFF.md در هر مرحله |
+| `wf-session-update` | ذخیره وضعیت و آپدیت HANDOFF.md در هر مرحله (جنرال) |
 
 ### dev — Development (کدنویسی و پروژه)
 | Skill | کاربرد |

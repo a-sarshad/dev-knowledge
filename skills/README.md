@@ -12,8 +12,8 @@
 | Skill | دسته | کاربرد خلاصه |
 |-------|------|--------------|
 | [wf-session-start](#wf-session-start) | workflow | شروع session — briefing وضعیت پروژه |
-| [wf-session-update](#wf-session-update) | workflow | ذخیره وضعیت و آپدیت HANDOFF.md |
-| [wf-commit-dn](#wf-commit-dn) | workflow | commit message بعد از تغییر در DN |
+| [wf-session-update](#wf-session-update) | workflow | ذخیره وضعیت + آپدیت HANDOFF/CLAUDE/README — هر پروژه |
+| [wf-commit-project](#wf-commit-project) | workflow | commit message آماده — هر git repo |
 | [dev-init-wizard](#dev-init-wizard) | dev | scaffold پروژه جدید قدم‌به‌قدم |
 | [dev-token-review](#dev-token-review) | dev | بررسی hardcode vs design token |
 | [dev-delivery-check](#dev-delivery-check) | dev | checklist قبل از merge/deploy |
@@ -45,32 +45,35 @@
 
 **فایل:** `wf-session-update.skill`
 
-**کاربرد:** در هر مرحله‌ای از کار — نه لزوماً آخر session — وضعیت پروژه رو snapshot می‌کنه. HANDOFF.md رو آپدیت می‌کنه تا session بعدی بتونه دقیقاً از همینجا ادامه بده.
+**کاربرد:** روی **هر پروژه‌ای** کار می‌کنه. وضعیت فعلی رو snapshot می‌کنه — HANDOFF.md رو آپدیت می‌کنه، و اگه تغییر معماری/باگ/ساختار داشتیم CLAUDE.md و README.md پروژه رو هم آپدیت می‌کنه. اگه این فایل‌ها وجود نداشتن کار می‌کنه، اگه وجود داشتن آپدیت می‌کنه.
 
 **چه موقع فعال می‌شه:**
 - «آپدیت کن» / «ذخیره کن» / «save کن»
 - «وضعیت رو ثبت کن» / «HANDOFF رو آپدیت کن»
 - «session-update بزن» / «update کن»
 
-**خروجی:** آپدیت HANDOFF.md + بررسی CLAUDE.md و README.md پروژه
+**خروجی:** آپدیت HANDOFF.md + بررسی و آپدیت CLAUDE.md / README.md در صورت نیاز
 
-**وابستگی:** وجود HANDOFF.md در پروژه (اگه نداشت می‌سازه)
+**تشخیص پروژه:** از workspace folder مانت‌شده، CLAUDE.md در context، یا package.json
 
 ---
 
-### wf-commit-dn
+### wf-commit-project
 
-**فایل:** `wf-commit-dn.skill`
+**فایل:** `wf-commit-project.skill`
 
-**کاربرد:** بعد از هر تغییر در فایل‌های `dev-knowledge/`، یه commit message آماده می‌کنه. خودش هیچ‌وقت git commit نمی‌زنه — فقط دستور آماده برای copy-paste در Terminal می‌ده.
+**کاربرد:** برای **هر git repo** — Vitrina، Airport، dev-knowledge، یا هر پروژه جدیدی — یه commit message آماده می‌کنه. مسیر رو خودش از context/CLAUDE.md/package.json تشخیص می‌ده. هیچ‌وقت git commit نمی‌زنه — فقط دستور آماده برای copy-paste در Terminal می‌ده.
 
 **چه موقع فعال می‌شه:**
-- **خودکار** — بعد از هر عملیات روی فایل‌های DN (بدون اینکه کاربر بخواد)
-- «commit dev-knowledge» / «save changes» / «sync dev-knowledge»
+- **خودکار** — بعد از هر عملیات روی فایل‌های هر پروژه
+- «commit کن» / «push کن» / «commit message بساز»
+- «save کن» / «sync کن» / «بزن رو git»
 
 **خروجی:** دستور `git add -A && git commit -m "..." && git push` آماده برای Terminal
 
 **نکته مهم:** هیچ‌وقت از sandbox git write نمی‌زنه — فقط `git status` می‌خونه
+
+**جایگزین:** این skill جایگزین `wf-commit-dn` شده — برای DN هم همین skill رو استفاده کن
 
 ---
 
