@@ -1,60 +1,119 @@
 # Figma → Code — پیاده‌سازی دیزاین
 > universal — مستقل از design system
 > کاربرد: وقتی دیزاین آماده‌ست و می‌خوای کدش کنی — نه برای شروع پروژه جدید
-> updated: 2026-05-17
+> updated: 2026-05-23 | منبع واحد حقیقت برای Figma→code (skill `figma-page-implement` بازنشسته شد، محتوا اینجا ادغام شد)
 
 ---
+
+## این فایل دو بخش داره
+
+1. **GATE (بلوک قابل‌کپی)** — بخش بعدی. این رو در `## Figma → Code Protocol` هر پروژه‌ی CLAUDE.md کپی کن. کوتاهه، همیشه‌فعاله، هیچ‌وقت فراموش نمیشه.
+2. **مرجع عمیق** — بقیه فایل. وقتی جزئیات لازم شد read کن.
+
+> **چرا gate در CLAUDE.md؟** CLAUDE.md هر پیام خودکار لود میشه. قانون اونجا = همیشه در context. skill ممکنه trigger نشه یا اصلاً نصب نباشه — به skill برای قانون اجباری تکیه نکن.
+
+---
+
+## ▼▼▼ COPY INTO PROJECT CLAUDE.md ▼▼▼
+<!-- نسخه‌ی DS-agnostic. موقع کپی، `[DS]` و `[MCP]` رو با مقدار پروژه پر کن. -->
+
+## Figma → Code Protocol (اجباری)
+
+هر task که از Figma به کد تبدیل میشه — حتی «اصلاح کن» / «مقایسه کن» / «ریسپانسیو کن» — این gate رو رد نکن.
+
+**Component Resolution (به ترتیب، اجباری):**
+```
+1. Local first → src/components/ رو grep کن. موجوده؟ import کن (نساز).
+2. DS second   → از [MCP] design-system بگیر. هیچ‌وقت کامپوننت DS رو از HTML خام rebuild نکن.
+3. Build last  → فقط اگه هیچ‌کدوم نبود، با primitives DS بساز (Box/Flex/Text). صفر hardcode.
+```
+
+**MCP servers این پروژه:**
+- `[MCP]` — کامپوننت/مثال/props دیزاین‌سیستم (مثلاً Chakra UI MCP)
+- Figma MCP — `get_design_context` / `get_screenshot` / `get_variable_defs`
+
+**Definition of Done — آخر هر task point-by-point گزارش بده:**
+- [ ] Component Resolution رعایت شد (Local→DS MCP→Build) — کدوم مسیر؟
+- [ ] صفر hardcode (رنگ/spacing/font) — همه token
+- [ ] logical CSS props (`insetInlineEnd` نه `right`)
+- [ ] RTL DOM order (اولین child = rightmost)
+- [ ] responsive روی breakpointهای پروژه چک شد
+- [ ] type-check / build سبز
+
+اگه چکی skip شد → با ⚠️ علامت بزن، نگو ✅.
+
+<!-- مرجع عمیق: dev-knowledge/universal/figma-to-code.md -->
+## ▲▲▲ END COPY ▲▲▲
+
+---
+---
+
+# مرجع عمیق
 
 ## فازهای کار
 
 **فاز ۱ — Context**
 قبل از شروع، اینا رو داشته باش:
-- CLAUDE.md پروژه (stack، RTL rules، known bugs)
-- لیست کامپوننت‌های local در Figma
+- CLAUDE.md پروژه (stack، RTL rules، known bugs، gate بالا)
+- لیست کامپوننت‌های local در `src/components/`
 - ساختار layout templates پروژه
 
 **فاز ۲ — Figma بخون**
-از Figma MCP یا screenshot برای فهمیدن layout و tokens استفاده کن:
+از Figma MCP یا screenshot برای فهمیدن layout و tokens:
 - کدوم layout template؟ (1-col، 2-col، sidebar+main، ...)
-- spacing‌ها (padding، gap) چند px؟
-- رنگ‌ها از کدوم token یا variable؟
+- spacing‌ها (padding، gap) چند px؟ → کدوم spacing token
+- رنگ‌ها از کدوم token یا variable؟ (`get_variable_defs`)
 - typography از کدوم text style؟
+- responsive: همون node رو در عرض‌های مختلف ببین (موبایل/دسکتاپ)
 
 **فاز ۳ — Component Resolution (اجباری)**
 
-قبل از نوشتن هر کد، برای هر کامپوننت این ترتیب رو دنبال کن:
+قبل از نوشتن هر کد، برای هر کامپوننت ترتیب gate بالا رو دنبال کن:
 
 ```
 1. Local first  → src/components/ پروژه رو بگرد
-2. DS second    → داکس DS یا MCP server چک کن
-3. Build last   → فقط اگه هیچ‌کدام موجود نبود بساز — از primitives، نه custom HTML
+2. DS second    → MCP server دیزاین‌سیستم چک کن
+3. Build last   → فقط اگه هیچ‌کدام نبود — از primitives، نه custom HTML
 ```
 
 **Local components:**
 ```bash
 # قبل از ساختن هر چیزی:
-find src/components -name "*.tsx" | xargs grep -l "<ComponentName"
+find src/components -name "*.tsx" | xargs grep -l "ComponentName"
 # یا:
 ls src/components/ui/ src/components/<feature>/
 ```
-اگه موجود بود → import کن و استفاده کن.
-اگه variant جدیدی نیاز داری → extend کن، نساز.
+موجود بود → import کن. variant جدید لازمه → extend کن، نساز.
 
-**DS components:**
+**DS components — از MCP بگیر، حدس نزن:**
 ```
-# روش ۱ — Figma MCP:
-search_design_system("<component-name>")
+# Chakra UI MCP (پروژه Vitrina):
+mcp__chakra-ui__list_components        → لیست کامپوننت‌ها
+mcp__chakra-ui__get_component_example  → مثال استفاده
+mcp__chakra-ui__get_component_props    → props و انواع
+mcp__chakra-ui__get_theme              → tokenها
 
-# روش ۲ — داکس DS (URL از CLAUDE.md پروژه):
-web_fetch("<ds-docs-url>/<component-name>")
+# Figma MCP (همه پروژه‌ها):
+search_design_system("<component-name>")   → کامپوننت DS در Figma
+
+# روش پشتیبان — داکس DS (URL از CLAUDE.md پروژه):
+WebFetch("<ds-docs-url>/<component-name>")
 ```
-اگه موجود بود → prop‌ها رو بخون، از همون کامپوننت استفاده کن.
-**هیچ‌وقت** یه کامپوننت DS رو با HTML خالص rebuild نکن.
+موجود بود → props رو بخون، از همون کامپوننت استفاده کن.
+**هیچ‌وقت** یه کامپوننت DS رو با HTML/div خام rebuild نکن.
 
-**Build new (فقط اگه هیچ‌کدوم موجود نبود):**
+**Build new (فقط اگه هیچ‌کدوم نبود):**
 - با primitives DS بساز (Box، Flex، Text، ...)
 - هیچ رنگ یا spacing hardcode نکن
-- در `src/components/ui/` یا محل مناسب پروژه قرار بده
+- در `src/components/ui/` یا محل مناسب پروژه بذار
+
+**جدول component mapping بساز:**
+
+| Figma Component | Code Component | وضعیت | منبع |
+|----------------|---------------|--------|------|
+| Button/Primary | `<Button colorPalette="teal">` | ✅ موجود (DS) | MCP |
+| PhoneCard | `<PhoneCard>` | ✅ موجود (local) | src/components |
+| FancyThing | — | ❌ بساز | primitives |
 
 ---
 
@@ -64,7 +123,12 @@ web_fetch("<ds-docs-url>/<component-name>")
 - Figma auto layout → Flex/Grid
 
 برای mapping token های Figma به DS خاص:
-→ `design-systems/<ds-name>/figma-tokens.md`
+→ `design-systems/<ds-name>/tokens.md`
+
+### قوانین سخت — هیچ استثنایی ندارن
+
+**❌ هرگز:** `color: '#1E293B'`، `padding: '16px'`، `fontSize: '14px'`، `marginLeft` (در RTL می‌شکنه)
+**✅ همیشه:** `color: 'fg'`، `padding={4}`، `textStyle="sm"`، `marginInlineStart={4}`
 
 ---
 
@@ -77,17 +141,16 @@ web_fetch("<ds-docs-url>/<component-name>")
 | Fill container | `flex: 1` یا `width: 100%` |
 | Hug contents | بدون width ثابت |
 | Fixed width | `width: 256px` |
-| gap | `gap: Npx` |
-| padding | `padding: Npx` |
+| gap | `gap: Npx` → spacing token |
+| padding | `padding: Npx` → spacing token |
 
-> هر DS این‌ها رو به syntax خودش ترجمه می‌کنه.
-> مثال Chakra UI v3: → `design-systems/chakra-ui-v3/rtl.md`
+> هر DS این‌ها رو به syntax خودش ترجمه می‌کنه. مثال Chakra: `design-systems/chakra-ui-v3/rtl.md`
 
 ---
 
 ## RTL DOM Order
 
-در RTL، اولین child = rightmost. این یه قانون CSS/HTML خالصه، مستقل از DS:
+در RTL، اولین child = rightmost. قانون CSS/HTML خالص، مستقل از DS:
 
 ```html
 <!-- Figma: [Start(راست)] [Middle] [End(چپ)] -->
@@ -102,11 +165,41 @@ web_fetch("<ds-docs-url>/<component-name>")
 
 ---
 
-## چک‌لیست قبل از تحویل
+## Verification — قبل از تحویل (همه اجباری)
 
-- [ ] هیچ مقدار رنگ hardcode نشده (نه hex، نه rgb)
-- [ ] spacing از token/variable استفاده شده
-- [ ] RTL DOM order رعایت شده (اولین child = rightmost)
-- [ ] logical CSS props استفاده شده (`margin-inline-start` نه `margin-left`)
-- [ ] Portal/overlay components `dir="rtl"` دارن
-- [ ] روی موبایل بررسی شده
+```bash
+# ۱. صفر hardcode
+grep -nE '#[0-9a-fA-F]{3,6}|[0-9]+px|fontSize:|fontWeight:' src/path/to/NewFile.tsx
+# چیزی پیدا شد → token کن → دوباره grep تا صفر
+
+# ۲. build سبز
+pnpm type-check 2>&1 | tail -20   # یا: npx tsc --noEmit
+```
+
+**responsive:** روی breakpointهای پروژه چک کن (Vitrina: 480 / 1440 / 1920). Preview MCP یا Claude in Chrome → screenshot در هر عرض.
+
+**visual:** screenshot کد را با screenshot Figma (فاز ۲) مقایسه کن — layout/typography/رنگ/spacing/shadow/radius.
+
+چک‌لیست نهایی = Definition of Done در بلوک GATE بالا. point-by-point گزارش بده.
+
+---
+
+## Pitfalls رایج
+
+| مشکل Figma | راه‌حل در کد |
+|-----------|-------------|
+| `position: absolute` در Figma | از `flex`/`grid` استفاده کن |
+| Auto-layout gap | `gap` در CSS، نه `margin` بین children |
+| state‌ها (hover/focus/disabled) | حتی اگه در فریم نیستن، implement کن |
+| فونت با وزن خاص | تأیید کن فونت آن weight رو load می‌کنه |
+| Box shadow | ترتیب پارامترهای CSS با Figma فرق داره |
+| متن overflow | متن فارسی ۱۵-۳۰٪ بلندتر — truncation/wrap handle کن |
+| Portal/overlay (Menu/Drawer/Dialog) | `dir="rtl"` روی Positioner |
+| Images/icons ندارن | به کاربر flag کن، placeholder موقت |
+
+---
+
+## skill مرتبط
+
+برای pipeline قدم‌به‌قدم Figma→code، از skill رسمی `figma-implement-design` استفاده کن.
+gate بالا (در CLAUDE.md) تضمین صحت میده — skill فقط شتاب‌دهنده‌ست، نه منبع قانون.

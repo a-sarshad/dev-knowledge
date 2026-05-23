@@ -14,8 +14,8 @@ dev-knowledge/
 │   ├── wf-commit-project.skill           ← commit message آماده برای هر git repo (جنرال)
 │   ├── dev-init-wizard.skill             ← ساخت پروژه جدید با scaffold کامل
 │   ├── dev-token-review.skill            ← بررسی کد از نظر استفاده صحیح از design tokens
-│   ├── dev-delivery-check.skill          ← checklist خودکار قبل از تحویل/merge/deploy
-│   └── figma-page-implement.skill        ← pipeline کامل Figma → React: token/build/visual/RTL
+│   └── dev-delivery-check.skill          ← checklist خودکار قبل از تحویل/merge/deploy
+│   (Figma → code: skill رسمی figma-implement-design + gate در CLAUDE.md پروژه)
 │
 ├── universal/                            ← مفاهیم مستقل از stack
 │   ├── language.md                       ← RTL/LTR، locale، font، logical CSS
@@ -66,6 +66,11 @@ dev-knowledge/
 - خطای git → `universal/git-troubleshoot.md` رو چک کن
 - تغییر در هر repo → skill `wf-commit-project` commit message آماده می‌کنه
 - قبل از تحویل → skill `dev-delivery-check` همه چیز رو بررسی می‌کنه
+
+**Figma → کد:**
+- قانون اجباری در `## Figma → Code Protocol` هر پروژه‌ی CLAUDE.md هست (always-on، هیچ‌وقت فراموش نمیشه)
+- مرجع عمیق: `universal/figma-to-code.md` · pipeline: skill رسمی `figma-implement-design`
+- چرا در CLAUDE.md نه skill؟ → `CLAUDE.md` این repo، بخش «اصل طلایی»
 
 ---
 

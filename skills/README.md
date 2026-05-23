@@ -17,7 +17,8 @@
 | [dev-init-wizard](#dev-init-wizard) | dev | scaffold پروژه جدید قدم‌به‌قدم |
 | [dev-token-review](#dev-token-review) | dev | بررسی hardcode vs design token |
 | [dev-delivery-check](#dev-delivery-check) | dev | checklist قبل از merge/deploy |
-| [figma-page-implement](#figma-page-implement) | dev | Figma → React با تمام چک‌های کیفیت |
+
+> **Figma → code:** skill جدا توی این repo نیست. از skill رسمی `figma-implement-design` استفاده کن. قانون اجباری (Component Resolution / DS MCP / DoD) در **CLAUDE.md هر پروژه** هست (always-on). جزئیات: بخش [Figma → Code](#figma--code) پایین.
 
 ---
 
@@ -133,29 +134,29 @@
 
 ---
 
-### figma-page-implement
+## Figma → Code
 
-**فایل:** `figma-page-implement.skill`
+> skill اختصاصی `figma-page-implement` **بازنشسته شد**. دلیل: نصب نبود و قانون اجباریش هیچ‌وقت لود نمی‌شد. محتوای اجباریش به دو جای always-on منتقل شد.
 
-**کاربرد:** Pipeline کامل برای تبدیل یه صفحه/کامپوننت Figma به کد React production-ready. از خوندن طرح تا مقایسه visual نهایی، همه چیز رو cover می‌کنه.
+**حالا چطور Figma رو کد می‌کنیم:**
 
-**چه موقع فعال می‌شه:**
-- «implement کن» / «پیاده‌سازی کن» / «کد بنویس از فیگما»
-- «این صفحه رو بزن» / «build this page» / «implement this screen»
-- «از فیگما بساز» / «بیا این طرح رو کد کنیم»
-- هر Figma URL + درخواست کد
+| لایه | کجا | نقش |
+|------|-----|-----|
+| **قانون اجباری (gate)** | `## Figma → Code Protocol` در CLAUDE.md هر پروژه | همیشه‌فعال — Component Resolution + DoD. هیچ‌وقت فراموش نمیشه |
+| **مرجع عمیق** | `universal/figma-to-code.md` | فازها، MCP tool names، pitfalls، verification |
+| **pipeline قدم‌به‌قدم** | skill رسمی `figma-implement-design` | شتاب‌دهنده — atoms→page |
 
-**مراحل pipeline:**
-1. **Context Setup** — شناسایی پروژه، load skill مناسب
-2. **Figma Reading** — design context، component inventory، token mapping، screenshot
-3. **Implementation Plan** — تأیید قبل از کد نوشتن
-4. **Implementation** — atoms → molecules → organisms → page، فقط tokens، logical CSS
-5. **Verification** — token grep + TypeScript build + visual comparison + RTL + responsive
-6. **Handoff** — آپدیت HANDOFF.md + commit message آماده
+**کدوم Figma skill کِی:**
 
-**خروجی:** کد React کامل + گزارش verification + commit message آماده برای Terminal
+| می‌خوای... | skill |
+|-----------|-------|
+| Figma → کد (پیاده‌سازی) | `figma-implement-design` + gate پروژه |
+| کد/ایده → Figma (طراحی) | `figma-generate-design` (+ `vitrina-figma-rules` برای Vitrina) |
+| اجرای JS در Figma | `figma-use` (prerequisite) |
+| library در Figma | `figma-generate-library` |
+| اتصال کد ↔ Figma | `figma-code-connect` |
 
-**وابستگی:** `figma-use` skill (باید قبلاً load شده باشه) + Figma MCP connection
+**اصل:** قانونِ «نباید فراموش شه» → CLAUDE.md پروژه (always-on). skill = شتاب، نه منبع قانون.
 
 ---
 
