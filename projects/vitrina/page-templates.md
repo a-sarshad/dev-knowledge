@@ -1,4 +1,4 @@
-<!-- version: 3 | updated: 2026-05-22 | changelog: اضافه شدن inner content width برای هر template + اصلاح ساختار لایه‌بندی -->
+<!-- version: 6 | updated: 2026-05-24 | changelog: panel border اضافه شد (borderWidth+borderColor)، اصلاح قانون padding: فقط ستون‌ها no bg/padding، inner content میتونه padding داشته باشه -->
 
 # Page Templates — Vitrina Dashboard
 > همیشه همراه با `project-context.md` استفاده شود
@@ -67,11 +67,11 @@ Page
 | Main | 1664 − 16×2 (padding) | **1632px** |
 | Content | 1632 − 24×2 (padding) | **1584px** |
 
-### داخل Panel (Middle column با padding داخلی 24px)
+### داخل Panel
 
-| Panel | محاسبه | نتیجه |
-|-------|--------|-------|
-| Panel 960px | 960 − 24×2 | **912px** inner content |
+> **قانون:** `bg="bg.panel"`, `borderWidth="1px"`, `borderColor="border"`, `rounded="2xl"` و `p="6"` (24px) فقط روی **panel wrapper** قرار می‌گیرد.  
+> ستون‌های داخل (Start/Middle/End) هیچ‌کدام `bg` یا `padding` ندارند.  
+> inner content داخل هر ستون میتواند padding داشته باشد — این به طراحی همان component بستگی دارد.
 
 ---
 
@@ -87,16 +87,16 @@ Content (1584px)
 └── Middle — fill (max 1584px)
 ```
 
-| ستون | width | inner content |
-|------|-------|--------------|
-| Middle | fill — max 1584px | 1584 − 24×2 = **1536px** |
+| ستون | width |
+|------|-------|
+| Middle | fill |
 
 **کاربرد:** لیست محصولات، جداول داده، داشبورد اصلی
 
 **کد Chakra:**
 ```tsx
-<Box w="full" bg="bg.panel" rounded="2xl" p="6">
-  {/* inner content: fill */}
+<Box w="full" bg="bg.panel" borderWidth="1px" borderColor="border" rounded="2xl" p="6">
+  {/* content: fill */}
 </Box>
 ```
 
@@ -108,12 +108,11 @@ Content (1584px)
 ```
 Content (1584px)
 └── Middle — max 960px | fill در canvas کوچک‌تر
-    └── inner content — max 912px (960 − 24×2 padding)
 ```
 
-| ستون | width | inner content |
-|------|-------|--------------|
-| Middle | max 960px | 960 − 24×2 = **912px** |
+| ستون | width |
+|------|-------|
+| Middle | max 960px |
 
 **کاربرد:** فرم‌های تک‌ستونه، صفحات تنظیمات، ثبت اطلاعات
 
@@ -121,8 +120,8 @@ Content (1584px)
 
 **کد Chakra:**
 ```tsx
-<Box maxW="960px" w="full" bg="bg.panel" rounded="2xl" p="6">
-  {/* inner content: max 912px */}
+<Box maxW="960px" w="full" bg="bg.panel" borderWidth="1px" borderColor="border" rounded="2xl" p="6">
+  {/* content: max 960px */}
 </Box>
 ```
 
@@ -133,26 +132,27 @@ Content (1584px)
 
 ```
 Content (1584px)
-├── Start  — 256px fixed                   ← راست
-└── Middle — max 960px fill                ← مرکز
-    └── inner content — max 912px
+├── Start  — 256px fixed      ← راست
+└── Middle — max 960px fill   ← مرکز
 ```
 
-| ستون | موقعیت | width | inner content |
-|------|---------|-------|--------------|
-| Start | راست | 256px fixed | — |
-| Middle | مرکز | max 960px fill | 912px |
+| ستون | موقعیت | width |
+|------|---------|-------|
+| Start | راست | 256px fixed |
+| Middle | مرکز | max 960px fill |
 
 **کاربرد:** پنل اطلاعات جانبی (راست) + محتوای اصلی (مرکز)
 
 **کد Chakra:**
 ```tsx
-<Flex gap="10" align="flex-start">
-  {/* Start — RTL: first = rightmost */}
-  <Box w="256px" flexShrink={0} bg="bg.panel" rounded="2xl" p="6" />
-  {/* Middle */}
-  <Box maxW="960px" flex="1" bg="bg.panel" rounded="2xl" p="6" />
-</Flex>
+<Box bg="bg.panel" borderWidth="1px" borderColor="border" rounded="2xl" p="6" w="full">
+  <Flex gap="10" align="flex-start">
+    {/* Start — RTL: first = rightmost */}
+    <Box w="256px" flexShrink={0} />
+    {/* Middle */}
+    <Box maxW="960px" flex="1" />
+  </Flex>
+</Box>
 ```
 
 ---
@@ -175,12 +175,14 @@ Content (1584px)
 
 **کد Chakra:**
 ```tsx
-<Flex gap="10" align="flex-start">
-  {/* Start — RTL: first = rightmost */}
-  <Box w="256px" flexShrink={0} bg="bg.panel" rounded="2xl" p="6" />
-  {/* Middle */}
-  <Box flex="1" bg="bg.panel" rounded="2xl" p="6" />
-</Flex>
+<Box bg="bg.panel" borderWidth="1px" borderColor="border" rounded="2xl" p="6" w="full">
+  <Flex gap="10" align="flex-start">
+    {/* Start — RTL: first = rightmost */}
+    <Box w="256px" flexShrink={0} />
+    {/* Middle */}
+    <Box flex="1" />
+  </Flex>
+</Box>
 ```
 
 ---
@@ -195,24 +197,26 @@ Content (1584px)
 └── End    — max 256px fixed    ← چپ
 ```
 
-| ستون | موقعیت | width | inner content |
-|------|---------|-------|--------------|
-| Start | راست | max 288px | 288 − 24×2 = 240px |
-| Middle | مرکز | max 960px fill | 912px |
-| End | چپ | max 256px | 256 − 24×2 = 208px |
+| ستون | موقعیت | width |
+|------|---------|-------|
+| Start | راست | max 288px |
+| Middle | مرکز | max 960px fill |
+| End | چپ | max 256px |
 
 **کاربرد:** ناوبری/فیلتر (Start-راست) + محتوای اصلی (Middle) + اطلاعات جانبی (End-چپ)
 
 **کد Chakra:**
 ```tsx
-<Flex gap="10" align="flex-start">
-  {/* Start — RTL: first = rightmost */}
-  <Box maxW="288px" w="full" flexShrink={0} bg="bg.panel" rounded="2xl" p="6" />
-  {/* Middle */}
-  <Box maxW="960px" flex="1" bg="bg.panel" rounded="2xl" p="6" />
-  {/* End — RTL: last = leftmost */}
-  <Box maxW="256px" w="full" flexShrink={0} bg="bg.panel" rounded="2xl" p="6" />
-</Flex>
+<Box bg="bg.panel" borderWidth="1px" borderColor="border" rounded="2xl" p="6" w="full">
+  <Flex gap="10" align="flex-start">
+    {/* Start — RTL: first = rightmost */}
+    <Box maxW="288px" w="full" flexShrink={0} />
+    {/* Middle */}
+    <Box maxW="960px" flex="1" />
+    {/* End — RTL: last = leftmost */}
+    <Box maxW="256px" w="full" flexShrink={0} />
+  </Flex>
+</Box>
 ```
 
 ---
@@ -223,13 +227,11 @@ Content (1584px)
 ```
 Main (fill, max 1664px)
 └── Panel — max 960px، centered
-    └── inner content — max 912px (960 − 24×2 padding)
 ```
 
 | لایه | width | توضیح |
 |------|-------|-------|
 | Panel | max 960px | خود panel سفید، centered در Main |
-| inner content | max 912px | داخل panel با p="6" |
 
 **کاربرد:** فرم‌های فوکوس‌شده، صفحات login/register، wizard های تک‌مرحله‌ای
 
@@ -237,8 +239,8 @@ Main (fill, max 1664px)
 
 **کد Chakra:**
 ```tsx
-<Box maxW="960px" w="full" mx="auto" bg="bg.panel" rounded="2xl" p="6">
-  {/* inner content: max 912px */}
+<Box maxW="960px" w="full" mx="auto" bg="bg.panel" borderWidth="1px" borderColor="border" rounded="2xl" p="6">
+  {/* content: max 960px */}
 </Box>
 ```
 
@@ -246,14 +248,16 @@ Main (fill, max 1664px)
 
 ## خلاصه مقایسه‌ای
 
-| Template | Panel | ستون‌های داخل panel | Inner (Middle) |
-|----------|------|-------------------|---------------|
-| One Column Fill | fill | Middle = fill | 1536px |
-| **One Column Center** ⭐ | fill | Middle = max 960px centered | 912px |
-| Two Columns Right Center | fill | Start=256px + Middle=max 960px | 912px |
-| Two Columns Right Fill | fill | Start=256px + Middle=fill | ~1240px |
-| Three Columns | fill | Start=288px + Middle=960px + End=256px | 912px |
-| **One Card Center** | **max 960px** | — | 912px |
+| Template | Panel | ستون‌های داخل panel |
+|----------|------|-------------------|
+| One Column Fill | fill | Middle = fill |
+| **One Column Center** ⭐ | max 960px | Middle = max 960px |
+| Two Columns Right Center | fill | Start=256px + Middle=max 960px |
+| Two Columns Right Fill | fill | Start=256px + Middle=fill |
+| Three Columns | fill | Start=max 288px + Middle=max 960px + End=max 256px |
+| **One Card Center** | **max 960px** | — |
+
+> ستون‌ها **هیچ‌وقت** `bg` یا `p` ندارند — فقط `w`/`maxW`/`flex`
 
 ---
 
@@ -272,7 +276,7 @@ Main (fill, max 1664px)
 
 ## نکات مهم برای Claude
 
-1. **Inner content = column width − 24×2** — کارت‌ها همیشه `p="6"` (24px) دارند
+1. **`bg="bg.panel"` + `borderWidth="1px"` + `borderColor="border"` + `rounded="2xl"` + `p="6"` فقط روی panel wrapper** — ستون‌ها (Start/Middle/End) هیچ‌کدام `bg` یا `padding` ندارند. inner content داخل هر ستون میتواند padding داشته باشد (به طراحی component بستگی دارد)
 2. **همه frame ها Auto Layout** — هیچ frame معمولی استفاده نکن
 3. **Main و Content همیشه fill container** — عرض ثابت نده
 4. **Start = راست / End = چپ** در RTL — DOM order: Start → Middle → End
