@@ -17,6 +17,26 @@
 ## ▼▼▼ COPY INTO PROJECT CLAUDE.md ▼▼▼
 <!-- نسخه‌ی DS-agnostic. موقع کپی، `[DS]` و `[MCP]` رو با مقدار پروژه پر کن. -->
 
+## Figma Access Gate (اجباری — بالاتر از همه)
+
+**اگه Figma tool خطا داد یا data برنگشت → STOP. هیچ کدی نزن.**
+
+```
+Figma tool fail شد؟
+  → اول مشکل دسترسی رو حل کن (tool دیگه امتحان کن، از کاربر link/node-id دوباره بخواه)
+  → هرگز با حدس/ذهن خودت ادامه نده
+  → هرگز محتوا (text، label، color، layout) از خودت نساز
+  → اگه بعد از تلاش باز هم نشد → به کاربر بگو و منتظر بمون
+
+مجاز نیست:
+  ✗ ادامه دادن بدون Figma data
+  ✗ حدس زدن TitleBar text / button label / component variant
+  ✗ ساختن layout از پیش‌فرض‌های ذهنی
+  ✗ گفتن «data نگرفتم ولی ادامه می‌دم»
+```
+
+---
+
 ## Figma → Code Protocol (اجباری)
 
 هر task که از Figma به کد تبدیل میشه — حتی «اصلاح کن» / «مقایسه کن» / «ریسپانسیو کن» — این gate رو رد نکن.
@@ -111,7 +131,7 @@ WebFetch("<ds-docs-url>/<component-name>")
 
 | Figma Component | Code Component | وضعیت | منبع |
 |----------------|---------------|--------|------|
-| Button/Primary | `<Button colorPalette="teal">` | ✅ موجود (DS) | MCP |
+| Button/Primary | `<Button colorPalette="brand">` | ✅ موجود (DS) | MCP |
 | PhoneCard | `<PhoneCard>` | ✅ موجود (local) | src/components |
 | FancyThing | — | ❌ بساز | primitives |
 

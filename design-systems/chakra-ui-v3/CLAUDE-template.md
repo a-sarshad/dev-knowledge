@@ -53,9 +53,15 @@ Key issues:
 <!-- [CUSTOMIZE] رنگ اصلی این پروژه — از project-context.md بیار -->
 | Token | Light | Dark |
 |-------|-------|------|
-| `brand.solid` | teal.600 | teal.400 |
+| `brand.solid` | teal.600 | teal.600 |
+| `brand.contrast` | white | white |
 | `brand.fg` | teal.700 | teal.300 |
-| `brand.muted` | teal.100 | teal.900 |
+| `brand.subtle` | teal.100 | teal.900 |
+| `brand.muted` | teal.200 | teal.800 |
+| `brand.emphasized` | teal.300 | teal.700 |
+| `brand.focusRing` | teal.500 | teal.500 |
+| `brand.border` | teal.500 | teal.400 |
+| `brand.bg` | teal.50 | teal.950 |
 
 → کامل: `src/theme/tokens.ts`
 → جدول همه variant‌ها: `dev-knowledge/design-systems/chakra-ui-v3/tokens.md`

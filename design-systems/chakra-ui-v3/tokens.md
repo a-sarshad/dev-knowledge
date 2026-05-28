@@ -142,14 +142,15 @@ export const projectTokens = defineConfig({
     semanticTokens: {
       colors: {
         brand: {
-          solid:      { value: { base: '{colors.teal.600}', _dark: '{colors.teal.400}' } },
+          solid:      { value: { base: '{colors.teal.600}', _dark: '{colors.teal.600}' } },
+          contrast:   { value: { base: 'white',             _dark: 'white'             } },
           fg:         { value: { base: '{colors.teal.700}', _dark: '{colors.teal.300}' } },
-          muted:      { value: { base: '{colors.teal.100}', _dark: '{colors.teal.900}' } },
-          subtle:     { value: { base: '{colors.teal.50}',  _dark: '{colors.teal.950}' } },
-          emphasized: { value: { base: '{colors.teal.200}', _dark: '{colors.teal.800}' } },
-          contrast:   { value: { base: 'white',             _dark: '{colors.teal.950}' } },
-          focusRing:  { value: { base: '{colors.teal.600}', _dark: '{colors.teal.400}' } },
-          border:     { value: { base: '{colors.teal.300}', _dark: '{colors.teal.700}' } },
+          subtle:     { value: { base: '{colors.teal.100}', _dark: '{colors.teal.900}' } },
+          muted:      { value: { base: '{colors.teal.200}', _dark: '{colors.teal.800}' } },
+          emphasized: { value: { base: '{colors.teal.300}', _dark: '{colors.teal.700}' } },
+          focusRing:  { value: { base: '{colors.teal.500}', _dark: '{colors.teal.500}' } },
+          border:     { value: { base: '{colors.teal.500}', _dark: '{colors.teal.400}' } },
+          bg:         { value: { base: '{colors.teal.50}',  _dark: '{colors.teal.950}' } },
         },
         surface: {
           card:   { value: { base: 'white',                  _dark: '{colors.gray.900}' } },

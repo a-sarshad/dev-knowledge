@@ -34,14 +34,15 @@ export const projectTokens = defineConfig({
     semanticTokens: {
       colors: {
         brand: {
-          solid:      { value: { base: '{colors.BRAND.600}', _dark: '{colors.BRAND.400}' } },
+          solid:      { value: { base: '{colors.BRAND.600}', _dark: '{colors.BRAND.600}' } },
+          contrast:   { value: { base: 'white',              _dark: 'white'              } },
           fg:         { value: { base: '{colors.BRAND.700}', _dark: '{colors.BRAND.300}' } },
-          muted:      { value: { base: '{colors.BRAND.100}', _dark: '{colors.BRAND.900}' } },
-          subtle:     { value: { base: '{colors.BRAND.50}',  _dark: '{colors.BRAND.950}' } },
-          emphasized: { value: { base: '{colors.BRAND.200}', _dark: '{colors.BRAND.800}' } },
-          contrast:   { value: { base: 'white',             _dark: '{colors.BRAND.950}' } },
-          focusRing:  { value: { base: '{colors.BRAND.600}', _dark: '{colors.BRAND.400}' } },
-          border:     { value: { base: '{colors.BRAND.300}', _dark: '{colors.BRAND.700}' } },
+          subtle:     { value: { base: '{colors.BRAND.100}', _dark: '{colors.BRAND.900}' } },
+          muted:      { value: { base: '{colors.BRAND.200}', _dark: '{colors.BRAND.800}' } },
+          emphasized: { value: { base: '{colors.BRAND.300}', _dark: '{colors.BRAND.700}' } },
+          focusRing:  { value: { base: '{colors.BRAND.500}', _dark: '{colors.BRAND.500}' } },
+          border:     { value: { base: '{colors.BRAND.500}', _dark: '{colors.BRAND.400}' } },
+          bg:         { value: { base: '{colors.BRAND.50}',  _dark: '{colors.BRAND.950}' } },
         },
       },
     },
@@ -199,6 +200,100 @@ export function MultiLangProvider({ defaultLang = 'fa', children }) {
 ```
 
 ⚠️ در RTL: `align="flex-start"` = سمت راست، `align="flex-end"` = سمت چپ
+
+---
+
+## ۷-الف. RTL DOM Order — الگوهای component-specific
+
+> **چرا این مهمه؟** Chakra v3 + @ark-ui RTL را از طریق `LocaleProvider locale="fa-IR"` → `dir:"rtl"` به همه کامپوننت‌ها می‌رسونه. CSS `flex-direction:row` در RTL context به طور خودکار main axis رو برعکس می‌کنه. **اما DOM ORDER به دست ما نوشته می‌شه** — اشتباه در DOM order = اشتباه بصری.
+
+### Button + icon
+
+```tsx
+// ✅ Start icon (leading) — FIRST در DOM = راست‌ترین در RTL
+<Button>
+  <Plus size={16} />   {/* راست (start) ✓ */}
+  افزودن
+</Button>
+
+// ✅ End icon (trailing) — LAST در DOM = چپ‌ترین در RTL
+<Button>
+  مشاهده بیشتر
+  <ChevronLeft size={16} />   {/* چپ (end) ✓ — در RTL forward = چپ */}
+</Button>
+
+// ❌ اشتباه: start icon بعد از text
+<Button>
+  افزودن
+  <Plus size={16} />   {/* چپ = end position ✗ */}
+</Button>
+```
+
+### Switch — standalone toggle
+
+```tsx
+// ✅ Switch FIRST = راست‌ترین (position: start)
+<Flex align="center" gap="2.5">
+  <Switch.Root colorPalette="brand" ...>
+    <Switch.HiddenInput />
+    <Switch.Control><Switch.Thumb /></Switch.Control>
+  </Switch.Root>
+  <Text fontSize="sm">ارسال رایگان</Text>   {/* LAST → چپ ✓ */}
+</Flex>
+
+// ❌ اشتباه: text قبل از switch
+<Flex align="center" gap="2.5">
+  <Text>ارسال رایگان</Text>   {/* FIRST → راست ✗ */}
+  <Switch.Root ...>...</Switch.Root>
+</Flex>
+```
+
+### Switch.Label داخل Switch.Root
+
+```tsx
+// ✅ Control FIRST = راست‌ترین (order:-1 در theme به عنوان CSS fallback هم داریم)
+<Switch.Root>
+  <Switch.HiddenInput />
+  <Switch.Control><Switch.Thumb /></Switch.Control>   {/* FIRST → راست ✓ */}
+  <Switch.Label>فعال / غیرفعال</Switch.Label>         {/* SECOND → چپ ✓ */}
+</Switch.Root>
+
+// ❌ اشتباه: label قبل از control
+<Switch.Root>
+  <Switch.Label>فعال</Switch.Label>   {/* FIRST → راست ✗ */}
+  <Switch.Control>...</Switch.Control>
+</Switch.Root>
+```
+
+> **CSS Defensive Fix** — در `globalCss` پروژه‌های RTL اضافه کن:
+> ```ts
+> '[data-scope="switch"][data-part="control"]': { order: -1 }
+> ```
+> این CSS حتی اگه DOM order اشتباه باشه، Control را بصری اول می‌آره (راست در RTL).
+
+### Settings row (full-width)
+
+```tsx
+// ✅ Switch راست، Label چپ، فاصله‌دار
+<Flex align="center" gap="2.5" w="full">
+  <Switch.Root flexShrink={0}>...</Switch.Root>   {/* FIRST → راست ✓ */}
+  <Text flex="1" fontSize="sm">عنوان تنظیم</Text> {/* LAST → چپ ✓ */}
+</Flex>
+
+// توجه: برعکس LTR settings (که label چپ و toggle راست)
+// در RTL: toggle/control همیشه start = راست
+```
+
+### Flex row عمومی
+
+```tsx
+// ✅ ترتیب صحیح برای هر row component
+<Flex align="center" gap="3">
+  <Icon />          {/* FIRST = راست‌ترین ✓ */}
+  <Text flex="1">متن اصلی</Text>
+  <ActionBtn />     {/* LAST = چپ‌ترین ✓ */}
+</Flex>
+```
 
 ---
 
