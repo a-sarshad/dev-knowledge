@@ -1,5 +1,5 @@
 # Chakra UI v3 — Token Reference
-> updated: 2026-05-16
+> updated: 2026-05-28
 
 ---
 
@@ -7,12 +7,12 @@
 
 | Token | Light | Dark |
 |-------|-------|------|
-| `bg` | white | gray.950 |
-| `bg.subtle` | gray.50 | gray.900 |
-| `bg.muted` | gray.100 | gray.800 |
-| `bg.emphasized` | gray.200 | gray.700 |
-| `bg.inverted` | gray.800 | gray.200 |
-| `bg.panel` | white | gray.900 |
+| `bg` | white | black |
+| `bg.subtle` | gray.50 | gray.950 |
+| `bg.muted` | gray.100 | gray.900 |
+| `bg.emphasized` | gray.200 | gray.800 |
+| `bg.inverted` | black | white |
+| `bg.panel` | white | gray.950 |
 | `bg.error` | red.50 | red.950 |
 | `bg.warning` | orange.50 | orange.950 |
 | `bg.success` | green.50 | green.950 |
@@ -22,25 +22,28 @@
 
 | Token | Light | Dark |
 |-------|-------|------|
-| `fg` | gray.800 | gray.100 |
+| `fg` | black | gray.50 |
 | `fg.muted` | gray.600 | gray.400 |
-| `fg.subtle` | gray.500 | gray.500 |
-| `fg.inverted` | white | gray.900 |
-| `fg.error` | red.700 | red.300 |
-| `fg.warning` | orange.700 | orange.300 |
-| `fg.success` | green.700 | green.300 |
-| `fg.info` | blue.700 | blue.300 |
+| `fg.subtle` | gray.400 | gray.500 |
+| `fg.inverted` | gray.50 | black |
+| `fg.error` | red.500 | red.400 |
+| `fg.warning` | orange.600 | orange.300 |
+| `fg.success` | green.600 | green.300 |
+| `fg.info` | blue.600 | blue.300 |
 
 ## Semantic Tokens — Border
 
 | Token | Light | Dark |
 |-------|-------|------|
-| `border` | gray.200 | gray.700 |
-| `border.muted` | gray.100 | gray.800 |
-| `border.emphasized` | gray.300 | gray.600 |
+| `border` | gray.200 | gray.800 |
+| `border.muted` | gray.100 | gray.900 |
+| `border.subtle` | gray.50 | gray.950 |
+| `border.emphasized` | gray.300 | gray.700 |
 | `border.inverted` | gray.800 | gray.200 |
-| `border.error` | red.500 | red.500 |
-| `border.success` | green.500 | green.500 |
+| `border.error` | red.500 | red.400 |
+| `border.warning` | orange.500 | orange.400 |
+| `border.success` | green.500 | green.400 |
+| `border.info` | blue.500 | blue.400 |
 
 ## Per-Color Tokens
 
