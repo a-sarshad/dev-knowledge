@@ -16,7 +16,6 @@
 | [wf-commit-project](#wf-commit-project) | workflow | commit message آماده — هر git repo |
 | [dev-init-wizard](#dev-init-wizard) | dev | scaffold پروژه جدید قدم‌به‌قدم |
 | [dev-token-review](#dev-token-review) | dev | بررسی hardcode vs design token |
-| [dev-delivery-check](#dev-delivery-check) | dev | checklist قبل از merge/deploy |
 | [dev-projfix](#dev-projfix) | dev | اجرای projfix — بررسی و auto-fix کد |
 
 > **Figma → code:** skill جدا توی این repo نیست. از skill رسمی `figma-implement-design` استفاده کن. قانون اجباری (Component Resolution / DS MCP / DoD) در **CLAUDE.md هر پروژه** هست (always-on). جزئیات: بخش [Figma → Code](#figma--code) پایین.
@@ -131,24 +130,6 @@
 **خروجی:** گزارش violations (error/warning) + auto-fix + راهنمای manual fixes
 
 **وابستگی:** وجود `.projfix.json` در پروژه + نصب `projfix` CLI
-
----
-
-### dev-delivery-check
-
-**فایل:** `dev-delivery-check.skill`
-
-**کاربرد:** قبل از هر merge، PR، یا deploy — یه checklist کامل اجرا می‌کنه: git status، build، tests، token review، RTL، responsive. بدون سوال همه چک‌ها رو می‌زنه.
-
-**چه موقع فعال می‌شه:**
-- «تحویل بده» / «آماده‌ست؟» / «merge کن» / «PR بزن»
-- «deploy کن» / «ready for review» / «review آماده‌ست؟»
-- «بررسی کن قبل از تحویل» / «checklist بزن»
-- «می‌تونیم merge کنیم؟» / «بریم production» / «push کنیم؟»
-
-**خروجی:** گزارش ✅/⚠️/❌ برای هر چک + نتیجه کلی (آماده‌ست یا نه)
-
-**وابستگی:** وجود `package.json` و git repo در پروژه
 
 ---
 
