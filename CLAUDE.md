@@ -120,3 +120,4 @@ Claude: [loads vitrina-project-context skill] → [reads projects/vitrina/projec
   ```
 - بعد از هر تغییر فایل در این repo، بدون اینکه کاربر بخواد، `wf-commit-project` اجرا کن
 - برای خطاهای git: `universal/git-troubleshoot.md` رو ببین
+- برای استفاده از projfix CLI: `universal/projfix.md` رو ببین
