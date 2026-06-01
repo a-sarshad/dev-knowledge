@@ -38,6 +38,7 @@ npm i -g projfix
 | `ds` | `chakra-v3` · `chakra-v2` · `mui` · `antd` · `mantine` · `generic` |
 | `icon_lib` | `lucide` · `heroicons` · `fa` · `generic` |
 
+> **سریع‌تر:** `projfix init` رو اجرا کن — سوال‌به‌سوال پیش می‌ره و فایل رو می‌سازه.
 > اگه `.projfix.json` نباشه، skill `dev-projfix` آن را auto-detect و می‌سازه.
 
 ---
@@ -133,12 +134,16 @@ alias pf-ci='projfix ./src --json --exit-zero'
 ## workflow پیشنهادی
 
 ```
+پروژه جدید؟
+  → projfix init (interactive setup .projfix.json)
 کد نوشتی؟
   → pfc (فقط changed — سریع)
   → اگه violation داشت → pff (auto-fix)
   → اگه manual violation موند → Claude skill dev-projfix
+حین توسعه؟
+  → pfw (watch mode — auto-rerun روی تغییر)
 قبل از commit؟
   → pf (full scan)
 CI؟
-  → projfix ./src --json (خروجی machine-readable)
+  → pf-ci (= projfix ./src --json --exit-zero)
 ```
