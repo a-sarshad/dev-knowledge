@@ -14,7 +14,7 @@ dev-knowledge/
 │   ├── wf-commit-project.skill           ← commit message آماده برای هر git repo (جنرال)
 │   ├── dev-init-wizard.skill             ← ساخت پروژه جدید با scaffold کامل
 │   ├── dev-token-review.skill            ← بررسی کد از نظر استفاده صحیح از design tokens
-│   └── dev-delivery-check.skill          ← checklist خودکار قبل از تحویل/merge/deploy
+│   └── dev-projfix.skill                 ← اجرای projfix با منو — بررسی، auto-fix، راهنمای manual
 │   (Figma → code: skill رسمی figma-implement-design + gate در CLAUDE.md پروژه)
 │
 ├── universal/                            ← مفاهیم مستقل از stack
@@ -22,6 +22,7 @@ dev-knowledge/
 │   ├── git-troubleshoot.md               ← خطاهای رایج git + راه‌حل
 │   ├── figma-to-code.md                  ← پیاده‌سازی دیزاین از Figma
 │   ├── project-init-wizard.md            ← wizard تعاملی ساخت پروژه
+│   ├── projfix.md                        ← راهنمای CLI projfix، aliases، modules، ignore
 │   ├── readme-template.md                ← template برای README پروژه‌های جدید
 │   └── session-management.md             ← مدیریت context و HANDOFF.md
 │
@@ -65,7 +66,8 @@ dev-knowledge/
 - bug جدید → `known-bugs.md` آپدیت می‌شه
 - خطای git → `universal/git-troubleshoot.md` رو چک کن
 - تغییر در هر repo → skill `wf-commit-project` commit message آماده می‌کنه
-- قبل از تحویل → skill `dev-delivery-check` همه چیز رو بررسی می‌کنه
+- بررسی کد → `pf` (full) یا `pfc` (changed only) از terminal — راهنما: `universal/projfix.md`
+- قبل از تحویل → `pf` از terminal یا skill `dev-projfix`
 
 **Figma → کد:**
 - قانون اجباری در `## Figma → Code Protocol` هر پروژه‌ی CLAUDE.md هست (always-on، هیچ‌وقت فراموش نمیشه)
