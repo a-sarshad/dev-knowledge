@@ -405,6 +405,11 @@ pnpm install
 # Chakra UI v3 (اگه Q7 = Chakra UI)
 pnpm add @chakra-ui/react
 
+# Bootstrap 5 (اگه Q7 = Bootstrap 5)
+pnpm add bootstrap
+# اگه پروژه دوزبانه (RTL + LTR):
+pnpm add sass   # برای override راحت‌تر
+
 # Tailwind (اگه Q7 = Tailwind)
 pnpm add -D tailwindcss postcss autoprefixer && pnpm dlx tailwindcss init -p
 
@@ -437,6 +442,7 @@ pnpm add i18next react-i18next
 >
 > هر تصمیم معماری که بعداً در session گرفته می‌شه هم اینجا اضافه می‌شه (توسط wf-session-update skill).
 
+**اگه Q7 = Chakra UI v3:**
 ```
 src/theme/
   tokens.ts        ← brand colors، fonts، spacing
@@ -446,12 +452,23 @@ src/providers/
   AppProviders.tsx ← ChakraProvider + سایر providers
 
 CLAUDE.md          ← از design-systems/chakra-ui-v3/CLAUDE-template.md کپی و customize
+```
+
+**اگه Q7 = Bootstrap 5:**
+```
+src/styles/
+  _tokens.scss     ← از design-systems/bootstrap5/_tokens.scss کپی و customize
+  _overrides.scss  ← از design-systems/bootstrap5/_overrides.scss کپی
+  bootstrap.scss   ← از design-systems/bootstrap5/bootstrap.scss کپی (entry point)
+  index.scss       ← @use './bootstrap'; (import در main.tsx)
+
+CLAUDE.md          ← بر اساس CLAUDE-template عمومی، بخش DS رو با Bootstrap جایگزین کن
+```
+
+**مشترک (همه DS):**
+```
 HANDOFF.md         ← از universal/session-management.md الگو بگیر
-README.md          ← از universal/readme-template.md — هر {Qx} را با جواب wizard جایگزین کن:
-                      {Q1}=نام، {Q3}=توضیح، {Q4}=framework، {Q5}=language،
-                      {Q6}=package manager، {Q7}=DS، {Q20}=زبان، {Q24}=state،
-                      بخش‌های شرطی: services (Q22=بله)، types (Q23=بله)،
-                      i18n (Q20=دوزبانه)، stores (Q24=Zustand)
+README.md          ← template در فاز ۱۱ همین فایل — هر {Qx} را با جواب wizard جایگزین کن
 ```
 
 **شرطی:**
@@ -581,11 +598,122 @@ feat: scaffold [project-name] project
 
 ---
 
+---
+
+## فاز ۱۱ — README.md Template
+
+هنگام scaffold، متن زیر رو کپی کن و هر `{Qx}` رو با جواب wizard جایگزین کن.
+بخش‌های `[فقط اگه ...]` رو بر اساس انتخاب‌ها نگه‌دار یا حذف کن.
+
+| فیلد README | منبع |
+|-------------|------|
+| نام پروژه | Q1 |
+| توضیح | Q3 |
+| Framework | Q4 |
+| Language | Q5 |
+| Design System | Q7 |
+| Package Manager | Q6 |
+| State Management | Q24 |
+| Data Fetching | Q25 |
+| زبان / جهت | Q20 |
+
+```markdown
+# {Q1}
+
+{Q3}
+
+## Stack
+
+| بخش | تکنولوژی |
+|-----|----------|
+| Framework | {Q4} |
+| Language | {Q5} |
+| Design System | {Q7} |
+| State | {Q24} |
+| Data Fetching | {Q25} |
+| Package Manager | {Q6} |
+| زبان | {Q20: فارسی RTL / انگلیسی LTR / فارسی + انگلیسی} |
+
+## شروع سریع
+
+\`\`\`bash
+{Q6} install
+{Q6} dev
+\`\`\`
+
+## ساختار پروژه
+
+\`\`\`
+src/
+├── theme/              ← design tokens و system config
+│   ├── tokens.ts       ← single source of truth (رنگ، فونت، spacing)
+│   └── index.ts        ← {Q7} system setup
+├── providers/          ← app-level providers
+├── components/         ← reusable UI components
+├── pages/              ← صفحات / routes
+[فقط اگه Q22 = بله:]
+├── services/           ← API calls و data layer
+[فقط اگه Q23 = بله:]
+├── types/              ← TypeScript interfaces (api.ts, ...)
+[فقط اگه Q24 = Zustand:]
+├── stores/             ← Zustand stores
+[فقط اگه Q20 = دوزبانه:]
+└── i18n/               ← multilang setup (fa / en)
+\`\`\`
+
+[فقط اگه Q22 = بله:]
+## برای توسعه‌دهنده Backend
+
+\`\`\`bash
+cp .env.example .env.local
+\`\`\`
+
+متغیرهای محیطی (`.env.example`):
+
+\`\`\`env
+VITE_API_BASE_URL=http://localhost:8000
+VITE_API_TIMEOUT=10000
+\`\`\`
+
+### افزودن endpoint جدید
+
+1. تایپ در `src/types/api.ts`
+2. تابع سرویس در `src/services/{domain}Service.ts`
+3. استفاده با {Q25} در component
+
+### ساختار services/ و types/
+
+\`\`\`
+src/services/
+├── api.ts              ← axios/fetch instance
+└── {domain}Service.ts  ← هر domain = یه فایل
+
+src/types/
+└── api.ts              ← همه request/response interfaces
+\`\`\`
+
+**قرارداد نامگذاری:** `Create{Entity}Payload` / `{Entity}Response`
+
+## مستندات بیشتر
+
+- `CLAUDE.md` — راهنمای کار با Claude
+- `HANDOFF.md` — وضعیت فعلی و قدم بعدی
+- `dev-knowledge/projects/{Q1}/project-context.md` — tokens و معماری
+```
+
+---
+
 ## مراجع
 
-- Setup Chakra: `design-systems/chakra-ui-v3/setup-checklist.md`
+**Chakra UI v3:**
+- Chakra UI v3 (شامل setup): `design-systems/chakra-ui-v3/chakra-ui-v3.md`
 - Tokens کامل: `design-systems/chakra-ui-v3/tokens.md`
 - Known bugs: `design-systems/chakra-ui-v3/known-bugs.md`
+
+**Bootstrap 5:**
+- RTL setup + overrides: `design-systems/bootstrap5/rtl.md`
+- Scaffold guide: `design-systems/bootstrap5/scaffold.md`
+
+**همه پروژه‌ها:**
 - Language & RTL: `universal/language.md`
-- Multilang + Direction Setup: `design-systems/chakra-ui-v3/chakra-ui-v3.md`
 - Figma→Code: `universal/figma-to-code.md`

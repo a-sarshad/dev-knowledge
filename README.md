@@ -14,9 +14,8 @@ dev-knowledge/
 │   ├── language.md                       ← RTL/LTR، locale، font، logical CSS
 │   ├── git-troubleshoot.md               ← خطاهای رایج git + راه‌حل
 │   ├── figma-to-code.md                  ← پیاده‌سازی دیزاین از Figma
-│   ├── project-init-wizard.md            ← wizard تعاملی ساخت پروژه
+│   ├── project-init-wizard.md            ← wizard تعاملی ساخت پروژه (شامل README template)
 │   ├── projfix.md                        ← راهنمای CLI projfix، aliases، modules، ignore
-│   ├── readme-template.md                ← template برای README پروژه‌های جدید
 │   └── session-management.md             ← مدیریت context و HANDOFF.md
 │
 ├── design-systems/
@@ -25,7 +24,6 @@ dev-knowledge/
 │   │   ├── tokens.md                     ← جداول کامل همه token‌ها
 │   │   ├── known-bugs.md                 ← باگ‌های تأییدشده + راه‌حل
 │   │   ├── components.md                 ← لیست کامل همه component‌ها (بدون tool call)
-│   │   ├── setup-checklist.md            ← نصب و setup قدم‌به‌قدم
 │   │   └── CLAUDE-template.md            ← template برای CLAUDE.md پروژه‌های Chakra
 │   └── bootstrap5/
 │       ├── rtl.md                        ← RTL setup، logical classes، known fixes

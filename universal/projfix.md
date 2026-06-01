@@ -64,8 +64,20 @@ projfix ./src --module dom-order,chakra-known-bugs
 # فقط گزارش بدون خروجی رنگی (برای CI)
 projfix ./src --json
 
+# CI — report بدون fail کردن pipeline
+projfix ./src --json --exit-zero
+
 # همه فایل‌ها (حتی clean) نمایش بده
 projfix ./src --verbose
+
+# config در مسیر دیگه (monorepo)
+projfix ./packages/ui/src --config ./packages/ui/.projfix.json
+
+# watch — اجرای خودکار روی تغییر فایل
+projfix ./src --watch
+
+# ساخت .projfix.json به صورت interactive
+projfix init
 ```
 
 ---
@@ -78,6 +90,8 @@ alias pf='projfix ./src'
 alias pfc='projfix ./src --changed'
 alias pff='projfix ./src --fix'
 alias pfcf='projfix ./src --changed --fix'
+alias pfw='projfix ./src --watch'
+alias pf-ci='projfix ./src --json --exit-zero'
 ```
 
 بعد از اضافه کردن: `source ~/.zshrc`

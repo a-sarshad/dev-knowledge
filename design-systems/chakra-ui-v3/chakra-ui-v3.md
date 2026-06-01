@@ -373,11 +373,73 @@ Tabs    → https://chakra-ui.com/docs/components/tabs
 
 ---
 
+## ۱۳. Setup — پروژه جدید
+
+### نصب
+
+```bash
+pnpm add @chakra-ui/react @emotion/react @emotion/styled
+```
+
+### ساختار فایل‌های Chakra
+
+```
+src/
+  contexts/
+    ColorModeContext.tsx   ← dark mode toggle
+  theme/
+    index.ts               ← createSystem entry
+    tokens.ts              ← custom tokens
+```
+
+### Theme Setup
+
+```ts
+// src/theme/index.ts
+import { createSystem, defaultConfig, defineConfig } from '@chakra-ui/react'
+import { projectTokens } from './tokens'
+
+const layoutConfig = defineConfig({
+  globalCss: {
+    'html, body': {
+      direction: 'rtl',   // یا 'ltr' برای LTR projects
+      fontFamily: 'body',
+    },
+  },
+})
+
+export const system = createSystem(defaultConfig, projectTokens, layoutConfig)
+```
+
+### main.tsx
+
+```tsx
+import { ChakraProvider, LocaleProvider } from '@chakra-ui/react'
+import { system } from './theme'
+import { ColorModeProvider } from './contexts/ColorModeContext'
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <ChakraProvider value={system}>
+      <LocaleProvider locale="fa-IR">   {/* یا حذف کن برای LTR */}
+        <ColorModeProvider>
+          <App />
+        </ColorModeProvider>
+      </LocaleProvider>
+    </ChakraProvider>
+  </StrictMode>,
+)
+```
+
+### CLAUDE.md
+از `CLAUDE-template.md` همین پوشه کپی و customize کن.
+
+---
+
 ## مراجع این پوشه
 
 | فایل | کاربرد |
 |------|--------|
 | `tokens.md` | جداول کامل همه توکن‌ها (lookup) |
 | `known-bugs.md` | لیست زنده باگ‌ها با مثال کد |
-| `setup-checklist.md` | نصب و setup قدم‌به‌قدم |
 | `CLAUDE-template.md` | template برای CLAUDE.md پروژه‌های جدید |
