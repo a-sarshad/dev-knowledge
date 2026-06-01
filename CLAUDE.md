@@ -13,6 +13,7 @@ dev-knowledge/
 │   ├── README.md                ← راهنمای کامل همه skill‌ها (trigger/کاربرد/خروجی)
 │   ├── dev-delivery-check.skill
 │   ├── dev-init-wizard.skill
+│   ├── dev-projfix.skill
 │   ├── dev-token-review.skill
 │   ├── wf-commit-project.skill
 │   ├── wf-session-start.skill

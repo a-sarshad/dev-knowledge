@@ -17,6 +17,7 @@
 | [dev-init-wizard](#dev-init-wizard) | dev | scaffold پروژه جدید قدم‌به‌قدم |
 | [dev-token-review](#dev-token-review) | dev | بررسی hardcode vs design token |
 | [dev-delivery-check](#dev-delivery-check) | dev | checklist قبل از merge/deploy |
+| [dev-projfix](#dev-projfix) | dev | اجرای projfix — بررسی و auto-fix کد |
 
 > **Figma → code:** skill جدا توی این repo نیست. از skill رسمی `figma-implement-design` استفاده کن. قانون اجباری (Component Resolution / DS MCP / DoD) در **CLAUDE.md هر پروژه** هست (always-on). جزئیات: بخش [Figma → Code](#figma--code) پایین.
 
@@ -113,6 +114,23 @@
 **خروجی:** جدول مشکلات + token پیشنهادی + خلاصه کیفیت (A/B/C/D)
 
 **وابستگی:** شناخت DS پروژه (Chakra UI v3 یا Bootstrap 5)
+
+---
+
+### dev-projfix
+
+**فایل:** `dev-projfix.skill`
+
+**کاربرد:** projfix رو روی پروژه اجرا می‌کنه — violations پیدا می‌کنه، auto-fix می‌زنه، و موارد manual رو راهنمایی می‌کنه. برای هر پروژه‌ای با `.projfix.json` کار می‌کنه — هر DS، هر direction.
+
+**چه موقع فعال می‌شه:**
+- «review-fix» / «projfix بزن» / «run projfix»
+- «fix issues» / «بررسی کد» / «check and fix» / «اصلاح کن»
+- بعد از پیاده‌سازی Figma یا تغییرات چند-فایلی
+
+**خروجی:** گزارش violations (error/warning) + auto-fix + راهنمای manual fixes
+
+**وابستگی:** وجود `.projfix.json` در پروژه + نصب `projfix` CLI
 
 ---
 
