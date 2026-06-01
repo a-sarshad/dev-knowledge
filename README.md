@@ -31,6 +31,7 @@ dev-knowledge/
 │   │   ├── chakra-ui-v3.md               ← مرجع اصلی: RTL، tokens، multilang
 │   │   ├── tokens.md                     ← جداول کامل همه token‌ها
 │   │   ├── known-bugs.md                 ← باگ‌های تأییدشده + راه‌حل
+│   │   ├── components.md                 ← لیست کامل همه component‌ها (بدون tool call)
 │   │   ├── setup-checklist.md            ← نصب و setup قدم‌به‌قدم
 │   │   └── CLAUDE-template.md            ← template برای CLAUDE.md پروژه‌های Chakra
 │   └── bootstrap5/

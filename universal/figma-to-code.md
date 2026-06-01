@@ -122,6 +122,19 @@ WebFetch("<ds-docs-url>/<component-name>")
 موجود بود → props رو بخون، از همون کامپوننت استفاده کن.
 **هیچ‌وقت** یه کامپوننت DS رو با HTML/div خام rebuild نکن.
 
+**Component descriptions = implementation checklist (اجباری):**
+```
+get_design_context output بخش "Component descriptions" داشت؟
+  → آن لیست = تمام DS componentهای استفاده‌شده در آن node
+  → قبل از نوشتن هر sub-element، اسمش رو در آن لیست چک کن
+  → هر component لیست‌شده باید از DS import بشه — rebuild ممنوع
+
+چرا مهمه:
+  Figma این section رو فقط برای named DS components می‌سازه
+  → badge/alert/button در آن لیست = آن component در DS وجود داره
+  → builder ممکنه روی layout تمرکز کنه و sub-componentها رو از scratch بسازه ← این اشتباهه
+```
+
 **Build new (فقط اگه هیچ‌کدوم نبود):**
 - با primitives DS بساز (Box، Flex، Text، ...)
 - هیچ رنگ یا spacing hardcode نکن
