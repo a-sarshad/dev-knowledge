@@ -9,13 +9,6 @@
 ```
 dev-knowledge/
 ├── skills/                               ← فایل‌های automation (نصب در Cowork)
-│   ├── wf-session-start.skill            ← briefing وضعیت پروژه در شروع session
-│   ├── wf-session-update.skill           ← ذخیره وضعیت + آپدیت HANDOFF/CLAUDE/README (جنرال)
-│   ├── wf-commit-project.skill           ← commit message آماده برای هر git repo (جنرال)
-│   ├── dev-init-wizard.skill             ← ساخت پروژه جدید با scaffold کامل
-│   ├── dev-token-review.skill            ← بررسی کد از نظر استفاده صحیح از design tokens
-│   └── dev-projfix.skill                 ← اجرای projfix با منو — بررسی، auto-fix، راهنمای manual
-│   (Figma → code: skill رسمی figma-implement-design + gate در CLAUDE.md پروژه)
 │
 ├── universal/                            ← مفاهیم مستقل از stack
 │   ├── language.md                       ← RTL/LTR، locale، font، logical CSS
@@ -54,26 +47,16 @@ dev-knowledge/
 
 ## نحوه استفاده
 
-**پروژه جدید:**
-1. skill `dev-init-wizard` رو در Cowork اجرا کن
-2. wizard سوال‌به‌سوال پیش می‌ره و پروژه رو scaffold می‌کنه
+```
+پروژه جدید  → skill dev-init-wizard
+شروع session → skill wf-session-start
+ذخیره وضعیت → skill wf-session-update
+commit       → skill wf-commit-project
+بررسی کد    → pf / pfc / pff از terminal (راهنما: universal/projfix.md)
+Figma→کد    → skill figma-implement-design + gate در CLAUDE.md پروژه
+```
 
-**شروع session:**
-1. skill `wf-session-start` رو اجرا کن → briefing وضعیت فعلی
-2. کار کن
-3. هر موقع خواستی وضعیت ذخیره کنه: skill `wf-session-update`
-
-**حین کار:**
-- bug جدید → `known-bugs.md` آپدیت می‌شه
-- خطای git → `universal/git-troubleshoot.md` رو چک کن
-- تغییر در هر repo → skill `wf-commit-project` commit message آماده می‌کنه
-- بررسی کد → `pf` (full) یا `pfc` (changed only) از terminal — راهنما: `universal/projfix.md`
-- قبل از تحویل → `pf` از terminal یا skill `dev-projfix`
-
-**Figma → کد:**
-- قانون اجباری در `## Figma → Code Protocol` هر پروژه‌ی CLAUDE.md هست (always-on، هیچ‌وقت فراموش نمیشه)
-- مرجع عمیق: `universal/figma-to-code.md` · pipeline: skill رسمی `figma-implement-design`
-- چرا در CLAUDE.md نه skill؟ → `CLAUDE.md` این repo، بخش «اصل طلایی»
+> قوانین اجباری، skill table، و workflow کامل: **`CLAUDE.md`** همین پوشه.
 
 ---
 

@@ -1,9 +1,16 @@
 # Skills — راهنمای کامل
 
-این پوشه شامل تمام skill‌های automation پروژه هست.
+این پوشه شامل skill‌های **workflow و dev** که در این repo نگهداری می‌شن.
 هر skill یه فایل `.skill` هست که در Cowork نصب می‌شه.
 
 > **نصب:** روی فایل `.skill` کلیک کن → Save skill
+
+> **توجه:** بخشی از skillها خارج از این repo مدیریت می‌شن:
+> - `dev-delivery-check` ← نصب‌شده از anthropic-skills (بدون فایل در این پوشه)
+> - Figma skills (`figma-implement-design`، `figma-use`، ...) ← از figma plugin رسمی
+> - Context skills (`vitrina-project-context`، `ds-chakra-ui`، ...) ← از anthropic-skills
+>
+> این فایل فقط راهنمای skillهای موجود در `skills/` این پوشه‌ست.
 
 ---
 

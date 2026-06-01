@@ -1,7 +1,7 @@
 # Language & Direction — مفاهیم پایه
 > universal — مستقل از design system
-> ادغام rtl-concepts.md + multilang-concepts.md
 > updated: 2026-05-18
+> ⬅️ **جایگزین:** `rtl-concepts.md` + `multilang-concepts.md` (هر دو در این فایل ادغام شدن)
 
 ---
 

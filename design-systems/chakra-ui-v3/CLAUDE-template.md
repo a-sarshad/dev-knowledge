@@ -105,5 +105,5 @@ src/
 - Chakra full reference: `dev-knowledge/design-systems/chakra-ui-v3/chakra-ui-v3.md`
 - All tokens: `dev-knowledge/design-systems/chakra-ui-v3/tokens.md`
 - Known bugs: `dev-knowledge/design-systems/chakra-ui-v3/known-bugs.md`
-- RTL concepts: `dev-knowledge/universal/rtl-concepts.md`
+- RTL concepts: `dev-knowledge/universal/language.md`
 - Figma→Code: `dev-knowledge/universal/figma-to-code.md`

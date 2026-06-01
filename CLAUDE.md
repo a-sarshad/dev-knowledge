@@ -86,7 +86,8 @@ Claude: [loads vitrina-project-context skill] → [reads projects/vitrina/projec
 |-------|---------|
 | `dev-init-wizard` | ساخت پروژه جدید با scaffold کامل (gate Figma→Code رو در CLAUDE.md پروژه bake میکنه) |
 | `dev-token-review` | بررسی کد از نظر استفاده صحیح از design tokens |
-| `dev-delivery-check` | بررسی خودکار checklist قبل از تحویل/merge/deploy |
+| `dev-projfix` | اجرای projfix — بررسی و auto-fix کد |
+| `dev-delivery-check` ⚙️ | بررسی خودکار checklist قبل از تحویل/merge/deploy — **external** (anthropic-skills، فایل در skills/ نیست) |
 
 ### Figma (رسمی — figma plugin، نصب‌شده)
 | Skill | جهت | کاربرد |

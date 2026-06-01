@@ -96,7 +96,7 @@ alias pfcf='projfix ./src --changed --fix'
 | `token-replacer` | hex color → design token | همه |
 | `persian-numerals` | اعداد فارسی در کد | fa-IR |
 | `icon-direction` | آیکون‌های جهت‌دار (arrow) در RTL | RTL |
-| `build-git` | build failure، uncommitted files، HANDOFF freshness | همه |
+| `build-git` | ۳ چک project-level (نه per-file): **①** `pnpm type-check` / build failure — **②** uncommitted files + unpushed commits — **③** HANDOFF.md staleness (N commits behind) | همه |
 
 ---
 

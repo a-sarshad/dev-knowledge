@@ -177,7 +177,7 @@ get_design_context output بخش "Component descriptions" داشت؟
 | gap | `gap: Npx` → spacing token |
 | padding | `padding: Npx` → spacing token |
 
-> هر DS این‌ها رو به syntax خودش ترجمه می‌کنه. مثال Chakra: `design-systems/chakra-ui-v3/rtl.md`
+> هر DS این‌ها رو به syntax خودش ترجمه می‌کنه. مثال Chakra: `design-systems/chakra-ui-v3/chakra-ui-v3.md`
 
 ---
 
@@ -194,7 +194,7 @@ get_design_context output بخش "Component descriptions" داشت؟
 </div>
 ```
 
-→ مفاهیم کامل‌تر: `universal/rtl-concepts.md`
+→ مفاهیم کامل‌تر: `universal/language.md`
 
 ---
 
