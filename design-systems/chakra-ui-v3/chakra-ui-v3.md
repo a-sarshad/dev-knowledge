@@ -2,6 +2,23 @@
 > جایگزین: rtl.md + multilang.md + unified-skill-content.md
 > updated: 2026-05-18
 
+## Table of Contents
+| # | بخش |
+|---|-----|
+| ۱ | [قوانین پایه](#۱-قوانین-پایه--همیشه) |
+| ۲ | [Brand Token Pattern](#۲-brand-token-pattern) |
+| ۳ | [Semantic Tokens](#۳-semantic-tokens--کلیدی‌ترین‌ها) |
+| ۴ | [Typography](#۴-typography) |
+| ۵ | [Spacing / Radius / Shadow](#۵-spacing-radius-shadow-component-size) |
+| ۶ | [Direction Setup — سه حالت](#۶-direction-setup--سه-حالت) |
+| ۷ | [RTL DOM Order](#۷-rtl--dom-order-و-layout) |
+| ۸ | [Logical Props](#۸-logical-props--قانون-مطلق) |
+| ۹ | [Portal Components](#۹-portal-components-در-rtl) |
+| ۱۰ | [Sidebar Patterns](#۱۰-sidebar-patterns) |
+| ۱۱ | [Known Bugs — خلاصه](#۱۱-known-bugs--خلاصه) → [فایل کامل](known-bugs.md) |
+| ۱۲ | [Chakra Docs URLs](#۱۲-chakra-docs--web_fetch-urls) |
+| ۱۳ | [Setup پروژه جدید](#۱۳-setup--پروژه-جدید) |
+
 این فایل محتوای کامل skill Chakra UI است — برای همه پروژه‌ها (RTL، LTR، دوزبانه).
 رنگ brand هر پروژه از `projects/[name]/project-context.md` می‌آید — اینجا hardcode نیست.
 

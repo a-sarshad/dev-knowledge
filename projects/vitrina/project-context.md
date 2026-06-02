@@ -1,5 +1,5 @@
 # Vitrina — Project Context
-> updated: 2026-05-18
+> updated: 2026-06-02
 
 ---
 
@@ -113,3 +113,14 @@ brand: {
 2. Navbar عرض کامل — Content از سمت راست 256px offset داره
 3. سیستم discount و currency جداگانه
 4. Dark/Light mode از طریق boolean variable
+
+---
+
+## کارهای معوق (TODO)
+
+| کار | جزئیات | وضعیت |
+|-----|---------|--------|
+| Persian Numbers | ساخت `src/utils/numbers.ts` با `toPersianDigits` + `toLatinDigits` — migrate همه JSX display | ⏳ |
+| Persian Calendar | همه تاریخ‌های display باید `fa-IR-u-ca-persian` locale داشته باشن | ⏳ |
+
+**قانون:** user میبینه؟ → فارسی. code میخونه؟ → انگلیسی (API، محاسبات، ID)

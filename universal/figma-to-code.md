@@ -3,6 +3,18 @@
 > کاربرد: وقتی دیزاین آماده‌ست و می‌خوای کدش کنی — نه برای شروع پروژه جدید
 > updated: 2026-05-23 | منبع واحد حقیقت برای Figma→code (skill `figma-page-implement` بازنشسته شد، محتوا اینجا ادغام شد)
 
+## Table of Contents
+- [ساختار فایل](#این-فایل-دو-بخش-داره)
+- [GATE — کپی در CLAUDE.md](#-copy-into-project-claudemd-)
+  - Figma Access Gate
+  - Figma → Code Protocol (Component Resolution / DS Second / DoD)
+- [مرجع عمیق](#فازهای-کار)
+  - [فازهای کار](#فازهای-کار)
+  - [نگاشت Auto Layout](#نگاشت-figma-auto-layout-به-css)
+  - [RTL DOM Order](#rtl-dom-order)
+  - [Verification](#verification--قبل-از-تحویل-همه-اجباری)
+  - [Pitfalls رایج](#pitfalls-رایج)
+
 ---
 
 ## این فایل دو بخش داره
