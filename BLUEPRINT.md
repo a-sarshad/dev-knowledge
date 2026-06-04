@@ -290,7 +290,7 @@ Projects/<X>/                               ← قانون + context خودِ پ
    - `doctor` (preflight) ✓ · `resolve` (Figma name→code، صفر MCP) ✓ · `figma-sync --scan/--init/status` ✓ · cache merge Local-first ✓ · seed DS chakra ✓
    - `visual-diff` (نیاز browser dep) — defer · `figma-sync` REST pull (Enterprise-gated) — scaffold فقط
 5. ساخت skill `dev-implement` (#5) ✓ — orchestrator واحد، pipeline §3 رو step-by-step enforce می‌کنه
-6. حذف/dedupe باقی‌مونده (#3، #6) — شامل overlap CLAUDE.md↔context (brand tokens/breakpoints) ← بعدی
+6. حذف/dedupe باقی‌مونده (#3، #6) ✓ — Vitrina: tokens/breakpoints duplicate از context cut شد (canonical → CLAUDE.md، drift بسته شد) · Airport: از قبل split ایده‌آل داشت · dod-check هیچ‌وقت ساخته نشد (DROP بی‌مورد)
 
 ---
 
