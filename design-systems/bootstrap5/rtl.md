@@ -63,4 +63,4 @@ margin-right: calc(-.5 * var(--bs-modal-header-padding-x));
 ## مراجع
 
 - RTL concepts عمومی (CSS/HTML): `universal/language.md`
-- پیاده‌سازی دوزبانه در پروژه Airport: `projects/airport/project-context.md`
+- پیاده‌سازی دوزبانه در پروژه Airport: `Airport/.claude/context/project-context.md`

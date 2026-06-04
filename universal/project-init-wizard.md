@@ -544,12 +544,13 @@ VITE_API_BASE_URL=http://localhost:8000
 VITE_API_TIMEOUT=10000
 ```
 
-### گام ۴ — dev-knowledge
+### گام ۴ — context پروژه (در repo خودِ پروژه)
 
 ```
-projects/<project-name>/
+<project-root>/.claude/context/
   project-context.md  ← brand tokens، stack، layout این پروژه
 ```
++ thin-loader skill `<project>-context.skill` در dev-knowledge/skills/ (فقط loader — محتوا رو از repo پروژه می‌خونه، embed نمی‌کنه)
 
 ### گام ۵ — Git
 
@@ -575,7 +576,7 @@ git push -u origin main
 - [ ] `CLAUDE.md` و `HANDOFF.md` ساخته شدن
 - [ ] بخش Layout در `CLAUDE.md` با مقادیر واقعی پر شده
 - [ ] `README.md` با اطلاعات واقعی پر شده
-- [ ] `project-context.md` در dev-knowledge ساخته شد
+- [ ] `project-context.md` در `<project>/.claude/context/` ساخته شد + thin-loader skill
 - [ ] git commit انجام شد
 
 ---
@@ -593,7 +594,7 @@ feat: scaffold [project-name] project
 - src/types/api.ts: backend TypeScript types    (اگه types لازمه)
 - src/i18n/LocaleContext.tsx: multilang setup   (اگه دوزبانه)
 - CLAUDE.md + HANDOFF.md + README.md
-- dev-knowledge/projects/[name]/project-context.md
+- <project>/.claude/context/project-context.md
 ```
 
 ---
@@ -698,7 +699,7 @@ src/types/
 
 - `CLAUDE.md` — راهنمای کار با Claude
 - `HANDOFF.md` — وضعیت فعلی و قدم بعدی
-- `dev-knowledge/projects/{Q1}/project-context.md` — tokens و معماری
+- `.claude/context/project-context.md` — tokens و معماری
 ```
 
 ---

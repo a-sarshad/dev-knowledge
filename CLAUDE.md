@@ -21,9 +21,6 @@ dev-knowledge/
 │   ├── wf-session-start.skill
 │   └── wf-session-update.skill
 ├── universal/          ← دانش cross-project (همه جا صدق می‌کنه)
-├── projects/           ← context خاص هر پروژه
-│   ├── airport/
-│   └── vitrina/
 └── design-systems/     ← دانش خاص هر design system
     ├── bootstrap5/
     └── chakra-ui-v3/
@@ -37,9 +34,10 @@ dev-knowledge/
 - فقط چیزهایی که بدون تغییر در **همه پروژه‌ها** صدق می‌کنن
 - اگه یه نکته project-specific یا DS-specific داره، اینجا نذار
 
-### projects/<name>/
-- context، تصمیمات، و نکات خاص اون پروژه
-- برای load کردن: skill مربوط به پروژه رو invoke کن
+### context پروژه (در repo خودِ پروژه — نه اینجا)
+- context/تصمیمات/نکات خاص هر پروژه → `Projects/<name>/.claude/context/`
+- با repo پروژه سفر می‌کنه؛ dev-knowledge فقط دانش cross-project نگه می‌داره
+- load: skill `<project>-context` (thin loader — محتوا رو از repo پروژه می‌خونه، embed نمی‌کنه)
 
 ### design-systems/<name>/
 - راهنما، token، و نکات خاص اون DS
@@ -70,7 +68,7 @@ dev-knowledge/
 ### مثال:
 ```
 User: روی Vitrina کار می‌کنم
-Claude: [loads vitrina-project-context skill] → [reads projects/vitrina/project-context.md]
+Claude: [loads vitrina-project-context skill] → [reads Vitrina/.claude/context/project-context.md]
 ```
 
 ---

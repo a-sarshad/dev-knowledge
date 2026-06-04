@@ -8,9 +8,10 @@
 > **توجه:** بخشی از skillها خارج از این repo مدیریت می‌شن:
 > - `dev-delivery-check` ← نصب‌شده از anthropic-skills (بدون فایل در این پوشه)
 > - Figma skills (`figma-implement-design`، `figma-use`، ...) ← از figma plugin رسمی
-> - Context skills (`vitrina-project-context`، `ds-chakra-ui`، ...) ← از anthropic-skills
+> - `ds-chakra-ui` ← از anthropic-skills
 >
-> این فایل فقط راهنمای skillهای موجود در `skills/` این پوشه‌ست.
+> **Context skills** (`vitrina-project-context`، `airport-project-context`) حالا **thin-loader**ـن:
+> source در همین پوشه، ولی محتوا رو از `Projects/<X>/.claude/context/` می‌خونن (embed نمی‌کنن، drift نمی‌کنن).
 
 ---
 
@@ -24,6 +25,8 @@
 | [dev-init-wizard](#dev-init-wizard) | dev | scaffold پروژه جدید قدم‌به‌قدم |
 | [dev-token-review](#dev-token-review) | dev | بررسی hardcode vs design token |
 | [dev-engine](#dev-engine) | dev | اجرای dev-engine — بررسی و auto-fix کد |
+| vitrina-project-context | context | thin loader — context ویترینا از repo پروژه |
+| airport-project-context | context | thin loader — context Airport از repo پروژه |
 
 > **Figma → code:** skill جدا توی این repo نیست. از skill رسمی `figma-implement-design` استفاده کن. قانون اجباری (Component Resolution / DS MCP / DoD) در **CLAUDE.md هر پروژه** هست (always-on). جزئیات: بخش [Figma → Code](#figma--code) پایین.
 

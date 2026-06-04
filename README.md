@@ -33,14 +33,8 @@ dev-knowledge/
 │       ├── _tokens.scss                  ← brand vars (per-project — فقط این عوض می‌شه)
 │       ├── _overrides.scss               ← mapping tokens → Bootstrap SCSS vars
 │       └── bootstrap.scss               ← entry point (copy به src/styles/ پروژه جدید)
-│
-└── projects/
-    ├── airport/
-    │   ├── project-context.md            ← brand tokens، layout، RTL setup
-    │   └── known-bugs.md                 ← باگ‌های project-specific
-    └── vitrina/
-        ├── project-context.md            ← brand tokens، breakpoints، feature flags
-        └── known-bugs.md                 ← باگ‌های project-specific
+
+(context هر پروژه دیگه اینجا نیست → repo خودِ پروژه: Projects/<X>/.claude/context/)
 ```
 
 ---
