@@ -56,7 +56,7 @@ check دترمینیستیک (قابل اجرا)؟      → dev-agents (CLI)
 
 ## ۳. Pipeline واحد Figma → Code
 
-**یک نقطه‌ی ورود:** skill `dev-impl` (جایگزین figma-impl-checklist + impl-session پیشنهادی).
+**یک نقطه‌ی ورود:** skill `dev-implement` (جایگزین figma-impl-checklist + impl-session پیشنهادی).
 این skill ترتیب رو enforce می‌کنه — step‌ها رو نمی‌شه پرید.
 
 ```
@@ -70,7 +70,7 @@ USER: "این frame رو implement کن: [Figma URL]"
 └────────────┬───────────────────────────────────────────────┘
              ▼
 ┌─ STEP 0 — PRE-FLIGHT (CLI) ──────────────────────────────┐
-│ dev-engine preflight                                          │
+│ dev-engine doctor                                          │
 │  ✓ DS installed?  ✓ figma-resolve.json fresh?            │
 │  ✓ cache موجود؟  → fail-hard اگه چیزی کمه                │
 └────────────┬───────────────────────────────────────────────┘
@@ -87,7 +87,7 @@ USER: "این frame رو implement کن: [Figma URL]"
 └────────────┬───────────────────────────────────────────────┘
              ▼
 ┌─ STEP 3 — IMPLEMENT (Claude) ────────────────────────────┐
-│  Resolution: grep src/ → ds-registry → Build last         │
+│  Resolution: dev-engine resolve → DS MCP → Build last     │
 │  Token: از figma-resolve.json local، صفر hardcode         │
 │  Responsive: breakpoints از snapshot/map                   │
 │  RTL: logical props، DOM order (ref: universal/language.md)│
@@ -110,7 +110,7 @@ USER: "این frame رو implement کن: [Figma URL]"
 **تقسیم کار CLI vs Claude:**
 - **CLI (dev-agents):** preflight، token-sync، dod، build-git، visual-diff — هر چیز دترمینیستیک
 - **Claude:** فقط STEP 1-3 (read context، Figma fetch، implement)
-- **skill `dev-impl`:** orchestrator — step‌ها رو به ترتیب صدا می‌زنه، نمی‌پره
+- **skill `dev-implement`:** orchestrator — step‌ها رو به ترتیب صدا می‌زنه، نمی‌پره
 
 ---
 
@@ -253,7 +253,7 @@ Tools/dev-knowledge/                        ← دانش cross-project + skill s
 │   ├── components.md، tokens.md (موجود)    ← لیست DS بدون tool call
 │   └── figma-resolve.json   (generated)    ← لایه DS: Figma→code map (shared)
 └── skills/
-    ├── dev-impl.skill        (جدید)        ← orchestrator واحد Figma→code
+    ├── dev-implement.skill        (جدید)        ← orchestrator واحد Figma→code
     ├── dev-engine.skill
     ├── wf-*.skill
     └── <project>-context.skill (نازک)      ← فقط loader، محتوا در repo پروژه
@@ -279,7 +279,7 @@ Projects/<X>/                               ← قانون + context خودِ پ
 | 3 | `dod-check` پیشنهادی | — | حذف (dev-engine پوشش می‌ده) | DROP |
 | 4 | ۶ script پیشنهادی | فایل‌های جدا | subcommand‌های dev-engine (`doctor`/`figma-sync`/`visual-diff`) | MERGE → dev-agents |
 | 7 | cache توکن/کامپوننت | (نبود) | `figma-resolve.json` دو-لایه (DS+Local، بخش ۶) | BUILD |
-| 5 | figma-impl-checklist + impl-session | دو skill | یک skill `dev-impl` | MERGE |
+| 5 | figma-impl-checklist + impl-session | دو skill | یک skill `dev-implement` | MERGE |
 | 6 | duplication قانون token بین لایه‌ها | چند جا | یک خونه (dev-engine + یک خط gate) | DEDUPE |
 
 **ترتیب اجرا (وقتی شروع کردیم):**
@@ -289,8 +289,8 @@ Projects/<X>/                               ← قانون + context خودِ پ
 4. extend dev-engine + cache دو-لایه (#4، #7):
    - `doctor` (preflight) ✓ · `resolve` (Figma name→code، صفر MCP) ✓ · `figma-sync --scan/--init/status` ✓ · cache merge Local-first ✓ · seed DS chakra ✓
    - `visual-diff` (نیاز browser dep) — defer · `figma-sync` REST pull (Enterprise-gated) — scaffold فقط
-5. ساخت skill `dev-impl` (#5) — نقطه‌ی ورود واحد که subcommandها رو orchestrate می‌کنه ← بعدی
-6. حذف/dedupe باقی‌مونده (#3، #6) — شامل overlap CLAUDE.md↔context (brand tokens/breakpoints)
+5. ساخت skill `dev-implement` (#5) ✓ — orchestrator واحد، pipeline §3 رو step-by-step enforce می‌کنه
+6. حذف/dedupe باقی‌مونده (#3، #6) — شامل overlap CLAUDE.md↔context (brand tokens/breakpoints) ← بعدی
 
 ---
 
@@ -301,4 +301,4 @@ Projects/<X>/                               ← قانون + context خودِ پ
 - [ ] check قابل‌اجرا، CLI شده؟ (نه دستی توسط Claude)
 - [ ] فکت فقط یک خونه داره؟ (نه duplicate بین لایه‌ها)
 - [ ] context پروژه‌ی خاص، در repo همون پروژه‌ست؟ (نه dev-knowledge)
-- [ ] فلوی Figma→code از `dev-impl` می‌گذره؟ (نه ad-hoc)
+- [ ] فلوی Figma→code از `dev-implement` می‌گذره؟ (نه ad-hoc)

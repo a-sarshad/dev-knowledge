@@ -22,6 +22,7 @@
 | [wf-session-start](#wf-session-start) | workflow | شروع session — briefing وضعیت پروژه |
 | [wf-session-update](#wf-session-update) | workflow | ذخیره وضعیت + آپدیت HANDOFF/CLAUDE/README — هر پروژه |
 | [wf-commit-project](#wf-commit-project) | workflow | commit message آماده — هر git repo |
+| dev-implement ⭐ | dev | **orchestrator واحد Figma→code** — pipeline کامل، نقطه ورود |
 | [dev-init-wizard](#dev-init-wizard) | dev | scaffold پروژه جدید قدم‌به‌قدم |
 | [dev-token-review](#dev-token-review) | dev | بررسی hardcode vs design token |
 | [dev-engine](#dev-engine) | dev | اجرای dev-engine — بررسی و auto-fix کد |
