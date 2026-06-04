@@ -83,6 +83,33 @@ dev-engine init
 
 ---
 
+## Figma pipeline subcommands (BLUEPRINT §3، §6)
+
+```bash
+# preflight — قبل از impl: env، DS، cache، freshness (hard-fail روی env)
+dev-engine doctor ./
+
+# resolve نام Figma → mapping کد (از cache local، صفر MCP/token)
+dev-engine resolve Button          # → @chakra-ui/react#Button       (لایه DS)
+dev-engine resolve TitleBar        # → @/components/ui/TitleBar#...   (لایه Local)
+dev-engine resolve Button --json
+
+# figma-resolve cache (دو لایه)
+dev-engine figma-sync ./           # وضعیت DS + Local + شمارش merge
+dev-engine figma-sync ./ --scan    # auto-populate لایه Local از scan src/components
+dev-engine figma-sync ./ --init    # template خالی در .claude/context/
+```
+
+**cache دو-لایه:**
+- لایه DS (shared): `dev-knowledge/design-systems/<ds>/figma-resolve.json`
+- لایه Local (پروژه): `<project>/.claude/context/figma-resolve.json`
+- merge: **Local-first** — local روی DS override (آینه‌ی Component Resolution)
+- `resolve` و scan صفر MCP مصرف می‌کنن — همه local
+
+**`.dev-engine.json` فیلدهای Figma:** `figma_source` (mcp|rest)، `figma_file_key`، `ds_mcp`، `import_alias` (پیش‌فرض `@/`)، `dev_knowledge_path` (override).
+
+---
+
 ## Aliases — اضافه کن به `~/.zshrc`
 
 ```bash

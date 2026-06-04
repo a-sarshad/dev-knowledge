@@ -286,8 +286,10 @@ Projects/<X>/                               ← قانون + context خودِ پ
 1. rename projfix → dev-engine ✓ (انجام شد)
 2. اول این BLUEPRINT تثبیت ✓
 3. مهاجرت context پروژه‌ها (#1، #2) ✓ — محتوا → `Projects/<X>/.claude/context/`، skillها thin-loader شدن، `projects/` حذف شد
-4. extend dev-engine با subcommandها `doctor`/`figma-sync`/`visual-diff` (#4) + cache دو-لایه (#7) ← بعدی
-5. ساخت skill `dev-impl` (#5) — نقطه‌ی ورود واحد که subcommandها رو orchestrate می‌کنه
+4. extend dev-engine + cache دو-لایه (#4، #7):
+   - `doctor` (preflight) ✓ · `resolve` (Figma name→code، صفر MCP) ✓ · `figma-sync --scan/--init/status` ✓ · cache merge Local-first ✓ · seed DS chakra ✓
+   - `visual-diff` (نیاز browser dep) — defer · `figma-sync` REST pull (Enterprise-gated) — scaffold فقط
+5. ساخت skill `dev-impl` (#5) — نقطه‌ی ورود واحد که subcommandها رو orchestrate می‌کنه ← بعدی
 6. حذف/dedupe باقی‌مونده (#3، #6) — شامل overlap CLAUDE.md↔context (brand tokens/breakpoints)
 
 ---
