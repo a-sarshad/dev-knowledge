@@ -1,4 +1,4 @@
-# projfix — راهنمای استفاده
+# dev-engine — راهنمای استفاده
 
 ابزار CLI برای بررسی و auto-fix مشکلات کد. بدون Claude کار می‌کنه — صفر توکن.
 
@@ -8,18 +8,18 @@
 
 ```bash
 # از dev-agents build شده (یه بار)
-cd ~/Documents/GitHub/Tools/dev-agents/packages/projfix
+cd ~/Documents/GitHub/Tools/dev-agents/packages/dev-engine
 pnpm build
 
 # یا اگه publish شد
-npm i -g projfix
+npm i -g dev-engine
 ```
 
 ---
 
 ## راه‌اندازی پروژه
 
-`.projfix.json` را در root پروژه (کنار `package.json`) بساز:
+`.dev-engine.json` را در root پروژه (کنار `package.json`) بساز:
 
 ```json
 {
@@ -38,8 +38,8 @@ npm i -g projfix
 | `ds` | `chakra-v3` · `chakra-v2` · `mui` · `antd` · `mantine` · `generic` |
 | `icon_lib` | `lucide` · `heroicons` · `fa` · `generic` |
 
-> **سریع‌تر:** `projfix init` رو اجرا کن — سوال‌به‌سوال پیش می‌ره و فایل رو می‌سازه.
-> اگه `.projfix.json` نباشه، skill `dev-projfix` آن را auto-detect و می‌سازه.
+> **سریع‌تر:** `dev-engine init` رو اجرا کن — سوال‌به‌سوال پیش می‌ره و فایل رو می‌سازه.
+> اگه `.dev-engine.json` نباشه، skill `dev-engine` آن را auto-detect و می‌سازه.
 
 ---
 
@@ -47,38 +47,38 @@ npm i -g projfix
 
 ```bash
 # بررسی کامل src/
-projfix ./src
+dev-engine ./src
 
 # فقط فایل‌های تغییرکرده (git diff HEAD)
-projfix ./src --changed
+dev-engine ./src --changed
 
 # auto-fix موارد قابل fix
-projfix ./src --fix
+dev-engine ./src --fix
 
 # فقط changed + fix
-projfix ./src --changed --fix
+dev-engine ./src --changed --fix
 
 # فقط یه module خاص
-projfix ./src --module css-logical-props
-projfix ./src --module dom-order,chakra-known-bugs
+dev-engine ./src --module css-logical-props
+dev-engine ./src --module dom-order,chakra-known-bugs
 
 # فقط گزارش بدون خروجی رنگی (برای CI)
-projfix ./src --json
+dev-engine ./src --json
 
 # CI — report بدون fail کردن pipeline
-projfix ./src --json --exit-zero
+dev-engine ./src --json --exit-zero
 
 # همه فایل‌ها (حتی clean) نمایش بده
-projfix ./src --verbose
+dev-engine ./src --verbose
 
 # config در مسیر دیگه (monorepo)
-projfix ./packages/ui/src --config ./packages/ui/.projfix.json
+dev-engine ./packages/ui/src --config ./packages/ui/.dev-engine.json
 
 # watch — اجرای خودکار روی تغییر فایل
-projfix ./src --watch
+dev-engine ./src --watch
 
-# ساخت .projfix.json به صورت interactive
-projfix init
+# ساخت .dev-engine.json به صورت interactive
+dev-engine init
 ```
 
 ---
@@ -86,13 +86,13 @@ projfix init
 ## Aliases — اضافه کن به `~/.zshrc`
 
 ```bash
-# projfix shortcuts
-alias pf='projfix ./src'
-alias pfc='projfix ./src --changed'
-alias pff='projfix ./src --fix'
-alias pfcf='projfix ./src --changed --fix'
-alias pfw='projfix ./src --watch'
-alias pf-ci='projfix ./src --json --exit-zero'
+# dev-engine shortcuts
+alias den='dev-engine ./src'
+alias denc='dev-engine ./src --changed'
+alias denf='dev-engine ./src --fix'
+alias dencf='dev-engine ./src --changed --fix'
+alias denw='dev-engine ./src --watch'
+alias den-ci='dev-engine ./src --json --exit-zero'
 ```
 
 بعد از اضافه کردن: `source ~/.zshrc`
@@ -119,14 +119,14 @@ alias pf-ci='projfix ./src --json --exit-zero'
 
 ```tsx
 // یه خط — inline ignore
-<NativeSelect.Root size="xs"> // projfix-ignore
+<NativeSelect.Root size="xs"> // dev-engine-ignore
 
 // یه block — چند خط
-// projfix-disable
+// dev-engine-disable
 <NativeSelect.Root>
   <NativeSelect.Field>...</NativeSelect.Field>
 </NativeSelect.Root>
-// projfix-enable
+// dev-engine-enable
 ```
 
 ---
@@ -135,15 +135,15 @@ alias pf-ci='projfix ./src --json --exit-zero'
 
 ```
 پروژه جدید؟
-  → projfix init (interactive setup .projfix.json)
+  → dev-engine init (interactive setup .dev-engine.json)
 کد نوشتی؟
-  → pfc (فقط changed — سریع)
-  → اگه violation داشت → pff (auto-fix)
-  → اگه manual violation موند → Claude skill dev-projfix
+  → denc (فقط changed — سریع)
+  → اگه violation داشت → denf (auto-fix)
+  → اگه manual violation موند → Claude skill dev-engine
 حین توسعه؟
-  → pfw (watch mode — auto-rerun روی تغییر)
+  → denw (watch mode — auto-rerun روی تغییر)
 قبل از commit؟
-  → pf (full scan)
+  → den (full scan)
 CI؟
-  → pf-ci (= projfix ./src --json --exit-zero)
+  → den-ci (= dev-engine ./src --json --exit-zero)
 ```

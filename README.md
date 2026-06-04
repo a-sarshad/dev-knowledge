@@ -15,7 +15,7 @@ dev-knowledge/
 │   ├── git-troubleshoot.md               ← خطاهای رایج git + راه‌حل
 │   ├── figma-to-code.md                  ← پیاده‌سازی دیزاین از Figma
 │   ├── project-init-wizard.md            ← wizard تعاملی ساخت پروژه (شامل README template)
-│   ├── projfix.md                        ← راهنمای CLI projfix، aliases، modules، ignore
+│   ├── dev-engine.md                        ← راهنمای CLI dev-engine، aliases، modules، ignore
 │   └── session-management.md             ← مدیریت context و HANDOFF.md
 │
 ├── design-systems/
@@ -50,7 +50,7 @@ dev-knowledge/
 شروع session → skill wf-session-start
 ذخیره وضعیت → skill wf-session-update
 commit       → skill wf-commit-project
-بررسی کد    → pf / pfc / pff از terminal (راهنما: universal/projfix.md)
+بررسی کد    → den / denc / denf از terminal (راهنما: universal/dev-engine.md)
 Figma→کد    → skill figma-implement-design + gate در CLAUDE.md پروژه
 ```
 

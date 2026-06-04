@@ -12,7 +12,7 @@ dev-knowledge/
 ├── skills/             ← فایل‌های .skill (automation) — source برای نصب در Cowork
 │   ├── README.md                ← راهنمای کامل همه skill‌ها (trigger/کاربرد/خروجی)
 │   ├── dev-init-wizard.skill
-│   ├── dev-projfix.skill
+│   ├── dev-engine.skill
 │   ├── dev-token-review.skill
 │   ├── wf-commit-project.skill
 │   ├── wf-session-start.skill
@@ -86,7 +86,7 @@ Claude: [loads vitrina-project-context skill] → [reads projects/vitrina/projec
 |-------|---------|
 | `dev-init-wizard` | ساخت پروژه جدید با scaffold کامل (gate Figma→Code رو در CLAUDE.md پروژه bake میکنه) |
 | `dev-token-review` | بررسی کد از نظر استفاده صحیح از design tokens |
-| `dev-projfix` | اجرای projfix — بررسی و auto-fix کد |
+| `dev-engine` | اجرای dev-engine — بررسی و auto-fix کد |
 | `dev-delivery-check` ⚙️ | بررسی خودکار checklist قبل از تحویل/merge/deploy — **external** (anthropic-skills، فایل در skills/ نیست) |
 
 ### Figma (رسمی — figma plugin، نصب‌شده)
@@ -121,4 +121,4 @@ Claude: [loads vitrina-project-context skill] → [reads projects/vitrina/projec
   ```
 - بعد از هر تغییر فایل در این repo، بدون اینکه کاربر بخواد، `wf-commit-project` اجرا کن
 - برای خطاهای git: `universal/git-troubleshoot.md` رو ببین
-- برای استفاده از projfix CLI: `universal/projfix.md` رو ببین
+- برای استفاده از dev-engine CLI: `universal/dev-engine.md` رو ببین

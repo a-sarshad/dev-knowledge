@@ -13,7 +13,7 @@ Claude این فایل‌ها را از طریق skill پروژه load می‌ک
 | پروژه | پوشه | Design System | وضعیت |
 |-------|------|---------------|--------|
 | Vitrina | `vitrina/` | Chakra UI v3 / RTL | فعال |
-| Kish Airport | `airport/` | Chakra UI v3 / RTL+LTR | فعال |
+| Kish Airport | `airport/` | Bootstrap 5 / RTL+LTR | فعال |
 
 → [vitrina/project-context.md](vitrina/project-context.md)
 → [airport/project-context.md](airport/project-context.md)
