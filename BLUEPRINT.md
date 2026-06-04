@@ -71,15 +71,14 @@ USER: "این frame رو implement کن: [Figma URL]"
              ▼
 ┌─ STEP 0 — PRE-FLIGHT (CLI) ──────────────────────────────┐
 │ dev-engine preflight                                          │
-│  ✓ DS installed?  ✓ figma-tokens.json fresh?              │
-│  ✓ component-map موجود؟  → fail-hard اگه چیزی کمه        │
+│  ✓ DS installed?  ✓ figma-resolve.json fresh?            │
+│  ✓ cache موجود؟  → fail-hard اگه چیزی کمه                │
 └────────────┬───────────────────────────────────────────────┘
              ▼
 ┌─ STEP 1 — CONTEXT LOAD (Claude reads LOCAL، نه MCP) ──────┐
-│ reads: {project}/.claude/context/figma-tokens.json        │
-│ reads: {project}/.claude/context/component-map.json       │
+│ reads: figma-resolve.json (Local + DS، merge شده)         │
 │ reads: {project}/.claude/context/project-context.md       │
-│  → tokens و component map از local؛ MCP call صرفه‌جویی    │
+│  → token/component map از local cache؛ صفر MCP call       │
 └────────────┬───────────────────────────────────────────────┘
              ▼
 ┌─ STEP 2 — FIGMA FETCH (targeted، نه scatter) ────────────┐
@@ -89,7 +88,7 @@ USER: "این frame رو implement کن: [Figma URL]"
              ▼
 ┌─ STEP 3 — IMPLEMENT (Claude) ────────────────────────────┐
 │  Resolution: grep src/ → ds-registry → Build last         │
-│  Token: از figma-tokens.json local، صفر hardcode          │
+│  Token: از figma-resolve.json local، صفر hardcode         │
 │  Responsive: breakpoints از snapshot/map                   │
 │  RTL: logical props، DOM order (ref: universal/language.md)│
 └────────────┬───────────────────────────────────────────────┘
@@ -154,7 +153,88 @@ USER: "این frame رو implement کن: [Figma URL]"
 
 ---
 
-## ۶. ساختار مقصد (target tree)
+## ۶. Figma Sync + Cache + Resolution
+
+> هسته‌ی صرفه‌جویی توکن. **یک‌بار pull، بعد همیشه local.**
+
+### ۶.۱ منبع — MCP اول، REST دوم
+
+| منبع | کِی | هزینه Claude token |
+|------|-----|-------------------|
+| **MCP** (default) | هر جا MCP server هست | یه‌بار، کم |
+| **REST** (fallback) | پروژه‌ی بدون figma/DS MCP | صفر (CLI native، نیاز `FIGMA_TOKEN`) |
+
+«MCP» دوتاست — هر کدوم یه محور:
+- **Figma MCP** → Variables، design context، Code Connect map
+- **DS MCP** (chakra-ui) → component props، default theme
+
+**اول پروژه یه‌بار پرسیده می‌شه** → ذخیره در `.dev-engine.json`، **session بعد دوباره نمی‌پرسه**:
+```jsonc
+{ "figma_source": "mcp",        // یا "rest"
+  "figma_file_key": "...",
+  "ds_mcp": "chakra-ui" }
+```
+
+### ۶.۲ cache = یک قرارداد، دو producer
+
+CLI نمی‌تونه MCP بزنه. پس دو مسیر تولید، یک فرمت خروجی:
+```
+مسیر MCP :  Claude می‌کشه (MCP) → فایل cache می‌نویسه
+مسیر REST:  dev-engine می‌کشه (REST) → فایل می‌نویسه
+            └── خروجی هر دو هم‌فرمت → بعدش CLI + Claude فقط read
+```
+
+### ۶.۳ دو لایه cache — split بر اساس مالکیت
+
+| لایه | چی | کجا | shared |
+|------|----|----|--------|
+| **DS** | DS comp→import + DS var→token | `dn/design-systems/<ds>/figma-resolve.json` | ✅ همه پروژه‌های اون DS |
+| **Local** | comp/token/var مخصوص پروژه | `<project>/.claude/context/figma-resolve.json` | ❌ |
+
+**merge با precedence Local-first** — آینه‌ی gate Component Resolution (Local → DS).
+
+فرمت (هر دو محور تو یه فایل):
+```jsonc
+{ "components": { "Button": "@chakra-ui/react#Button" },
+  "tokens":     { "color/primary/500": "colors.primary.500" },
+  "variables":  { },
+  "_synced": "2026-06-04", "_source": "mcp" }
+```
+
+> **چرا دو فایل نه یکی:** قانون scope (shared→dn، project→repo) + DRY (cache DS یه‌بار ساخته، هر پروژه‌ی اون DS استفاده می‌کنه) + آینه‌ی ترتیب resolution.
+> لایه DS نیمه‌موجوده: `components.md` + `tokens.md` الان هستن؛ figma-resolve فقط **نگاشت Figma→code** رو روش اضافه می‌کنه.
+
+### ۶.۴ Resolution — top-down، stop-at-match
+
+Claude درخت Figma رو از بالا می‌گرده. هر node:
+```
+instance یه component شناخته‌شده‌ست؟ (figma-resolve: Local → DS)
+  → بله → import کن، STOP (داخلش dive نکن)
+  → نه  → برو تو، از بچه‌ها بساز (Build last)
+```
+به‌محض match توقف. **composite موجود رو از اجزاش rebuild نمی‌کنه.**
+
+مثال: Figma instance «ProductCard» (local، داخلش Chakra Box+Button) → resolve به `@/components/settings/ProductCard` → `<ProductCard/>` نوشته می‌شه، تموم. Box/Button جدا ساخته نمی‌شن (داخل ProductCard‌ان).
+
+detection = scan `src/components/` (اسم→path). لازم نیست داخل composite رو بفهمه — فقط اینکه وجود داره.
+
+### ۶.۵ Resolution ≠ Check — دو لایه‌ی جدا (اشتباه نگیر)
+
+| سوال | لایه | ابزار |
+|------|------|-------|
+| component رو **استفاده** کنم؟ | resolution | figma-resolve (top-level match) |
+| داخلش **درست** نوشته؟ (DS نه div، token نه hardcode) | check | dev-engine modules: `ds-component-usage`، `token-replacer` |
+
+«local از DS استفاده کرده» برای **استفاده** بی‌ربطه (کلش import می‌شه)؛ برای **صحت داخل** کار module‌های check‌ـه.
+
+### ۶.۶ staleness + edge
+
+- `_synced` timestamp تو cache. `dev-engine doctor` چک می‌کنه کهنه نشده (مثلاً >۷ روز یا «طراحی عوض شد») → کهنه: re-sync. وگرنه local می‌مونه = صفر pull.
+- **edge:** طرح فراتر از توان local component (variant/prop که نداره) → silently rebuild **نمی‌کنه**؛ یا local رو extend یا flag «طرح از component موجود فراتره». (gate: حدس نزن.)
+
+---
+
+## ۷. ساختار مقصد (target tree)
 
 ```
 Tools/dev-agents/                          ← ENGINE
@@ -170,6 +250,8 @@ Tools/dev-knowledge/                        ← دانش cross-project + skill s
 ├── CLAUDE.md                               ← قوانین کار با DN
 ├── universal/                              ← DS-agnostic
 ├── design-systems/<ds>/                    ← DS-specific
+│   ├── components.md، tokens.md (موجود)    ← لیست DS بدون tool call
+│   └── figma-resolve.json   (generated)    ← لایه DS: Figma→code map (shared)
 └── skills/
     ├── dev-impl.skill        (جدید)        ← orchestrator واحد Figma→code
     ├── dev-engine.skill
@@ -182,33 +264,35 @@ Projects/<X>/                               ← قانون + context خودِ پ
 └── .claude/context/
     ├── project-context.md                  ← منتقل‌شده از dev-knowledge/projects/<X>/
     ├── known-bugs.md                       ← منتقل‌شده از dev-knowledge/projects/<X>/
-    ├── figma-tokens.json     (generated)   ← خروجی dev-engine figma-sync
-    └── component-map.json    (generated)   ← خروجی dev-engine figma-sync
+    └── figma-resolve.json    (generated)   ← لایه Local: Figma→code map
+                                               (merge با لایه DS، Local-first)
 ```
 
 ---
 
-## ۷. نقشه‌ی مهاجرت (فعلی → مقصد)
+## ۸. نقشه‌ی مهاجرت (فعلی → مقصد)
 
 | # | کار | از | به | نوع |
 |---|-----|----|----|-----|
 | 1 | محتوای context پروژه‌ها | `dev-knowledge/projects/<X>/` | `Projects/<X>/.claude/context/` | MOVE |
 | 2 | skill project-context | محتوای کامل | loader نازک (read از پروژه) | REFACTOR |
 | 3 | `dod-check` پیشنهادی | — | حذف (dev-engine پوشش می‌ده) | DROP |
-| 4 | ۶ script پیشنهادی | فایل‌های جدا | subcommand‌های dev-engine | MERGE → dev-agents |
+| 4 | ۶ script پیشنهادی | فایل‌های جدا | subcommand‌های dev-engine (`doctor`/`figma-sync`/`visual-diff`) | MERGE → dev-agents |
+| 7 | cache توکن/کامپوننت | (نبود) | `figma-resolve.json` دو-لایه (DS+Local، بخش ۶) | BUILD |
 | 5 | figma-impl-checklist + impl-session | دو skill | یک skill `dev-impl` | MERGE |
 | 6 | duplication قانون token بین لایه‌ها | چند جا | یک خونه (dev-engine + یک خط gate) | DEDUPE |
 
 **ترتیب اجرا (وقتی شروع کردیم):**
-1. اول این BLUEPRINT تثبیت (الان ✓)
-2. مهاجرت context پروژه‌ها (#1، #2) — کم‌ریسک، duplication رو می‌بنده
-3. ساخت skill `dev-impl` (#5) — نقطه‌ی ورود واحد
-4. extend dev-engine با subcommandها (#4) در dev-agents
-5. حذف/dedupe باقی‌مونده (#3، #6)
+1. rename projfix → dev-engine ✓ (انجام شد)
+2. اول این BLUEPRINT تثبیت (الان ✓)
+3. مهاجرت context پروژه‌ها (#1، #2) — کم‌ریسک، duplication رو می‌بنده
+4. extend dev-engine با subcommandها `doctor`/`figma-sync`/`visual-diff` (#4) + cache دو-لایه (#7)
+5. ساخت skill `dev-impl` (#5) — نقطه‌ی ورود واحد که subcommandها رو orchestrate می‌کنه
+6. حذف/dedupe باقی‌مونده (#3، #6)
 
 ---
 
-## ۸. چک‌لیست «آیا درست دارم کار می‌کنم؟»
+## ۹. چک‌لیست «آیا درست دارم کار می‌کنم؟»
 
 هر وقت شک کردی:
 - [ ] قانونی که نباید فراموش شه، در CLAUDE.md پروژه‌ست؟ (نه فقط skill)

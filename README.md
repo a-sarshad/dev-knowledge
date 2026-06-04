@@ -2,6 +2,8 @@
 
 دانش مشترک بین همه پروژه‌ها — bugs، patterns، workflow ها
 
+> 🗺️ **نقشه راه کل سیستم → [`BLUEPRINT.md`](BLUEPRINT.md)** — معماری سه repo، فلوی Figma→code، cache دو-لایه، تصمیمات قطعی.
+
 ---
 
 ## ساختار
