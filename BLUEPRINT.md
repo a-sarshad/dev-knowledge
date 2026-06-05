@@ -112,6 +112,10 @@ USER: "این frame رو implement کن: [Figma URL]"
 - **Claude:** فقط STEP 1-3 (read context، Figma fetch، implement)
 - **skill `dev-implement`:** orchestrator — step‌ها رو به ترتیب صدا می‌زنه، نمی‌پره
 
+**STEP -1 — scope triage (اول هر چیز):** pipeline کامل فقط برای **Tier 2** (surface نو از Figma).
+Tier 0 (trivial) = فقط Edit. Tier 1 (code/style، بدون Figma نو) = Edit + `--changed --fix`، **بدون fetch، بدون screenshot**.
+screenshot/visual-diff = opt-in، نه default. خونه‌ی canonical: `universal/scope-triage.md`؛ gate همیشه‌فعال در `{project}/CLAUDE.md`؛ route در skill `dev-implement` STEP -1.
+
 ---
 
 ## ۴. درخت تصمیم — «این چیز کجا بره؟»

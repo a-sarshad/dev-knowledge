@@ -27,7 +27,25 @@
 ---
 
 ## ▼▼▼ COPY INTO PROJECT CLAUDE.md ▼▼▼
-<!-- نسخه‌ی DS-agnostic. موقع کپی، `[DS]` و `[MCP]` رو با مقدار پروژه پر کن. -->
+<!-- نسخه‌ی DS-agnostic. موقع کپی، `[DS]`، `[MCP]` و `[TYPECHECK]` رو با مقدار پروژه پر کن. -->
+
+## Scope Triage (اجباری — اول هر تغییر، قبل از Figma→Code)
+
+هر task → اول tier رو تعیین کن. tier تعیین می‌کنه چقدر pipeline لازمه:
+
+| Tier | چیه | کار | screenshot؟ |
+|------|-----|-----|------------|
+| **0 — trivial** | متن/label، rename، comment، config | فقط Edit | ❌ |
+| **1 — code/style** | prop، token، spacing، bugfix، refactor، ریسپانسیو روی component موجود — **بدون surface نو از Figma** | Edit + `[TYPECHECK]` | ❌ |
+| **2 — Figma→code نو** | frame/page/component نو از Figma، یا pixel-match با spec | کل Protocol پایین | ✅ |
+
+- **screenshot = opt-in.** default نزن. فقط **Tier 2** یا وقتی کاربر صریح گفت «compare / pixel / screenshot».
+- **MCP Figma fetch فقط Tier 2.** Tier 0/1 از local cache، صفر MCP call.
+- **شک بین دو tier؟ → پایین‌تر**، لازم شد escalate. سرعت اول.
+
+مرجع عمیق: `dev-knowledge/universal/scope-triage.md`
+
+---
 
 ## Figma Access Gate (اجباری — بالاتر از همه)
 
@@ -49,7 +67,7 @@ Figma tool fail شد؟
 
 ---
 
-## Figma → Code Protocol (اجباری)
+## Figma → Code Protocol (اجباری — فقط Tier 2)
 
 هر task که از Figma به کد تبدیل میشه — حتی «اصلاح کن» / «مقایسه کن» / «ریسپانسیو کن» — این gate رو رد نکن.
 

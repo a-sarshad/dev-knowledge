@@ -16,6 +16,7 @@ dev-knowledge/
 │   ├── language.md                       ← RTL/LTR، locale، font، logical CSS
 │   ├── git-troubleshoot.md               ← خطاهای رایج git + راه‌حل
 │   ├── figma-to-code.md                  ← پیاده‌سازی دیزاین از Figma
+│   ├── scope-triage.md                   ← ۳ tier: تغییر کوچیک از pipeline کامل + screenshot رد نشه
 │   ├── project-init-wizard.md            ← wizard تعاملی ساخت پروژه (شامل README template)
 │   ├── dev-engine.md                        ← راهنمای CLI dev-engine، aliases، modules، ignore
 │   └── session-management.md             ← مدیریت context و HANDOFF.md
