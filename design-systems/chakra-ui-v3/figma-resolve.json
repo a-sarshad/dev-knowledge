@@ -34,7 +34,16 @@
     "Spinner": "@chakra-ui/react#Spinner",
     "Progress": "@chakra-ui/react#Progress",
     "Alert": "@chakra-ui/react#Alert",
-    "Breadcrumb": "@chakra-ui/react#Breadcrumb"
+    "Breadcrumb": "@chakra-ui/react#Breadcrumb",
+    "Separator": "@chakra-ui/react#Separator",
+    "Collapsible": "@chakra-ui/react#Collapsible",
+    "InputGroup": "@chakra-ui/react#InputGroup",
+    "FileUpload": "@chakra-ui/react#FileUpload",
+    "Field": "@chakra-ui/react#Field",
+    "Portal": "@chakra-ui/react#Portal",
+    "CloseButton": "@chakra-ui/react#CloseButton",
+    "Icon": "@chakra-ui/react#Icon",
+    "NativeSelect": "@chakra-ui/react#NativeSelect"
   },
   "tokens": {},
   "variables": {}
