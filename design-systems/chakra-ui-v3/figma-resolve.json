@@ -43,7 +43,12 @@
     "Portal": "@chakra-ui/react#Portal",
     "CloseButton": "@chakra-ui/react#CloseButton",
     "Icon": "@chakra-ui/react#Icon",
-    "NativeSelect": "@chakra-ui/react#NativeSelect"
+    "NativeSelect": "@chakra-ui/react#NativeSelect",
+    "EmptyState": "@chakra-ui/react#EmptyState",
+    "VStack": "@chakra-ui/react#VStack",
+    "HStack": "@chakra-ui/react#HStack",
+    "Field": "@chakra-ui/react#Field",
+    "CloseButton": "@chakra-ui/react#CloseButton"
   },
   "tokens": {},
   "variables": {}

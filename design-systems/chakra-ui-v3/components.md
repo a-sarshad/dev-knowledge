@@ -60,6 +60,77 @@
 
 ## قانون استفاده
 1. نام کامپوننت مورد نیاز رو در لیست بالا پیدا کن
-2. اگه بود → `mcp__chakra-ui__get_component_example` بزن، snippet رو بگیر
-3. فقط project-specific adaptation اضافه کن (RTL · token · icon)
-4. اگه نبود → از primitives بساز (Box/Flex/Text) — صفر hardcode
+2. **اول بخش «Snippets تأییدشده» پایین رو چک کن** — اگه بود، MCP نزن (zero-MCP)
+3. نبود → `mcp__chakra-ui__get_component_example` بزن، snippet رو بگیر
+4. فقط project-specific adaptation اضافه کن (RTL · token · icon)
+5. اگه نبود → از primitives بساز (Box/Flex/Text) — صفر hardcode
+
+---
+
+## Snippets تأییدشده (zero-MCP — RTL/token-adapted)
+
+> از implهای واقعی. این‌ها رو دیگه از MCP نگیر.
+
+### EmptyState
+```tsx
+import { EmptyState, VStack } from '@chakra-ui/react'
+import { FolderPlus } from 'lucide-react'
+
+<EmptyState.Root size="sm">
+  <EmptyState.Content>
+    <EmptyState.Indicator><FolderPlus /></EmptyState.Indicator>
+    <VStack textAlign="center" gap="1">
+      <EmptyState.Title>عنوان خالی</EmptyState.Title>
+      <EmptyState.Description>توضیح کوتاه</EmptyState.Description>
+    </VStack>
+  </EmptyState.Content>
+</EmptyState.Root>
+```
+
+### FileUpload (dropzone)
+```tsx
+import { FileUpload, Icon, Text } from '@chakra-ui/react'
+import { Upload } from 'lucide-react'
+
+<FileUpload.Root accept={['image/png','image/jpeg','image/webp']} maxFiles={1} w="full">
+  <FileUpload.HiddenInput />
+  <FileUpload.Dropzone w="full" minH="128px" cursor="pointer">
+    <Icon color="fg.muted"><Upload size={20} /></Icon>
+    <FileUpload.DropzoneContent>
+      <Text fontSize="sm" fontWeight="semibold" textAlign="center">برای بارگذاری کلیک کنید</Text>
+    </FileUpload.DropzoneContent>
+  </FileUpload.Dropzone>
+</FileUpload.Root>
+```
+
+### Dialog (RTL wrapper)
+```tsx
+<Dialog.Root open={open} onOpenChange={(e) => !e.open && onClose()}>
+  <Portal>
+    <Dialog.Backdrop />
+    <Dialog.Positioner dir="rtl" py="6">
+      <Dialog.Content maxW="512px" w="full" mx="4">
+        <Dialog.Header pb="4" pt="6" px="6" position="relative">
+          <Dialog.Title fontSize="lg" fontWeight="semibold" textAlign="right" w="full">عنوان</Dialog.Title>
+          <Dialog.CloseTrigger asChild position="absolute" top="3" insetEnd="3"><CloseButton size="sm" /></Dialog.CloseTrigger>
+        </Dialog.Header>
+        <Dialog.Body px="6" pt="2" pb="4">...</Dialog.Body>
+        <Dialog.Footer px="6" pt="2" pb="4" justifyContent="flex-end" gap="3">...</Dialog.Footer>
+      </Dialog.Content>
+    </Dialog.Positioner>
+  </Portal>
+</Dialog.Root>
+```
+> close با `insetEnd` (= چپ در RTL). footer `justifyContent="flex-end"` (= سمت چپ، primary leftmost).
+
+### Hover-action row (مثل SubCategoryGrip)
+```tsx
+const [hover, setHover] = useState(false)
+<Flex onMouseEnter={()=>setHover(true)} onMouseLeave={()=>setHover(false)}
+  bg={hover ? 'teal.subtle' : 'bg.muted'} borderWidth="1px"
+  borderColor={hover ? 'teal.focusRing' : 'transparent'} rounded="md">
+  {/* محتوا */}
+  {hover && <><IconButton.../><IconButton.../></>}  {/* action فقط hover */}
+</Flex>
+```
+> border همیشه 1px (transparent→teal) تا layout shift نشه.
