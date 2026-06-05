@@ -306,3 +306,17 @@ Projects/<X>/                               ← قانون + context خودِ پ
 - [ ] فکت فقط یک خونه داره؟ (نه duplicate بین لایه‌ها)
 - [ ] context پروژه‌ی خاص، در repo همون پروژه‌ست؟ (نه dev-knowledge)
 - [ ] فلوی Figma→code از `dev-implement` می‌گذره؟ (نه ad-hoc)
+
+---
+
+## ۱۰. استاندارد package manager — **pnpm** (تصمیم قطعی)
+
+> updated: 2026-06-05 — انگیزه: mixed بودن pm (Vitrina/dev-agents=pnpm، Airport=npm)
+> باعث یه باگ شد (dev-engine فرض pnpm سراسری کرد و node_modules npmـی Airport رو آلود).
+
+- **همه‌ی پروژه‌های نو + فعلی → pnpm.** در `dev-init-wizard` bake شده (سؤال نمی‌شه).
+  package.json فیلد `packageManager` داشته باشه، لاک‌فایل pnpm-lock.yaml، دستورهای CLAUDE.md `pnpm`.
+- **استثنای مستند: Airport → npm** (به‌خاطر rolldown/vite native binding). تا تست dev-server
+  روی pnpm پاس نشده، npm می‌مونه. `.dev-engine.json`ش `build_command: "npx tsc --noEmit"` داره.
+- **dev-engine چطور pm رو می‌فهمه:** اول `build_command` در `.dev-engine.json`؛ وگرنه از **lockfile** پروژه
+  (نه «pnpm سراسری نصبه؟»). هیچ‌وقت build-git نباید روی پروژه‌ی npm، pnpm بزنه (آلودگی node_modules).
