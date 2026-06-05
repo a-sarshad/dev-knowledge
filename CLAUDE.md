@@ -17,7 +17,6 @@ dev-knowledge/
 │   ├── dev-implement.skill       ← orchestrator واحد Figma→code
 │   ├── dev-engine.skill
 │   ├── dev-init-wizard.skill
-│   ├── dev-token-review.skill
 │   ├── vitrina-project-context.skill   ← thin loader
 │   ├── airport-project-context.skill   ← thin loader
 │   ├── wf-commit-project.skill
@@ -90,8 +89,7 @@ Claude: [loads vitrina-project-context skill] → [reads Vitrina/.claude/context
 |-------|---------|
 | `dev-implement` ⭐ | **نقطه‌ی ورود واحد Figma→code** — کل pipeline رو orchestrate می‌کنه (preflight→fetch→impl→verify→commit). از dev-engine CLI استفاده می‌کنه |
 | `dev-init-wizard` | ساخت پروژه جدید با scaffold کامل (gate Figma→Code رو در CLAUDE.md پروژه bake میکنه) |
-| `dev-token-review` | بررسی کد از نظر استفاده صحیح از design tokens |
-| `dev-engine` | اجرای dev-engine — بررسی و auto-fix کد |
+| `dev-engine` | اجرای dev-engine — بررسی و auto-fix کد (token/hardcode هم همین‌جاست — جایگزین dev-token-review) |
 | `dev-delivery-check` ⚙️ | بررسی خودکار checklist قبل از تحویل/merge/deploy — **external** (anthropic-skills، فایل در skills/ نیست) |
 
 ### Figma (رسمی — figma plugin، نصب‌شده)

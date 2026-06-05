@@ -135,8 +135,8 @@ alias den-ci='dev-engine ./src --json --exit-zero'
 | `chakra-known-bugs` | lineHeight="8"، bg.default، noOfLines، NativeSelect | chakra-v3 |
 | `ds-component-usage` | raw `<select>`/`<table>` → DS components | chakra-v3 |
 | `debug-artifacts` | console.log، debugger، TODO/FIXME | همه |
-| `token-replacer` | hex color → design token | همه |
-| `persian-numerals` | اعداد فارسی در کد | fa-IR |
+| `token-replacer` | hardcode → token: hex رنگ + spacing (`padding="16px"` و shorthand چاکرا `p/m/mt/...`) + fontSize/fontWeight/borderRadius | همه |
+| `persian-numerals` | اعداد لاتین در رشته فارسی + display number بدون locale (comment/scale-prop رو نادیده) | fa-IR |
 | `icon-direction` | آیکون‌های جهت‌دار (arrow) در RTL | RTL |
 | `build-git` | ۳ چک project-level (نه per-file): **①** `pnpm type-check` / build failure — **②** uncommitted files + unpushed commits — **③** HANDOFF.md staleness (N commits behind) | همه |
 

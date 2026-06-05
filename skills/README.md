@@ -24,8 +24,7 @@
 | [wf-commit-project](#wf-commit-project) | workflow | commit message آماده — هر git repo |
 | dev-implement ⭐ | dev | **orchestrator واحد Figma→code** — pipeline کامل، نقطه ورود |
 | [dev-init-wizard](#dev-init-wizard) | dev | scaffold پروژه جدید قدم‌به‌قدم |
-| [dev-token-review](#dev-token-review) | dev | بررسی hardcode vs design token |
-| [dev-engine](#dev-engine) | dev | اجرای dev-engine — بررسی و auto-fix کد |
+| [dev-engine](#dev-engine) | dev | اجرای dev-engine — بررسی و auto-fix کد (شامل token/hardcode) |
 | vitrina-project-context | context | thin loader — context ویترینا از repo پروژه |
 | airport-project-context | context | thin loader — context Airport از repo پروژه |
 
@@ -105,25 +104,6 @@
 **خروجی:** ساختار کامل پروژه با CLAUDE.md، HANDOFF.md، config files، token setup
 
 **وابستگی:** مشخص کردن DS (Chakra UI / Bootstrap 5) و RTL preference
-
----
-
-### dev-token-review
-
-**فایل:** `dev-token-review.skill`
-
-**کاربرد:** کد JSX/TSX/CSS/SCSS رو بررسی می‌کنه و هر مقدار hardcode (رنگ، spacing، font size) رو پیدا می‌کنه و token معادلش رو پیشنهاد می‌ده.
-
-**چه موقع فعال می‌شه:**
-- «review کن» / «توکن بررسی کن» / «hardcode داره؟»
-- «token درست استفاده شده؟» / «کد رو از نظر DS بررسی کن»
-- «این رنگ‌ها درسته؟» / «spacing درسته؟»
-- «token review» / «design system review»
-- وقتی کد paste می‌شه و پروژه‌ای active هست
-
-**خروجی:** جدول مشکلات + token پیشنهادی + خلاصه کیفیت (A/B/C/D)
-
-**وابستگی:** شناخت DS پروژه (Chakra UI v3 یا Bootstrap 5)
 
 ---
 
