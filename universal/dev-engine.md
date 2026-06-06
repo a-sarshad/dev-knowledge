@@ -131,7 +131,7 @@ alias den-ci='dev-engine ./src --json --exit-zero'
 | Module | کاربرد | DS |
 |--------|--------|-----|
 | `css-logical-props` | physical props → logical (mr → me، borderRight → borderInlineEnd) | همه |
-| `dom-order` | RTL DOM order — icon/switch باید FIRST باشه | RTL |
+| `dom-order` | RTL DOM order — icon/switch باید FIRST باشه + Dialog close باید `insetEnd` (بالا-چپ) | RTL |
 | `chakra-known-bugs` | lineHeight="8"، bg.default، noOfLines، NativeSelect | chakra-v3 |
 | `ds-component-usage` | raw `<select>`/`<table>` → DS components | chakra-v3 |
 | `debug-artifacts` | console.log، debugger، TODO/FIXME | همه |

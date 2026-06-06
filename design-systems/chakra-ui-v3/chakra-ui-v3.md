@@ -365,6 +365,26 @@ export function MultiLangProvider({ defaultLang = 'fa', children }) {
 </Flex>
 ```
 
+### Dialog / Modal — دکمه بستن (×)
+
+عنوان در start (راست) می‌شینه؛ دکمه‌ی بستن باید گوشه‌ی **دور = بالا-چپ = end** باشه.
+در RTL یعنی **`insetEnd`** — نه `insetStart` (که می‌شه راست، روی عنوان)، نه `right=`/`left=` (physical).
+
+```tsx
+// ✅ × گوشه‌ی بالا-چپ — insetEnd
+<Dialog.Header position="relative">
+  <Dialog.Title>فیلترها</Dialog.Title>             {/* start = راست ✓ */}
+  <Dialog.CloseTrigger asChild position="absolute" top="4" insetEnd="4">
+    <CloseButton size="sm" />                       {/* end = چپ ✓ */}
+  </Dialog.CloseTrigger>
+</Dialog.Header>
+
+// ❌ insetStart → × می‌ره راست (start) = گوشه‌ی اشتباه، روی عنوان
+<Dialog.CloseTrigger position="absolute" top="4" insetStart="4">
+```
+
+> dev-engine module `dom-order` این رو می‌گیره (rule `close-button-wrong-corner` + `close-button-physical-prop`).
+
 ---
 
 ## ۸. Logical Props — قانون مطلق
