@@ -31,6 +31,59 @@
 3. **Direction** — هیچ‌وقت hardcode نکن مگر پروژه single-language باشد
 4. **قبل از props ناشناخته** → `web_fetch https://chakra-ui.com/docs/components/[name]`
 5. **هیچ‌وقت props را حدس نزن** — اشتباه در props = کد غیرقابل اجرا
+6. **Select فقط — `NativeSelect` ممنوع** — همه‌جا `Select` (namespace + `createListCollection`). دلیل: استایل یکدست، کنترل کامل Portal/RTL، ItemIndicator. → §۱-الف
+7. **Table → alt-row را بپرس** — قبل از ساخت هر جدول از کاربر بپرس آیا سطرهای متناوب رنگ پس‌زمینه متفاوت داشته باشن و چه رنگی. پیش‌فرض `bg.subtle`. → §۱-الف
+
+---
+
+## ۱-الف. Select و Table — قوانین اجباری component
+
+### Select (نه NativeSelect)
+
+`NativeSelect` هیچ‌وقت — حتی برای dropdown ساده. الگوی استاندارد (RTL-safe، Portal، ItemIndicator):
+
+```tsx
+const collection = createListCollection({
+  items: [{ label: 'همه', value: 'all' }, { label: 'الکترونیک', value: 'electronics' }],
+})
+
+<Select.Root collection={collection} size="sm" value={value} onValueChange={(e) => setValue(e.value)}>
+  <Select.HiddenSelect />
+  <Select.Control>
+    <Select.Trigger><Select.ValueText placeholder="..." /></Select.Trigger>
+    <Select.IndicatorGroup><Select.Indicator /></Select.IndicatorGroup>
+  </Select.Control>
+  <Select.Positioner>   {/* RTL: dir از html ارث می‌بره؛ اگه drift دیدی dir="rtl" بده */}
+    <Select.Content>
+      {collection.items.map((it) => (
+        <Select.Item key={it.value} item={it}>
+          <Select.ItemText>{it.label}</Select.ItemText>
+          <Select.ItemIndicator />
+        </Select.Item>
+      ))}
+    </Select.Content>
+  </Select.Positioner>
+</Select.Root>
+```
+
+**عرض منو > عرض trigger** (متن بلند تک‌خطی بمونه، نه ۲ خطی):
+```tsx
+<Select.Content minW="max-content" maxW="360px">   {/* به‌جای پیش‌فرض = عرض trigger */}
+  <Select.Item ...><Select.ItemText whiteSpace="nowrap">...</Select.ItemText></Select.Item>
+```
+`max-content` = منو به اندازه عریض‌ترین آیتم باز می‌شه؛ `maxW` سقف می‌ذاره. `whiteSpace="nowrap"` روی ItemText جلوی wrap رو می‌گیره.
+
+### Table — alt-row (زبراسطر)
+
+**قبل از ساخت هر جدول، بپرس** (سوال اجباری):
+1. سطرهای متناوب رنگ پس‌زمینه متفاوت داشته باشن؟ (بله/خیر)
+2. اگه بله، چه رنگی؟ — **پیش‌فرض `bg.subtle`**
+
+پیاده‌سازی با token دقیق (ترجیح بر `striped` — چون رنگ `striped` از recipe میاد و token نیست):
+
+```tsx
+<Table.Row bg={i % 2 === 1 ? 'bg.subtle' : undefined}>
+```
 
 ---
 

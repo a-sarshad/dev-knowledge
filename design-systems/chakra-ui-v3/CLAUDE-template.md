@@ -26,6 +26,13 @@
 - Use logical CSS props: `ms/me/ps/pe` not `ml/mr/pl/pr`
 - Portal components: add `dir="rtl"` to Positioner explicitly
 
+### Conventions — always-on (cross-project)
+این قوانین در **همه** taskها اجباری‌ان (نه فقط Figma→code):
+1. **Select فقط** — `NativeSelect` ممنوع؛ همه‌جا `Select` + `createListCollection`. → `chakra-ui-v3.md §۱-الف`
+2. **Table alt-row** — قبل از ساخت هر جدول بپرس: سطر متناوب رنگ بخواد؟ چه رنگی؟ (پیش‌فرض `bg.subtle`). → `chakra-ui-v3.md §۱-الف`
+3. **Sidebar selected** — صفحه‌ی فعال باید item متناظرش در Sidebar را active نشان دهد (route-aware؛ parent + sub-item). → `universal/app-conventions.md`
+4. **Responsive assets** — برای حالت responsive/mobile اگر لینک/تصویر مخصوص آن view ندادی، قبل از ساخت ماژولار بپرس. → `universal/app-conventions.md`
+
 ### Chakra v3 Known Issues
 → see `dev-knowledge/design-systems/chakra-ui-v3/known-bugs.md`
 

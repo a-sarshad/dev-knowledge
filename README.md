@@ -17,6 +17,7 @@ dev-knowledge/
 │   ├── git-troubleshoot.md               ← خطاهای رایج git + راه‌حل
 │   ├── figma-to-code.md                  ← پیاده‌سازی دیزاین از Figma
 │   ├── scope-triage.md                   ← ۳ tier: تغییر کوچیک از pipeline کامل + screenshot رد نشه
+│   ├── app-conventions.md                ← قوانین cross-project: sidebar selected، asset موبایل بپرس
 │   ├── project-init-wizard.md            ← wizard تعاملی ساخت پروژه (شامل README template)
 │   ├── dev-engine.md                        ← راهنمای CLI dev-engine، aliases، modules، ignore
 │   └── session-management.md             ← مدیریت context و HANDOFF.md
