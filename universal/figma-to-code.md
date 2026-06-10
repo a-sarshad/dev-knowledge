@@ -110,12 +110,17 @@ Figma tool fail شد؟
 
 **Local components:**
 ```bash
-# قبل از ساختن هر چیزی:
+# اگه .projfix-components.json وجود داره (سریع‌تر):
+cat .projfix-components.json | grep -i "ComponentName"
+
+# اگه index وجود نداره:
 find src/components -name "*.tsx" | xargs grep -l "ComponentName"
 # یا:
 ls src/components/ui/ src/components/<feature>/
 ```
 موجود بود → import کن. variant جدید لازمه → extend کن، نساز.
+
+> اگه `.projfix-components.json` ندارید، skill `dev-projfix` رو اجرا کن — Step 2.5 بصورت خودکار index می‌سازه.
 
 **DS components — از MCP بگیر، حدس نزن:**
 ```
@@ -221,9 +226,21 @@ grep -nE '#[0-9a-fA-F]{3,6}|[0-9]+px|fontSize:|fontWeight:' src/path/to/NewFile.
 pnpm type-check 2>&1 | tail -20   # یا: npx tsc --noEmit
 ```
 
-**responsive:** روی breakpointهای پروژه چک کن (Vitrina: 480 / 1440 / 1920). Preview MCP یا Claude in Chrome → screenshot در هر عرض.
+**responsive:** روی breakpointهای پروژه چک کن — mapping کامل در `universal/responsive-map.md`.
+
+```bash
+# بررسی سریع — هیچ media query inline وجود نداشته باشه:
+grep -rn "@media" src/path/to/NewFile.tsx
+# چیزی پیدا شد → به responsive props تبدیل کن
+```
 
 **visual:** screenshot کد را با screenshot Figma (فاز ۲) مقایسه کن — layout/typography/رنگ/spacing/shadow/radius.
+
+```bash
+# بعد از پیاده‌سازی، projfix --changed --fix بزن:
+projfix ./src --changed --fix
+# ماژول‌های جدید: prefer-ds-component, figma-spacing-check, responsive-props
+```
 
 چک‌لیست نهایی = Definition of Done در بلوک GATE بالا. point-by-point گزارش بده.
 
