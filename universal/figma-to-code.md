@@ -239,9 +239,13 @@ grep -nE '#[0-9a-fA-F]{3,6}|[0-9]+px|fontSize:|fontWeight:' src/path/to/NewFile.
 pnpm type-check 2>&1 | tail -20   # یا: npx tsc --noEmit
 ```
 
-**responsive:** روی breakpointهای پروژه چک کن (Vitrina: 480 / 1440 / 1920). Preview MCP یا Claude in Chrome → screenshot در هر عرض.
+**preview/screenshot = هیچ‌وقت خودکار. همیشه اول از کاربر بپرس** (قانون کاربر، ۱۴۰۴):
+> «preview بگیرم و pixel-perfect با طرح چک کنم؟» — فقط با «بله» سراغ Preview MCP برو.
+> type-check سبز + RTL DOM order = کافی برای بستن task. verify بصری مرحله‌ی جدا و opt-in است.
 
-**visual:** screenshot کد را با screenshot Figma (فاز ۲) مقایسه کن — layout/typography/رنگ/spacing/shadow/radius.
+**responsive (فقط اگه کاربر preview خواست):** روی breakpointهای پروژه screenshot بگیر (Vitrina: 480 / 1440 / 1920).
+
+**visual (فقط اگه کاربر preview خواست):** screenshot کد را با screenshot Figma (فاز ۲) مقایسه کن — layout/typography/رنگ/spacing/shadow/radius.
 
 چک‌لیست نهایی = Definition of Done در بلوک GATE بالا. point-by-point گزارش بده.
 
