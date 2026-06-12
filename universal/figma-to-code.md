@@ -86,7 +86,7 @@ Figma tool fail شد؟
 - [ ] Component Resolution رعایت شد (Local→DS MCP→Build) — کدوم مسیر؟
 - [ ] صفر hardcode (رنگ/spacing/font) — همه token
 - [ ] logical CSS props (`insetInlineEnd` نه `right`)
-- [ ] RTL DOM order (اولین child = rightmost)
+- [ ] RTL DOM order — با evidence per-row (نه checkbox خالی): `container → اولین child → راست‌ترین در Figma`
 - [ ] responsive روی breakpointهای پروژه چک شد
 - [ ] type-check / build سبز
 
@@ -223,6 +223,25 @@ get_design_context output بخش "Component descriptions" داشت؟
   <div>End — leftmost</div>
 </div>
 ```
+
+### ⚠️ ترتیب فرزندها از هندسه دربیار، نه از خروجی کد Figma
+
+خروجی `get_design_context` فرزندها رو به ترتیب **چپ→راست** (LTR canvas) لیست می‌کنه.
+کپی verbatim این ترتیب در app با `dir=rtl` = layout **آینه‌ای**. این شایع‌ترین
+الگوی باگ تکراری Figma→code در پروژه‌های RTL هست (۱۴۰۴: سه نقطه آینه‌ای در یک
+تحویل — هر سه کپی verbatim ترتیب Figma بودن).
+
+**الگوریتم اجباری برای هر container افقی (Box/Flex/Grid ساده):**
+1. مختصات x فرزندها از `get_metadata` (bounding box) یا screenshot
+2. sort بر اساس x **نزولی** → راست‌ترین = اولین child در JSX
+3. خروجی کد Figma فقط مرجع style/token — ساختار ردیف افقی از آن کپی نشه
+
+**استثنا:** کامپوننت‌های DS که خودشون dir ست می‌کنن (در Chakra: Table، Pagination،
+Steps، Select، Menu...) — داخلشون reorder نکن. همین «بعضی جاها بدون reverse درست
+به‌نظر می‌رسه» منبع گیج‌شدن و کپی verbatim هست.
+
+**در DoD:** تیک «RTL DOM order» بدون evidence قبول نیست — برای هر ردیف افقی یک خط:
+`container → اولین DOM child → راست‌ترین المان در Figma`
 
 → مفاهیم کامل‌تر: `universal/language.md`
 
