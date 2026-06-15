@@ -1,5 +1,5 @@
 # Chakra UI v3 — Known Bugs & Gotchas
-> updated: 2026-05-16
+> updated: 2026-06-15
 > این فایل در حین کار با پروژه‌های واقعی update می‌شه
 
 ---
@@ -98,6 +98,26 @@ document.documentElement.classList.toggle('dark')
 <div className="dark"><App /></div>
 ```
 
+### RadioCard — border روی `Item` (label)، نه `ItemControl`
+```tsx
+// recipe رادیو-کارت border + box-shadow ring رو روی RadioCard.Item (همون <label>)
+// می‌ذاره. اگه border خودت رو روی ItemControl هم بذاری → دو border نمایش داده میشه
+// (Item recipe + ItemControl تو).
+
+// ❌ double-border
+<RadioCard.Item value={v}>
+  <RadioCard.ItemControl borderWidth="1px" borderColor="border.muted">…
+
+// ✅ استایل کارت روی Item، ItemControl فقط layout
+<RadioCard.Item value={v}
+  borderWidth="1px" borderColor="border.muted" boxShadow="none"
+  _hover={{ borderColor: 'brand.border' }} _checked={{ borderColor: 'brand.solid' }}>
+  <RadioCard.ItemHiddenInput />
+  <RadioCard.ItemControl border="none" p="0" boxShadow="none">…
+```
+> `boxShadow="none"` لازمه: حالت checked یه ring (`0 0 0 1px`) جدا از border می‌ذاره = خط دوم.
+> سابقه: Vitrina Sender-Card (۱۴۰۴) — verify با computed style: Item border، ItemControl border=0.
+
 ---
 
 ## 🟢 Patterns کار‌کرده
@@ -109,6 +129,22 @@ document.documentElement.classList.toggle('dark')
 <Drawer.Positioner dir="rtl">
 <Tooltip.Positioner dir="rtl">
 ```
+
+### Select/Menu داخل Dialog با scrollBehavior="inside" → Portal کن
+```tsx
+// Dialog با scrollBehavior="inside" → body اش overflow:auto میشه. اگه Select.Positioner
+// inline بمونه، dropdown داخل body clip میشه و کاربر مجبوره body رو اسکرول کنه.
+
+// ✅ Positioner رو Portal کن → content به <body> میره، بالای dialog و clip نمیشه
+<Portal>
+  <Select.Positioner>
+    <Select.Content>…</Select.Content>
+  </Select.Positioner>
+</Portal>
+```
+> Dialog خودش Portal شده؛ content چاکرا z-index=`popover` می‌گیره (۱۵۰۱) > dialog (۱۵۰۰)
+> → روی dialog، clickable، floating-ui نسبت به trigger position می‌کنه.
+> سابقه: Vitrina EditAddressDialog (۱۴۰۴).
 
 ### bg="white" در Chakra
 ```tsx
