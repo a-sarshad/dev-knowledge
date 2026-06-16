@@ -131,11 +131,11 @@ alias den-ci='dev-engine ./src --json --exit-zero'
 | Module | کاربرد | DS |
 |--------|--------|-----|
 | `css-logical-props` | physical props → logical (mr → me، borderRight → borderInlineEnd) | همه |
-| `dom-order` | RTL DOM order — icon/switch باید FIRST باشه + Dialog close باید `insetEnd` (بالا-چپ) | RTL |
+| `dom-order` | Button: آیکن باید FIRST (leading) باشه — هر دو جهت، Latin+فارسی، multi-line/arrow-fn (`button-icon-after-text`). RTL-only: Switch FIRST + Dialog close `insetEnd` (بالا-چپ) | همه |
 | `chakra-known-bugs` | lineHeight="8"، bg.default، noOfLines، NativeSelect | chakra-v3 |
 | `ds-component-usage` | raw `<select>`/`<table>` → DS components | chakra-v3 |
 | `debug-artifacts` | console.log، debugger، TODO/FIXME | همه |
-| `token-replacer` | hardcode → token: hex رنگ + spacing (`padding="16px"` و shorthand چاکرا `p/m/mt/...`) + fontSize/fontWeight/borderRadius | همه |
+| `token-replacer` | hardcode → token: hex رنگ + spacing (`padding="16px"` و shorthand چاکرا `p/m/mt/...`) + fontSize/fontWeight/borderRadius · + `raw-palette-on-theme-prop`: palette خام روی bg/border/fg (`teal.50`) → semantic (`brand.bg`) چون dark نمی‌شکنه | همه |
 | `persian-numerals` | اعداد لاتین در رشته فارسی + display number بدون locale (comment/scale-prop رو نادیده) | fa-IR |
 | `icon-direction` | آیکون‌های جهت‌دار (arrow) در RTL | RTL |
 | `build-git` | ۳ چک project-level (نه per-file): **①** `pnpm type-check` / build failure — **②** uncommitted files + unpushed commits — **③** HANDOFF.md staleness (N commits behind) | همه |

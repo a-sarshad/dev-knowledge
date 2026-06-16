@@ -243,6 +243,21 @@ Steps، Select، Menu...) — داخلشون reorder نکن. همین «بعضی
 **در DoD:** تیک «RTL DOM order» بدون evidence قبول نیست — برای هر ردیف افقی یک خط:
 `container → اولین DOM child → راست‌ترین المان در Figma`
 
+### Button + icon — default: icon اول DOM (leading) — هر دو جهت
+
+آیکن دکمه پیش‌فرض **اول DOM** = سمت start. RTL → راستِ متن · LTR → چپِ متن.
+**یک DOM برای هر دو جهت** (icon-first)؛ `dir` خودش flip می‌کند — ترتیب را per-direction عوض نکن.
+استثنا (تنها دو حالت): کاربر صریح trailing بخواهد، یا آیکن **هر دو طرف** متن باشد.
+> دام رایج: کد Figma اغلب `text` بعد `icon` لیست می‌کند (LTR canvas) — کپی verbatim = آیکن سمت غلط.
+> dev-engine `dom-order` → `button-icon-after-text` این را flag می‌کند (Latin+فارسی، multi-line، arrow-fn).
+
+### رنگ سطح‌ها — توکن semantic نه palette خام
+
+برای bg/border/fg کارت/پنل/سطح، متغیر semantic فیگما (`bg/teal`، `teal/muted`) را به توکن
+**semantic** پروژه map کن (`brand.bg`، `brand.muted`، `bg.subtle`…) — نه به palette خام (`teal.50`) با hex-match.
+palette خام در dark mode adapt نمی‌کند. gate hardcode این را نمی‌گیرد (palette هم token است)؛
+dev-engine `token-replacer` → `raw-palette-on-theme-prop` flag می‌کند.
+
 → مفاهیم کامل‌تر: `universal/language.md`
 
 ---
